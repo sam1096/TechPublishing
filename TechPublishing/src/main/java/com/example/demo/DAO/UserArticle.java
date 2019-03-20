@@ -17,15 +17,19 @@ public class UserArticle {
 	
 	@PersistenceContext	
 	private EntityManager entityManager;	
-	public List<Article> getUserArticles(String username)
+	public List<Object[]> getUserArticleStuff(String username)
 	{
 		
-		String hql="from Article a, AreaInterest i where a.areaid=i.areaid and a.areaid=(select ar.areaid from UserArea ar where ar.username =username)";
-		 List<Article> obj_list=entityManager.createQuery(hql).getResultList();
+		String hql1="from Article as a,AreaInterest as i where a.areaid=i.areaid and a.areaid=(select ar.areaid from UserArea ar where ar.username=username)";
+		 List<Object[]> obj_list1=entityManager.createQuery(hql1).getResultList();
 		 System.out.println("This is the result!!");
-		 System.out.println(obj_list);
-		 return obj_list;
-	  
-	   
+		 
+		 return obj_list1; 
+	}
+	public List<AreaInterest> getallCategories()
+	{
+		String hql=" from AreaInterest";
+		 List<AreaInterest> obj_list1=entityManager.createQuery(hql).getResultList();
+		 return obj_list1; 
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Respository.UserRepository;
 import com.example.demo.model.Article;
+import com.example.demo.model.AreaInterest;
 import com.example.demo.model.User;
 import com.example.demo.DAO.UserArticle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserService {
 	
 	@Autowired
-    private UserArticle userArticle;
+   private UserArticle userArticle;
   	
 	private final UserRepository userRepository;
 	
@@ -30,9 +31,6 @@ public class UserService {
 		
 		userRepository.save(user);
 	}
-
-	
-	
 	public User findByUsernameAndPassword(String username,String password)
 	{
 	  //System.out.println("hello getting user");
@@ -42,9 +40,12 @@ public class UserService {
 	  return user;
 	}
 	
-	public List<Article> getUserArticles(String username)
-	{ return userArticle.getUserArticles(username);
+	public List<Object[]> getUserArticleStuff(String username)
+	{ return userArticle.getUserArticleStuff(username);
 	}
-
+	public List<AreaInterest> getallCategories()
+	{
+		return userArticle.getallCategories();
+	}
 }
 

@@ -17,6 +17,8 @@ import com.example.demo.model.User;
 import com.example.demo.services.UserService;
 import com.example.demo.model.Admin;
 import com.example.demo.model.Article;
+import com.example.demo.model.AreaInterest;
+
 import com.example.demo.services.AdminService;
 
 @Controller
@@ -36,8 +38,8 @@ public class ApplicationController {
 	
 	@RequestMapping("/welcomepage")
     public String Welcome(HttpServletRequest request) {
-		request.setAttribute("mode", "MODE_HOME");
-	 return "welcome1";
+		
+	 return "Home";
  }
 	
 	@RequestMapping("/register")
@@ -47,11 +49,14 @@ public class ApplicationController {
 	}
 	
 	@PostMapping("/save-user")
-	public String registerUser(@ModelAttribute User user,BindingResult bindingresult,HttpServletRequest request)
+	public ModelAndView registerUser(@ModelAttribute User user,BindingResult bindingresult,HttpServletRequest request)
 	{
 		userservice.saveMyUser(user);
-		request.setAttribute("mode", "MODE_HOME");
-		return "welcome1";
+		//request.setAttribute("mode", "MODE_HOME");
+		List<AreaInterest>list=userservice.getallCategories();
+		ModelAndView model= new ModelAndView("area_of_interest");
+		model.addObject("categories",list);
+		return model;
 	}
 	
 	@RequestMapping("/login")
@@ -66,9 +71,11 @@ public class ApplicationController {
 			System.out.println("reached");
 			//String username =request.getParameter("username");
 			//session.setAttribute("username", username);
-			List<Article> l=userservice.getUserArticles(user.getUsername());
+			List<Object[]> l1=userservice.getUserArticleStuff(user.getUsername());
+			//List<AreaInterest> l2=userservice.getUserAreaStuff(user.getUsername());
 			ModelAndView model= new ModelAndView("UserHome");
-			model.addObject("dashboard",l);
+			model.addObject("dashboard1",l1);
+			//model.addObject("dashboard2",l2);
 			return model;
 		}
 		else  {

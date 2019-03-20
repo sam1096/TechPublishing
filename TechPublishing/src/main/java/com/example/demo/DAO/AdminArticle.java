@@ -20,9 +20,12 @@ public class AdminArticle {
 	{
 		
 		String hql="from Article as a where a.status= 'in review' and a.areaid=(select ad.areaid from AdminArea ad where ad.adminname=adminname)";
-		return (List<Article>) entityManager.createQuery(hql).getResultList();
-	  
-	  
+		
+		List<Article> art= entityManager.createQuery(hql).getResultList();
+		
+		System.out.println(art);
+		System.out.println("reached");
+		return art;
 	   
 	}
 }

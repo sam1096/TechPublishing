@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
 <title>CSS Template</title>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -90,16 +91,17 @@ footer {
 <td>Topic</td>
 <td>Ratings</td>
 <td>Date</td>
+
 </tr>
 </thead>
 <tbody>
-<c:forEach items="${dashboard}" var="temp">
+<c:forEach items="${dashboard1}" var="temp">
 	<tr>
-	<td>${temp.description}</td>
-	<td>${temp.authname}</td>
-	<td>${temp.areaname}</td><!-- came from another table after join -->
-	<td>${temp.rating}</td>
-	<td>${temp.postdate}</td>
+	<td>${temp[0].description}</td>
+	<td>${temp[0].authname}</td>
+	<td>${temp[1].areaname}</td>
+	<td>${temp[0].rating}</td>
+	<td>${temp[0].postdate}</td>
 	</tr>
 </c:forEach>
 </tbody>
@@ -111,7 +113,7 @@ footer {
     <ul>
       <li><a href="#">Profile</a></li>
       <li><a href="/editor">Create Articles</a></li>
-      
+   
     </ul>
   </nav>
 </section>

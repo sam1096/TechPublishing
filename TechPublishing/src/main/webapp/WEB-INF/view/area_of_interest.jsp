@@ -16,10 +16,12 @@
 <title>Tech Categories</title>
 </head>
 <body>
-<h3>Hello,${user.username}</h3>
+<form action="/submitarea" method="post">
+<h3>Hello,<%=session.getAttribute("id") %></h3>
 <p>Choose your favorite categories!!</p>
+
 <div class="container">
-<form>
+
 <table class="table table-striped">
 <caption><h3>Categories</h3></caption>
 <thead>
@@ -28,16 +30,16 @@
 <tbody>
 <c:forEach items="${categories}" var="temp">
 	<tr>
-	<td><input type="checkbox" checked="checked"></td>
+	<td><input type="checkbox" name="area" class="card" value=${temp.areaid } ></td>
+	<!--  <td><label class="card" for="area">${temp.areaid}</label></td>-->
 	<td><div class="card">${temp.areaname}</div></td>
-	
 	</tr>
 </c:forEach>
 </tbody>
 </table>
+ <input type="submit" class="btn btn-info" id="myBtn1" value="Save Interest"/>
 
-</form>
 </div>
-
+</form>
 </body>
 </html>

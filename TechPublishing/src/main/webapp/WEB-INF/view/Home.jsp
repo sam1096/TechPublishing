@@ -54,7 +54,7 @@
           <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          <form action="/login-user" method="POST" role="form">
+          <form action="/validateUserLogin" method="POST" role="form">
           
             <div class="form-group">
              <label for="username"><span class="glyphicon glyphicon-user"></span>Username</label>
@@ -129,7 +129,7 @@
             </div>
             
              <div class="form-group">
-             <label for="username"><span class="glyphicon glyphicon-user"></span>Email</label>
+             <label for="email"><span class="glyphicon glyphicon-user"></span>Email</label>
              <input type="text" class="form-control" name="email" placeholder="Enter Email" value="${user.email}"/>
              </div>
              

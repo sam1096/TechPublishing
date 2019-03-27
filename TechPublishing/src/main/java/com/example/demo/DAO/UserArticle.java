@@ -20,7 +20,7 @@ public class UserArticle {
 	public List<Object[]> getUserArticleStuff(String username)
 	{
 		
-		String hql1="from Article as a,AreaInterest as i where a.areaid=i.areaid and a.areaid=(select ar.areaid from UserArea ar where ar.username=username)";
+		String hql1="from Article as a,AreaInterest as i where a.areaid=i.areaid and a.areaid in(select ar.areaid from UserArea ar where ar.username=username)";
 		 List<Object[]> obj_list1=entityManager.createQuery(hql1).getResultList();
 		 System.out.println("This is the result!!");
 		 

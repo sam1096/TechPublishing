@@ -70,6 +70,17 @@ footer {
     height: auto;
   }
 }
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  /*text-align: center;*/
+  background-color: #f1f1f1;
+  white-space: nowrap; 
+  width: 200px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+ /* border: 1px solid #000000;*/
+}
 </style>
 </head>
 <body>
@@ -97,7 +108,14 @@ footer {
 <tbody>
 <c:forEach items="${dashboard1}" var="temp">
 	<tr>
-	<td>${temp[0].description}</td>
+	<td><div class="card">${temp[0].description} </div>
+	<form action="/readmore" method="post">
+	<input type="hidden" name ="aid" value="${temp[0].aid }"/>
+	 <button type="submit">Read More>></button>
+	</form>
+	
+		
+	</td>
 	<td>${temp[0].authname}</td>
 	<td>${temp[1].areaname}</td>
 	<td>${temp[0].rating}</td>

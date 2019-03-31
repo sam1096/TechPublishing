@@ -61,6 +61,12 @@ public class ApplicationController {
 		return model;
 	}
 	
-	
+	@RequestMapping ("/readmore")
+	public String readMore( @RequestParam("aid") String aid,HttpServletRequest request,ModelMap map)
+	{	int article_id=Integer.parseInt(aid);
+		List<Article> article=userservice.getfullArticle(article_id);
+		map.addAttribute("article", article);
+		return "Article";
+	}
 	
 }

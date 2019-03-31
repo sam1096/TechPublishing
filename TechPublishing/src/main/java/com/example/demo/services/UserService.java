@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Respository.ArticleRepository;
 import com.example.demo.Respository.UserAreaRepository;
 import com.example.demo.Respository.UserRepository;
 import com.example.demo.model.Article;
@@ -21,14 +22,15 @@ public class UserService {
 	
 	@Autowired
    private UserArticle userArticle;
-  	
+	private final ArticleRepository articleRepository;
 	private final UserRepository userRepository;
 	private final UserAreaRepository userareaRepository;
 	
-	public UserService(UserRepository userRepository,UserAreaRepository userareaRepository)
+	public UserService(UserRepository userRepository,UserAreaRepository userareaRepository,ArticleRepository articleRepository)
 	{
 		this.userRepository=userRepository;
 		this.userareaRepository=userareaRepository;
+		this.articleRepository=articleRepository;
 	}
 	
 	public User validateUser(String username, String password) {
@@ -77,7 +79,10 @@ public class UserService {
 			userareaRepository.save(ua);
 		}
 	}
-	
+	public List<Article> getfullArticle(int aid)
+	{
+		return articleRepository.findByAid(aid);
+	}
 	
 }
 

@@ -8,4 +8,5 @@ import com.example.demo.model.Article;
 
 public interface ArticleRepository  extends CrudRepository<Article, Integer>{
 List<Article> findByAid(int aid);
+List<Article> findByAreaid(String areaid);
 }

@@ -24,6 +24,7 @@ ${temp.description}
 </div>
 <div style="text-align:center;">
 <h1>Comments</h1>
+
 </div>
 </c:forEach>
 </body>

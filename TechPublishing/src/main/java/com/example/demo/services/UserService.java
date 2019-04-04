@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -37,7 +38,8 @@ public class UserService {
 		List<User> users = userRepository.findByUsername(username);
 		if (users.size() == 0) {
 			return null;
-		} else {
+		} 
+		else {
 
 			User user = users.get(0);
 			if (user.getPassword().equals(password)) {
@@ -61,6 +63,7 @@ public class UserService {
 	*/
 	public List<Object[]> getUserArticleStuff(String username)
 	{ return userArticle.getUserArticleStuff(username);
+		
 	}
 	
 	public List<AreaInterest> getallCategories()

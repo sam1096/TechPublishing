@@ -34,6 +34,7 @@ public class ApplicationController {
 	@RequestMapping("/")
     public String Home() {
 	 return "Home";}
+	
 	@RequestMapping("/welcomepage")
     public String Welcome(HttpServletRequest request) {
 	 return "Home";}
@@ -65,28 +66,6 @@ public class ApplicationController {
 		}
 	}
 	
-	@RequestMapping ("/editor")
-	public String Editor(HttpSession session,ModelMap map) {
-		if (session.getAttribute("id") == null) {
-			return "redirect:loginUser";
-		}
-		User user = (User)session.getAttribute("user");
-		map.addAttribute("user", user);
-		List<AreaInterest> list=userservice.getallCategories();
-		map.addAttribute("areainterest", list);
-		return "editor";
-	}
 	
-	
-	@RequestMapping ("/readmore")
-	public String readMore( @RequestParam("aid") String aid,HttpServletRequest request,ModelMap map)
-	{	int article_id=Integer.parseInt(aid);
-		List<Article> article=userservice.getfullArticle(article_id);
-		List<Comment> list=userservice.getComment(article_id);
-		map.addAttribute("commentList", list);
-		map.addAttribute("article", article);
-		map.addAttribute("article_id",article_id);
-		return "Article";
-}
 	
 }

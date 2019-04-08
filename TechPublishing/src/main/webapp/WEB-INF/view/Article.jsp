@@ -5,15 +5,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <title>Article</title>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script>
+	$(document).ready(function(){
+		$("#comment_page").load("/getComments");
+	});
+	$(document).ready(function(){
+		$("#upload_comment").click(function(){
+			var aid = $("#article_id").val();
+			var comment = $("#comment_desc").val();
+			$.ajax({
+				url:'comment_section',
+				data: {
+					article_id: aid,
+					comment_desc : comment
+				},
+				success: function(response) {
+					$("#comment_page").html(response);
+				}
+			});
+			
+		});
+	});
+</script>
 </head>
 <body>
 
-<!-- Navigation bar -->
+	<!-- Navigation bar -->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -21,40 +46,30 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/welcomepage">Home</a></li>
-				
+
 				<li><a href="#">About</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/logoutUser"><span class="glyphicon glyphicon-log-out"></span>
-						Logout</a></li>
+				<li><a href="/logoutUser"><span
+						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 		</div>
 	</nav>
 	<!---------- end ----------------->
 
-
+	
 
 	<c:forEach items="${article}" var="temp">
 		<div class="card"
 			style="margin-top: 8%; margin-left: 5%, margin-right:5%">
-			${temp.description}
-			<input type=hidden name="articleId" value="${temp.aid}"> 
-			<div>
-			${temp.aid}
-			</div>
+			${temp.description} <input type=hidden name="articleId"
+				value="${temp.aid}">
+			<div>${temp.aid}</div>
 		</div>
 		<div style="text-align: left;">
 			<h1>Comments</h1>
-			<div id="display_comment">
-				<c:forEach items="${commentList}" var="cmt">
-					<div class="media">
-						<div class="media-body">
-							<h4 class="media-heading">${cmt.authname}</h4>
-							<p>${cmt.comdesc}</p>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
+				<div id="comment_page"><jsp:include page="comments.jsp"/></div>
+			
 			<form action="/comment_section" method="post" name="comment_form"
 				id="comment_saving">
 				<div class="container-fluid">
@@ -64,22 +79,20 @@
 						</div>
 						<div class="panel-body">
 							<div class="form-group col-md-4">
-								<label>USER NAME</label> <input class="form-control"
-									name="authname" type="text" id="username"
-									value="${cmt.authname }">
-				    	<input type=hidden name="articleId" value="${temp.aid}"> 
-							
+								<label>${user.username}</label> <input id="article_id"
+									type=hidden name="articleId" value="${temp.aid}">
+
 
 							</div>
 							<div class="form-group col-md-4">
 								<label>YOUR COMMENT</label>
-								<textarea class="form-control" rows="8" id="comment"
-									name="comdesc" required="required" value="${cmt.comdesc }"></textarea>
+								<textarea id="comment_desc" class="form-control" rows="8"
+									id="comment" name="comdesc" required="required"></textarea>
 							</div>
 							<div class="clearfix"></div>
 							<div class="form-group col-md-6">
-								<button type="submit" name="upload_comment" id="upload_comment"
-									value="Post" onsubmit="setTimeout(function(){window.location.reload();},10)">Upload</button>
+								<button type="button" name="upload_comment" id="upload_comment"
+									value="Post">Upload</button>
 							</div>
 						</div>
 					</div>

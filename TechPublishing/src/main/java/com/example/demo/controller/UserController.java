@@ -118,22 +118,54 @@ public class UserController {
 	}
 	
 	@RequestMapping("/comment_section")
-	public String comment_section(@RequestParam("articleId") int id,@ModelAttribute Comment cmt,HttpServletRequest request,ModelMap map) {
+	public String comment_section(@RequestParam("article_id") int article_id,@RequestParam("comment_desc") String comment_desc,HttpSession session,ModelMap map) {
 		
 		System.out.println("commentSection*************************************");
-		System.out.println("article id: "+id);
+		System.out.println("article id: "+article_id);
 		System.out.println("*************************************");
-		System.out.println(id);
+		System.out.println(comment_desc);
 		System.out.println("*************************************");
-		cmt.setArtid(id);
-		System.out.println(cmt.getArtid()+" "+cmt.getAuthname()+" "+cmt.getComdesc());
-		aid=String.valueOf(id);
-		System.out.println("##########################################");
+		User user = (User) session.getAttribute("user");
+		System.out.println(user.getUsername());
+		Comment cmt=new Comment();
+		cmt.setAuthname(user.getUsername());
+		cmt.setArtid(article_id);
+		cmt.setComdesc(comment_desc);
+		
 		userservice.save_comment(cmt);
-		//List<Comment> list=userservice.getComment(id);
-		//map.addAttribute("commentList", list);
-		return "redirect:readmore/{aid}";
+		List<Comment> list=userservice.getComment(article_id);
+		map.addAttribute("commentList", list);
+		return "comments";
+	}
+	
+	@RequestMapping("getComments")
+	public String comments( @RequestParam("aid") int aid, HttpSession session ,ModelMap map) {
+		List<Comment> list=userservice.getComment(aid);
+		map.addAttribute("commentList", list);
+		return "comments";
+	}
+	
+	@RequestMapping ("/editor")
+	public String Editor(HttpSession session,ModelMap map) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+		User user = (User)session.getAttribute("user");
+		map.addAttribute("user", user);
+		List<AreaInterest> list=userservice.getallCategories();
+		map.addAttribute("areainterest", list);
+		return "editor";
 	}
 	
 	
+	@RequestMapping ("/readmore")
+	public String readMore( @RequestParam("aid") String aid, HttpServletRequest request,ModelMap map)
+	{	int article_id=Integer.parseInt(aid);
+		List<Article> article=userservice.getfullArticle(article_id);
+		List<Comment> list=userservice.getComment(article_id);
+		map.addAttribute("commentList", list);
+		map.addAttribute("article", article);
+		map.addAttribute("article_id",article_id);
+		return "Article";
+}
 }

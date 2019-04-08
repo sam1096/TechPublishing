@@ -31,7 +31,7 @@
 					$("#comment_page").html(response);
 				}
 			});
-			
+			$("#comment_desc").val('');
 		});
 	});
 </script>
@@ -62,7 +62,8 @@
 	<c:forEach items="${article}" var="temp">
 		<div class="card"
 			style="margin-top: 8%; margin-left: 5%, margin-right:5%">
-			${temp.description} <input type=hidden name="articleId"
+			<div class="jumbotron-fluid" align="center" style="background-color:skyblue; width:50%;margin-left:25%;"><font size="5" face="verdana">${temp.description}</font></div>
+			 <input type=hidden name="articleId"
 				value="${temp.aid}">
 			<div>${temp.aid}</div>
 		</div>
@@ -86,7 +87,7 @@
 							</div>
 							<div class="form-group col-md-4">
 								<label>YOUR COMMENT</label>
-								<textarea id="comment_desc" class="form-control" rows="8"
+								<textarea id="comment_desc" class="form-control" rows="5"
 									id="comment" name="comdesc" required="required"></textarea>
 							</div>
 							<div class="clearfix"></div>

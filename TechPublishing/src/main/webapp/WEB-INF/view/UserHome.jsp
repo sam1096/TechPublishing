@@ -52,8 +52,7 @@
 				<h3>EDITOR</h3>
 				<p>Something on mind write here!!!</p>
 				<ul class="nav nav-pills flex-column">
-					<li class="nav-item"><a class="nav-link active" href="/editor">Create
-							Article</a></li>
+					<li class="nav-item"><a href="/editor">Create Article</a></li>
 				</ul>
 				<hr class="d-sm-none">
 			</div>
@@ -61,25 +60,27 @@
 			<div class="col-sm-10">
 				<article>
 					<div class="container">
-						<table class="table table-striped">
+						<table>
 							<thead>
 								<tr class="tr tr-success">
-									<td>Description</td>
-									<td>Author Name</td>
-									<td>Topic</td>
-									<td>Ratings</td>
-									<td>Date</td>
+									<th>Description</th>
+									<th>Author Name</th>
+									<th>Topic</th>
+									<th>Ratings</th>
+									<th>Date</th>
 
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${dashboard1}" var="temp">
 									<tr>
-										<td><div class="card">${temp[0].description}</div>
+										<td>
+										<section class="card">${temp[0].description}</section>
 											<form action="/readmore" method="post">
 												<input type="hidden" name="aid" value="${temp[0].aid }" />
 												<button class="readmoreButton" type="submit"><span>Read More</span> </button>
-											</form></td>
+											</form>
+										</td>
 										<td>${temp[0].authname}</td>
 										<td>${temp[1].areaname}</td>
 										<td>${temp[0].rating}</td>

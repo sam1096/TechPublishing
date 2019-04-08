@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.model.User;
 import com.example.demo.services.UserService;
 import com.example.demo.model.AreaInterest;
+import com.example.demo.model.Article;
+import com.example.demo.model.Comment;
 
 
 @Controller
@@ -25,6 +28,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userservice;
+	String aid;
 
 	@PostMapping("/save-user")
 	public ModelAndView registerUser(@ModelAttribute User user,BindingResult bindingresult,HttpServletRequest request)
@@ -94,4 +98,42 @@ public class UserController {
 		
 		return "redirect:userHome";
 	}
+	
+	
+	@RequestMapping ("/saveArticle")
+	public String saveArticle(@ModelAttribute Article art,ModelMap map,HttpServletRequest request,@RequestParam("areas")String areaname)
+	{
+		User user=(User)request.getSession(false).getAttribute("user");
+		System.out.println("*******************************************");
+		System.out.println(user.getId());
+		System.out.println("usernme is: "+user.getUsername());
+		System.out.println("*******************************************");
+		art.setAuthname(user.getUsername());
+		String areaid=userservice.findAreaInterest(areaname).get(0).getAreaid();
+		art.setAreaid(areaid);
+		art.setStatus("in review");
+		userservice.saveArticle(art);
+		map.addAttribute("message", "Successfully saved");
+		return "redirect:userHome";
+	}
+	
+	@RequestMapping("/comment_section")
+	public String comment_section(@RequestParam("articleId") int id,@ModelAttribute Comment cmt,HttpServletRequest request,ModelMap map) {
+		
+		System.out.println("commentSection*************************************");
+		System.out.println("article id: "+id);
+		System.out.println("*************************************");
+		System.out.println(id);
+		System.out.println("*************************************");
+		cmt.setArtid(id);
+		System.out.println(cmt.getArtid()+" "+cmt.getAuthname()+" "+cmt.getComdesc());
+		aid=String.valueOf(id);
+		System.out.println("##########################################");
+		userservice.save_comment(cmt);
+		//List<Comment> list=userservice.getComment(id);
+		//map.addAttribute("commentList", list);
+		return "redirect:readmore/{aid}";
+	}
+	
+	
 }

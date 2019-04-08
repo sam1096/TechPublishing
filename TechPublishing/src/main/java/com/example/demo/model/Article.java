@@ -26,7 +26,7 @@ public class Article {
 	@Column(name="status")
 	private String status;
 	@Column(name="postdate")
-	private Date postdate;
+	private Date postdate = new Date();
 	@Column(name="reviewdate")
 	private Date reviewdate;
 	public Article()

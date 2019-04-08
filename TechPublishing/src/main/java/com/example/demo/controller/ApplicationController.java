@@ -19,6 +19,7 @@ import com.example.demo.model.User;
 import com.example.demo.services.UserService;
 import com.example.demo.model.Admin;
 import com.example.demo.model.Article;
+import com.example.demo.model.Comment;
 import com.example.demo.model.AreaInterest;
 
 import com.example.demo.services.AdminService;
@@ -50,22 +51,35 @@ public class ApplicationController {
 			String username=user.getUsername();
 			System.out.println(username);
 			List<Object[]> l1=userservice.getUserArticleStuff(username);
+			System.out.println("**********************");
+			
 			map.addAttribute("dashboard1", l1);
+			//map.addAttribute("user", user);
+			map.addAttribute("message", "");
 			return "UserHome";
 		}
 	}
 	
 	@RequestMapping ("/editor")
-	public ModelAndView Editor(@ModelAttribute User user, HttpServletRequest request) {
-		ModelAndView model= new ModelAndView("editor");
-		return model;
+	public String Editor(HttpSession session,ModelMap map) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+		User user = (User)session.getAttribute("user");
+		map.addAttribute("user", user);
+		List<AreaInterest> list=userservice.getallCategories();
+		map.addAttribute("areainterest", list);
+		return "editor";
 	}
 	
 	@RequestMapping ("/readmore")
 	public String readMore( @RequestParam("aid") String aid,HttpServletRequest request,ModelMap map)
 	{	int article_id=Integer.parseInt(aid);
 		List<Article> article=userservice.getfullArticle(article_id);
+		List<Comment> list=userservice.getComment(article_id);
+		map.addAttribute("commentList", list);
 		map.addAttribute("article", article);
+		map.addAttribute("article_id",article_id);
 		return "Article";
 	}
 	

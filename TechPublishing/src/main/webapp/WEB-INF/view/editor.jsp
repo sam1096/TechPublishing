@@ -1,56 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-
-"http://www.w3.org/TR/html4/loose.dtd">
-
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<title>Toolbar with TextArea </title>
+<title>Editor</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<!--  <link rel="stylesheet" href="css/jquery.wysiwyg.css" type="text/css" />
-
-<link rel="stylesheet" href="examples.css" type="text/css" />
--->
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
-  <script>tinymce.init({ selector:'textarea',theme:'modern',skin:'lightgray'});</script>
-
-<!--  <script src="//cdn.ckeditor.com/4.11.3/full/ckeditor.js"></script>
-
-<script type="text/javascript" src="jquery/jquery-1.3.2.js"></script>
-
-<script type="text/javascript" src="jquery/jquery.wysiwyg.js"></script>
--->
-
-<script type="text/javascript">
-
-$(function()
-
-{
-
-$('#wysiwyg').wysiwyg();
-
-});
-
+<script>
+	tinymce.init({
+		selector : 'textarea'
+	});
 </script>
-
+<script type="text/javascript">
+	$(function() {
+		$('#wysiwyg').wysiwyg();
+	});
+</script>
 </head>
 
 <body>
-
-<h1>Toolbar with TextArea </h1>
-
-<div>
-
-<!--  <textarea name="wysiwyg" id="wysiwyg" rows="5" cols="47"></textarea> -->
-
-<textarea name="wysiwyg" id="wysiwyg"></textarea> 
-
-</div>
-
+<%
+  response.setIntHeader("Refresh", 60);
+response.setHeader("Cache-Control", "no-cache");
+response.setHeader("Pragma", "no-cache");
+response.setDateHeader("Expires", 0);//in your case 60*5=300 (for 5 min)
+%>
+	<h1>Create Article</h1>
+	<h3>Select Area Name under which you want to create article</h3>
+	<br>
+	
+	<div>
+		<form action="/saveArticle" method="post" name="tinymc" id="tinymc">
+		<select name="areas">
+		<c:forEach items="${areainterest}" var="list">
+			<option value="${list.areaname}">${list.areaname}</option>
+		
+		</c:forEach>
+	</select>
+			<!--  <input type="hidden" name="aid" value="${art.aid }" />-->
+			<!--  <input type="hidden" name="authname" value="${user.username}" />-->
+			<textarea name="description" id="description"
+				value="${art.description }"></textarea>
+			<input type="submit" name="upload" id="upload" value="upload">
+		</form>
+	</div>
 </body>
 
 </html>

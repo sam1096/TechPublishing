@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Respository.AreaInterestRepository;
 import com.example.demo.Respository.ArticleRepository;
 import com.example.demo.Respository.UserAreaRepository;
 import com.example.demo.Respository.UserRepository;
@@ -26,9 +27,10 @@ public class UserService {
 	private final ArticleRepository articleRepository;
 	private final UserRepository userRepository;
 	private final UserAreaRepository userareaRepository;
+	private final AreaInterestRepository areainterestRepository;
 	
-	public UserService(UserRepository userRepository,UserAreaRepository userareaRepository,ArticleRepository articleRepository)
-	{
+	public UserService(UserRepository userRepository,UserAreaRepository userareaRepository,ArticleRepository articleRepository,AreaInterestRepository areainterestRepository)
+	{	this.areainterestRepository=areainterestRepository;
 		this.userRepository=userRepository;
 		this.userareaRepository=userareaRepository;
 		this.articleRepository=articleRepository;
@@ -54,13 +56,6 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
-	
-	/*public User findByUsernameAndPassword(String username,String password)
-	{
-		User user = userRepository.findByUsernameAndPassword(username, password);
-	  return user;
-	}
-	*/
 	public List<Object[]> getUserArticleStuff(String username)
 	{ return userArticle.getUserArticleStuff(username);
 		
@@ -86,6 +81,17 @@ public class UserService {
 	{
 		return articleRepository.findByAid(aid);
 	}
-	
+	public List<Article> getArticleByUser(String authname)
+	{
+		return articleRepository.findByAuthname(authname);
+	}
+	public List<UserArea> getAreaByUser(String username)
+	{
+		return userareaRepository.findByUsername(username);
+	}
+	public List<AreaInterest>getAreaInterestById(String areaid)
+	{
+		return areainterestRepository.findByAreaid(areaid);
+	}
 }
 

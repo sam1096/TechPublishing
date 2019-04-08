@@ -7,6 +7,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
 * {
   box-sizing: border-box;
@@ -85,7 +88,6 @@ footer {
 </head>
 <body>
 
-
 <header>
   <h2>DashBoard</h2>
 </header>
@@ -93,7 +95,7 @@ footer {
 <section> 
 <article>
 <div class="container">
-<table class="table table-striped">
+<table class="table ">
 <caption><h3>Articles</h3></caption>
 <thead>
 <tr class="tr tr-success">
@@ -129,15 +131,15 @@ footer {
   
    <nav>
     <ul>
-      <li><a href="#">Profile</a></li>
+      <li><a href="/userProfile">Profile</a></li>
       <li><a href="/editor">Create Articles</a></li>
    
     </ul>
   </nav>
 </section>
-<%=session.getAttribute("id") %>
+
 <footer>
- <a href="/logoutUser">Logout</a>
+ <a href="/logoutUser">LogOut</a>
 </footer>
 
 </body>

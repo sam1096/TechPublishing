@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.User;
+import com.example.demo.model.UserArea;
 import com.example.demo.services.UserService;
 import com.example.demo.model.AreaInterest;
+import com.example.demo.model.Article;
 
 
 @Controller
@@ -38,27 +41,7 @@ public class UserController {
 		model.addObject("categories",list);
 		return model;
 	}
-	
-/*	@RequestMapping ("/login-user")
-	public ModelAndView loginUser(@ModelAttribute User user, HttpServletRequest request) {
-		if(userservice.findByUsernameAndPassword(user.getUsername(), user.getPassword())!=null) {
-			System.out.println("reached");
-			List<Object[]> l1=userservice.getUserArticleStuff(user.getUsername());
-			//List<AreaInterest> l2=userservice.getUserAreaStuff(user.getUsername());
-			ModelAndView model= new ModelAndView("UserHome");
-			model.addObject("dashboard1",l1);
-			//model.addObject("dashboard2",l2);
-			return model;
-		}
-		else  {
-			
-			System.out.println(user.getPassword());
-			System.out.println(user.getUsername());
-			ModelAndView model= new ModelAndView("homepage");
-			return model;	
-		}
-	}
-	*/
+
 	@RequestMapping(value = "/validateUserLogin", method = RequestMethod.POST)
 	public String UserLogin(@RequestParam("username") String username, @RequestParam("password")String password, ModelMap map, HttpServletRequest request) {
 		if(request.getSession(false).getAttribute("id")!=null){	
@@ -83,6 +66,23 @@ public class UserController {
 		return "redirect:welcomepage";
 	}
 	
+	@RequestMapping(value = "/userProfile")
+	public String userProfile(ModelMap map,HttpSession session)
+	{
+		User user=(User)session.getAttribute("user");
+		System.out.println(user.getUsername());
+		map.addAttribute("user", user);
+		List<Article> articleinfo=userservice.getArticleByUser(user.getUsername());
+		List<UserArea>area=userservice.getAreaByUser(user.getUsername());
+		List<AreaInterest>userarea=new ArrayList<AreaInterest>();
+		for(int i=0;i<area.size();i++)
+		{
+			userarea.add((userservice.getAreaInterestById(area.get(i).getAreaid())).get(0));
+		}
+		map.addAttribute("userarea", userarea);
+		map.addAttribute("articleinfo", articleinfo);
+		return "UserProfile";
+	}
 	
 	@RequestMapping ("/submitarea")
 	public String AreaOfInterest( HttpServletRequest request,@RequestParam("area") List<String> list, ModelMap map) {

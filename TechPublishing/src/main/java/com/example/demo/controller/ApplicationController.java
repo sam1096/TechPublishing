@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.User;
@@ -28,6 +30,9 @@ public class ApplicationController {
 	
 	@Autowired
 	private UserService userservice;
+	@RequestMapping("/")
+    public String Home() {
+	 return "Home";}
 	@RequestMapping("/welcomepage")
     public String Welcome(HttpServletRequest request) {
 	 return "Home";}
@@ -61,12 +66,13 @@ public class ApplicationController {
 		return model;
 	}
 	
+	
 	@RequestMapping ("/readmore")
 	public String readMore( @RequestParam("aid") String aid,HttpServletRequest request,ModelMap map)
 	{	int article_id=Integer.parseInt(aid);
 		List<Article> article=userservice.getfullArticle(article_id);
 		map.addAttribute("article", article);
 		return "Article";
-	}
+}
 	
 }

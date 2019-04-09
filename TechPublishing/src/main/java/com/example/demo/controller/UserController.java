@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.User;
+import com.example.demo.model.UserArea;
 import com.example.demo.services.UserService;
 import com.example.demo.model.AreaInterest;
+import com.example.demo.model.Article;
+
+import com.example.demo.model.Comment;
+
 
 
 @Controller
@@ -25,6 +31,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService userservice;
+	String aid;
 
 	@PostMapping("/save-user")
 	public ModelAndView registerUser(@ModelAttribute User user,BindingResult bindingresult,HttpServletRequest request)
@@ -38,27 +45,7 @@ public class UserController {
 		model.addObject("categories",list);
 		return model;
 	}
-	
-/*	@RequestMapping ("/login-user")
-	public ModelAndView loginUser(@ModelAttribute User user, HttpServletRequest request) {
-		if(userservice.findByUsernameAndPassword(user.getUsername(), user.getPassword())!=null) {
-			System.out.println("reached");
-			List<Object[]> l1=userservice.getUserArticleStuff(user.getUsername());
-			//List<AreaInterest> l2=userservice.getUserAreaStuff(user.getUsername());
-			ModelAndView model= new ModelAndView("UserHome");
-			model.addObject("dashboard1",l1);
-			//model.addObject("dashboard2",l2);
-			return model;
-		}
-		else  {
-			
-			System.out.println(user.getPassword());
-			System.out.println(user.getUsername());
-			ModelAndView model= new ModelAndView("homepage");
-			return model;	
-		}
-	}
-	*/
+
 	@RequestMapping(value = "/validateUserLogin", method = RequestMethod.POST)
 	public String UserLogin(@RequestParam("username") String username, @RequestParam("password")String password, ModelMap map, HttpServletRequest request) {
 		if(request.getSession(false).getAttribute("id")!=null){	
@@ -67,7 +54,7 @@ public class UserController {
 		User user = userservice.validateUser(username,password);
 		if(user==null) {
 			map.addAttribute("error", "username or password invalid");
-			return "Login";
+			return "Home";
 		}
 		else {
 			HttpSession session = request.getSession(true);
@@ -80,9 +67,26 @@ public class UserController {
 	@RequestMapping("/logoutUser")
 	public String logoutUser(HttpSession session) {
 		session.invalidate();
-		return "redirect:Home";
+   	return "redirect:/";
 	}
 	
+	@RequestMapping(value = "/userProfile")
+	public String userProfile(ModelMap map,HttpSession session)
+	{
+		User user=(User)session.getAttribute("user");
+		System.out.println(user.getUsername());
+		map.addAttribute("user", user);
+		List<Article> articleinfo=userservice.getArticleByUser(user.getUsername());
+		List<UserArea>area=userservice.getAreaByUser(user.getUsername());
+		List<AreaInterest>userarea=new ArrayList<AreaInterest>();
+		for(int i=0;i<area.size();i++)
+		{
+			userarea.add((userservice.getAreaInterestById(area.get(i).getAreaid())).get(0));
+		}
+		map.addAttribute("userarea", userarea);
+		map.addAttribute("articleinfo", articleinfo);
+		return "UserProfile";
+	}
 	
 	@RequestMapping ("/submitarea")
 	public String AreaOfInterest( HttpServletRequest request,@RequestParam("area") List<String> list, ModelMap map) {
@@ -94,4 +98,74 @@ public class UserController {
 		
 		return "redirect:userHome";
 	}
+	
+	
+	@RequestMapping ("/saveArticle")
+	public String saveArticle(@ModelAttribute Article art,ModelMap map,HttpServletRequest request,@RequestParam("areas")String areaname)
+	{
+		User user=(User)request.getSession(false).getAttribute("user");
+		System.out.println("*******************************************");
+		System.out.println(user.getId());
+		System.out.println("usernme is: "+user.getUsername());
+		System.out.println("*******************************************");
+		art.setAuthname(user.getUsername());
+		String areaid=userservice.findAreaInterest(areaname).get(0).getAreaid();
+		art.setAreaid(areaid);
+		art.setStatus("in review");
+		userservice.saveArticle(art);
+		map.addAttribute("message", "Successfully saved");
+		return "redirect:userHome";
+	}
+	
+	@RequestMapping("/comment_section")
+	public String comment_section(@RequestParam("article_id") int article_id,@RequestParam("comment_desc") String comment_desc,HttpSession session,ModelMap map) {
+		
+		System.out.println("commentSection*************************************");
+		System.out.println("article id: "+article_id);
+		System.out.println("*************************************");
+		System.out.println(comment_desc);
+		System.out.println("*************************************");
+		User user = (User) session.getAttribute("user");
+		System.out.println(user.getUsername());
+		Comment cmt=new Comment();
+		cmt.setAuthname(user.getUsername());
+		cmt.setArtid(article_id);
+		cmt.setComdesc(comment_desc);
+		
+		userservice.save_comment(cmt);
+		List<Comment> list=userservice.getComment(article_id);
+		map.addAttribute("commentList", list);
+		return "comments";
+	}
+	
+	@RequestMapping("getComments")
+	public String comments( @RequestParam("aid") int aid, HttpSession session ,ModelMap map) {
+		List<Comment> list=userservice.getComment(aid);
+		map.addAttribute("commentList", list);
+		return "comments";
+	}
+	
+	@RequestMapping ("/editor")
+	public String Editor(HttpSession session,ModelMap map) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+		User user = (User)session.getAttribute("user");
+		map.addAttribute("user", user);
+		List<AreaInterest> list=userservice.getallCategories();
+		map.addAttribute("areainterest", list);
+		return "editor";
+	}
+	
+	
+	@RequestMapping ("/readmore")
+	public String readMore( @RequestParam("aid") String aid, HttpServletRequest request,ModelMap map)
+	{	int article_id=Integer.parseInt(aid);
+		List<Article> article=userservice.getfullArticle(article_id);
+		List<Comment> list=userservice.getComment(article_id);
+		map.addAttribute("commentList", list);
+		map.addAttribute("article", article);
+		map.addAttribute("article_id",article_id);
+		return "Article";
+}
 }

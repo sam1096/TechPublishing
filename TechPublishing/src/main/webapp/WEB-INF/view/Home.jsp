@@ -102,13 +102,13 @@
           
             <div class="form-group">
              <label for="adminname"><span class="glyphicon glyphicon-user"></span>Adminname</label>
-             <input type="text" class="form-control" name="adminname" placeholder="Enter AdminName" value="${admin.adminname}"/>
+             <input type="text" class="form-control" name="adminname" placeholder="Enter AdminName"/>
           
              </div>
              
             <div class="form-group">
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-              <input type="password" class="form-control" name="password" placeholder="Enter Password" value="${admin.password }"/>
+              <input type="password" class="form-control" name="password" placeholder="Enter Password"/>
              
             </div>
             

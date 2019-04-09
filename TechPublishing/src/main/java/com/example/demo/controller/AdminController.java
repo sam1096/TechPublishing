@@ -26,49 +26,34 @@ public class AdminController {
 	
 	@RequestMapping(value = "/validateAdminLogin", method = RequestMethod.POST)
 	public String AdminLogin(@RequestParam("adminname") String adminname, @RequestParam("password")String password, ModelMap map, HttpServletRequest request) {
-		if(request.getSession(false).getAttribute("adminid")!=null){	
+		if(request.getSession(false).getAttribute("id")!=null){	
 			System.out.println("********gdfjhkgh****");
-			System.out.println(request.getSession(false).getAttribute("adminid"));
+			System.out.println(request.getSession(false).getAttribute("id"));
 			return "redirect:adminHome";
 		}
 			Admin admin = adminservice.validateAdmin( adminname, password);
 		if(admin==null) {
 			System.out.println("***bla****");
 			map.addAttribute("error", "adminname or password invalid");
-			return "Login";
+			return "Home";
 		}
 		else {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("adminid", admin.getAdminid());
+			session.setAttribute("id", admin.getAdminid());
 			session.setAttribute("admin",admin);
 			System.out.println(admin.getAdminname());
 			return "redirect:adminHome";
 		}
 	}
 	
+	
 	@RequestMapping("/logoutAdmin")
 	public String logoutAdmin(HttpSession session) {
 		session.invalidate();
-		return "redirect:Home";
+		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/adminHome")
-	public String AdminHome(ModelMap map,HttpSession session)
-	{
-		if (session.getAttribute("adminid") == null) {
-			return "redirect:Home";
-		} else { 
-			Admin admin=(Admin)session.getAttribute("admin");
-			System.out.println(admin.getAdminname());
-			//if(admin==null)
-				//{return "redirect:Home";}
-			//else
-			List<Article> l=adminservice.getArticles(admin.getAdminname());
-			map.addAttribute("articles",l);
-			return "admin_review";
-			
-		}
-	}
+	
 //	@RequestMapping ("/admin_profile")
 //	public ModelAndView adminProfile(@ModelAttribute Admin admin, HttpServletRequest request) {
 //		ModelAndView model= new ModelAndView("admin_profile");

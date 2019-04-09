@@ -10,15 +10,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.User;
 import com.example.demo.services.UserService;
 import com.example.demo.model.Admin;
 import com.example.demo.model.Article;
+import com.example.demo.model.Comment;
 import com.example.demo.model.AreaInterest;
 
 import com.example.demo.services.AdminService;
@@ -28,12 +31,14 @@ public class ApplicationController {
 	
 	@Autowired
 	private UserService userservice;
+	@Autowired
+	private AdminService adminservice;
 	@RequestMapping("/")
-    public String Welcome(HttpServletRequest request) {
+    public String Home() {
 	 return "Home";}
 	
-	@RequestMapping("/Home")
-    public String WelcomeHome(HttpServletRequest request) {
+	@RequestMapping("/welcomepage")
+    public String Welcome(HttpServletRequest request) {
 	 return "Home";}
 	
 	@RequestMapping("loginUser")
@@ -45,7 +50,6 @@ public class ApplicationController {
 		return "Home";
 	}
 	
-
 	@RequestMapping("userHome")
 	public String UserHome(ModelMap map, HttpSession session) {
 		if (session.getAttribute("id") == null) {
@@ -55,23 +59,41 @@ public class ApplicationController {
 			String username=user.getUsername();
 			System.out.println(username);
 			List<Object[]> l1=userservice.getUserArticleStuff(username);
+			System.out.println("**********************");
+			
 			map.addAttribute("dashboard1", l1);
+			//map.addAttribute("user", user);
+			map.addAttribute("message", "");
 			return "UserHome";
 		}
 	}
 	
-	@RequestMapping ("/editor")
-	public ModelAndView Editor(@ModelAttribute User user, HttpServletRequest request) {
-		ModelAndView model= new ModelAndView("editor");
-		return model;
+	@RequestMapping("loginAdmin")
+	public String loginAdmin(ModelMap map, HttpSession session) {
+		if (session.getAttribute("id") != null) 
+			return "redirect:adminHome";
+		
+		map.addAttribute("error", "");
+		return "Home";
 	}
 	
-	@RequestMapping ("/readmore")
-	public String readMore( @RequestParam("aid") String aid,HttpServletRequest request,ModelMap map)
-	{	int article_id=Integer.parseInt(aid);
-		List<Article> article=userservice.getfullArticle(article_id);
-		map.addAttribute("article", article);
-		return "Article_admin";
+	@RequestMapping(value="/adminHome")
+	public String AdminHome(ModelMap map,HttpSession session)
+	{
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginAdmin";
+		} else { 
+			Admin admin=(Admin)session.getAttribute("admin");
+			String adminname=admin.getAdminname();
+			System.out.println(adminname);
+			List<Article> l=adminservice.getArticles(admin.getAdminname());
+			System.out.println("**********************");
+			
+			map.addAttribute("articles",l);
+			//map.addAttribute("user", user);
+			map.addAttribute("message", "");
+			return "admin_review";
+		}
 	}
 	
 }

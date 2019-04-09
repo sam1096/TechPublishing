@@ -26,16 +26,24 @@ public class Article {
 	@Column(name="status")
 	private String status;
 	@Column(name="postdate")
-	private Date postdate = new Date();
+	private Date postdate;
 	@Column(name="reviewdate")
 	private Date reviewdate;
+	
+	@Column(name="reviewby")
+	private String reviewby;
+	@Column(name="reason")
+	private String reason;
+	
+	
 	public Article()
-	{
-		
-	}
-	public Article(int rating, String description, String areaid, String authname, String status, Date postdate,
-			Date reviewdate) {
+	{}	
+	
+	
+	public Article(int aid, int rating, String description, String areaid, String authname, String status,
+			Date postdate, Date reviewdate, String reviewby, String reason) {
 		super();
+		this.aid = aid;
 		this.rating = rating;
 		this.description = description;
 		this.areaid = areaid;
@@ -43,13 +51,22 @@ public class Article {
 		this.status = status;
 		this.postdate = postdate;
 		this.reviewdate = reviewdate;
+		this.reviewby = reviewby;
+		this.reason = reason;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Article [aid=" + aid + ", rating=" + rating + ", description=" + description + ", areaid=" + areaid
 				+ ", authname=" + authname + ", status=" + status + ", postdate=" + postdate + ", reviewdate="
-				+ reviewdate + "]";
+				+ reviewdate + ", reviewby=" + reviewby + ", reason=" + reason + "]";
 	}
+
+	
+	
+	
 	public int getAid() {
 		return aid;
 	}
@@ -98,6 +115,28 @@ public class Article {
 	public void setReviewdate(Date reviewdate) {
 		this.reviewdate = reviewdate;
 	}
+	public String getReviewby() {
+		return reviewby;
+	}
+	public void setReviewby(String reviewby) {
+		this.reviewby = reviewby;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+
+	
 	
 	
 	

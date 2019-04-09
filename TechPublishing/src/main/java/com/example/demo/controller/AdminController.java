@@ -54,64 +54,82 @@ public class AdminController {
 	}
 	
 	
-//	@RequestMapping ("/admin_profile")
-//	public ModelAndView adminProfile(@ModelAttribute Admin admin, HttpServletRequest request) {
-//		ModelAndView model= new ModelAndView("admin_profile");
-//		return model;
-//	}
-//	
-//	@RequestMapping (value="/read_article",method=RequestMethod.POST)
-//	public ModelAndView readArticle(@ModelAttribute Article article,@RequestParam("newfield") int aid,HttpServletRequest request) {
-//		    System.out.println("This is it"+aid);
-//	        Article l=adminservice.getArticlesbyId(aid);
-//			System.out.println("reached");
-//			System.out.println("Article = " + l);
-//			ModelAndView model= new ModelAndView("read_article");
-//			model.addObject("data",l);
-//			return model;
-//	}
-//
-//  
-//    @RequestMapping (value="/publisharticle/{id}")
-//		public ModelAndView publishUserArticle(@ModelAttribute Admin admin,@PathVariable(value="id") int aid,BindingResult result,HttpSession session,HttpServletRequest request,ModelMap map)
-//		{   System.out.println("this is it"+aid);
-//			int n=adminservice.setArticles(aid);
-//			
-//			System.out.println("this is after it is published  "+aid);
-//			System.out.println("this is it"+admin.getAdminname());
-//			if(n!=0) {
-//			List<Article> l=adminservice.getArticles(admin.getAdminname());
-//			 System.out.println("this is it"+admin.getAdminname());
-//			ModelAndView model= new ModelAndView("admin_review");
-//			model.addObject("articles",l);
-//			return model;
-//		}
-//		else  {
-//			ModelAndView model= new ModelAndView("welcome_new");
-//					return model;
-//			
-//		}
-//	  }
-//    
-//    @RequestMapping (value="/rejectarticle/{id}")
-//	public ModelAndView rejectUserArticle(@ModelAttribute Admin admin,@PathVariable(value="id") int aid,BindingResult result,HttpSession session,HttpServletRequest request,ModelMap map)
-//	{   System.out.println("this is it"+aid);
-//		int n=adminservice.rejectArticles(aid);
-//		
-//		System.out.println("this is after it is rejected  "+aid);
-//		System.out.println("this is it"+admin.getAdminname());
-//		if(n!=0) {
-//		List<Article> l=adminservice.getArticles(admin.getAdminname());
-//		 System.out.println("this is it"+admin.getAdminname());
-//		ModelAndView model= new ModelAndView("admin_review");
-//		model.addObject("articles",l);
-//		return model;
-//	}
-//	else  {
-//		ModelAndView model= new ModelAndView("welcome_new");
-//		return model;
-//		
-//	 }
-// }
+	@RequestMapping ("/admin_profile")
+	public ModelAndView adminProfile(@ModelAttribute Admin admin, HttpServletRequest request) {
+		ModelAndView model= new ModelAndView("admin_profile");
+		return model;
+	}
+	
+	@RequestMapping (value="/read_article",method=RequestMethod.POST)
+	public ModelAndView readArticle(@ModelAttribute Article article,@RequestParam("newfield") int aid,HttpServletRequest request) {
+		    System.out.println("This is it"+aid);
+	        Article l=adminservice.getArticlesbyId(aid);
+			System.out.println("reached");
+			System.out.println("Article = " + l);
+			ModelAndView model= new ModelAndView("read_article");
+			model.addObject("data",l);
+			return model;
+	}
+
+  
+    @RequestMapping (value="/publisharticle/{id}")
+		public ModelAndView publishUserArticle(@ModelAttribute Admin admin,@PathVariable(value="id") int aid,BindingResult result,HttpSession session,HttpServletRequest request,ModelMap map)
+		{   System.out.println("this is it"+aid);
+			int n=adminservice.setArticles(aid);
+			
+			System.out.println("this is after it is published  "+aid);
+			System.out.println("this is it"+admin.getAdminname());
+			if(n!=0) {
+			List<Article> l=adminservice.getArticles(admin.getAdminname());
+			 System.out.println("this is it"+admin.getAdminname());
+			ModelAndView model= new ModelAndView("admin_review");
+			model.addObject("articles",l);
+			return model;
+		}
+		else  {
+			ModelAndView model= new ModelAndView("welcome_new");
+					return model;
+			
+		}
+	  }
+ 
+  
+  @RequestMapping (value="/rejectarticle/{id}")
+	public ModelAndView rejectUserArticle(@ModelAttribute Admin admin,@PathVariable(value="id") String id,BindingResult result,HttpSession session,HttpServletRequest request)
+	{   System.out.println("this is it"+id);
+	
+	    String[] temp=id.split("_");
+	    System.out.println("this is it"+temp[0]);
+	    int aid=Integer.parseInt(temp[0]);
+	    String reas=temp[1];
+	
+	
+	    System.out.println("this is it"+aid);
+	    System.out.println("this is it"+reas);
+		int n=adminservice.rejectArticles(aid,reas);
+		
+		System.out.println("this is after it is rejected  "+aid);
+		System.out.println("this is it"+admin.getAdminname());
+		if(n!=0) {
+		List<Article> l=adminservice.getArticles(admin.getAdminname());
+		 System.out.println("this is it"+admin.getAdminname());
+		ModelAndView model= new ModelAndView("admin_review");
+		model.addObject("articles",l);
+		return model;
+	}
+	else  {
+		ModelAndView model= new ModelAndView("welcome_new");
+		return model;
+		
+	 }
+ }
+    
+//@RequestMapping ("/readmore")
+//public String readMore( @RequestParam("aid") String aid,HttpServletRequest request,ModelMap map)
+//{	int article_id=Integer.parseInt(aid);
+//	List<Article> article=adminservice.getfullArticle(article_id);
+//	map.addAttribute("article", article);
+//	return "Article";
+//}
     
 }

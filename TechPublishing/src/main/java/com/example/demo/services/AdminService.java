@@ -3,6 +3,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 import com.example.demo.Respository.AdminRepository;
+import com.example.demo.Respository.ArticleRepository;
+
 import java.util.*;
 import com.example.demo.model.Admin;
 import com.example.demo.model.Article;
@@ -16,8 +18,7 @@ public class AdminService {
 
 	@Autowired
 	private AdminArticle adminArticle;
-
-	
+	private ArticleRepository articleRepository;
 	private AdminRepository adminRepository;
 
 	public AdminService(AdminRepository adminRepository)
@@ -41,15 +42,34 @@ public class AdminService {
 	}
 	
 	
-/*	public Admin findByAdminnameAndPassword(String adminname,String password)
-	{
-	  
-		Admin admin = adminRepository.findByAdminnameAndPassword(adminname, password);
-	   
-	  return admin;
-	}*/
-	
+
 	public List<Article> getArticles(String adminname)
 	{ return adminArticle.getArticles(adminname);
+	}
+	
+	public int  setArticles(int id)
+	{     System.out.println("This is service"+id);
+		return adminArticle.setArticles(id);
+		
+	}
+	
+	public Article getArticlesbyId(int id)
+	{ Article ar=adminArticle.getArticlesbyId(id);
+	   System.out.println("This is service"+ar);
+	  return ar;
+	}
+	
+	
+	
+	public int  rejectArticles(int id,String reas)
+	{     System.out.println("This is reject service"+id);
+	System.out.println("This is reject service"+reas);
+		return adminArticle.rejectArticles(id,reas);
+		
+	}
+
+	public List<Article> getfullArticle(int aid)
+	{
+		return articleRepository.findByAid(aid);
 	}
 }

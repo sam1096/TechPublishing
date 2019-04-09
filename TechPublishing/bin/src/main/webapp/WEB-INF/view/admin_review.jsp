@@ -27,6 +27,5 @@
 </tbody>
 </table>
 </div>
-<a href="/logoutAdmin">Logout</a>
 </body>
 </html>

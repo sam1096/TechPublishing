@@ -78,9 +78,9 @@ public class UserController {
 	}
 	
 	@RequestMapping("/logoutUser")
-	public String logoutPublisher(HttpSession session) {
+	public String logoutUser(HttpSession session) {
 		session.invalidate();
-		return "redirect:welcomepage";
+		return "redirect:Home";
 	}
 	
 	

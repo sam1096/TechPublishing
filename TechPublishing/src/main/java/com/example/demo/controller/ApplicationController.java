@@ -28,8 +28,12 @@ public class ApplicationController {
 	
 	@Autowired
 	private UserService userservice;
-	@RequestMapping("/welcomepage")
+	@RequestMapping("/")
     public String Welcome(HttpServletRequest request) {
+	 return "Home";}
+	
+	@RequestMapping("/Home")
+    public String WelcomeHome(HttpServletRequest request) {
 	 return "Home";}
 	
 	@RequestMapping("loginUser")
@@ -41,6 +45,7 @@ public class ApplicationController {
 		return "Home";
 	}
 	
+
 	@RequestMapping("userHome")
 	public String UserHome(ModelMap map, HttpSession session) {
 		if (session.getAttribute("id") == null) {
@@ -66,7 +71,7 @@ public class ApplicationController {
 	{	int article_id=Integer.parseInt(aid);
 		List<Article> article=userservice.getfullArticle(article_id);
 		map.addAttribute("article", article);
-		return "Article";
+		return "Article_admin";
 	}
 	
 }

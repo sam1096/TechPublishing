@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -127,8 +127,8 @@ button:hover, a:hover {
 					<div class="container-fluid">
 
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="admin_profile">Basic Details</a></li>
-							<li><a href="/admin_reviewed">Articles Reviewed</a></li>
+							<li><a href="admin_profile">Basic Details</a></li>
+							<li class="active"><a href="/admin_reviewed">Articles Reviewed</a></li>
 							<li><a href="/admin_myArticles">My Articles</a></li>
 							<li><a href="/admin_pass">Change Password</a></li>
 							<li> <a href="/logoutAdmin">Logout</a></li>
@@ -137,32 +137,47 @@ button:hover, a:hover {
 				</nav>
 
 				<div class="contain">
+					
+					<table class="table table-striped">
+						<caption>
+							<h3>Articles Reviewed By You !!!</h3>
+						</caption>
+						<thead>
+							<tr class="tr tr-success">
 
-					<p class="til">DETAILS</p>
+								<td>Description</td>
+								<td>Author name</td>
+								<td>Post Date</td>
+							
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${articles}" var="temp">
+								<tr>
+									<td>
 
-					<p>
-						<span class="large_font">Username : </span> <span
-							class="small_font"> ${admin.adminname}</span>
-					</p>
-					<p>
-						<span class="large_font">Name : </span> <span class="small_font">${admin.name}</span>
-					</p>
-					<p>
-						<span class="large_font">Password </span> <span class="small_font"> ${admin.password}</span>
-					</p>
-					<p>
-						<span class="large_font">Role : </span> <span class="small_font">Admin</span>
-					</p>
+										<p class="show-read-more">${temp.description}</p>
 
-					<br> <br>
-					<p class="til">CONTACT DETAILS</p>
-					<p>
-						<span class="large_font">Email : </span> <span class="small_font"></span>
-					</p>
-					<p>
-						<span class="large_font">Phone No : </span> <span
-							class="small_font"> </span>
-					</p>
+										<form class="read" action="/read_article" id='form1'
+											method='POST'>
+											<input type='hidden' id='newfield' name='newfield'
+												value="${temp.aid}" />
+											<button class="bt" type="submit" id='b1'>read
+												more..</button>
+										</form>
+
+
+									</td>
+
+									<td>${temp.authname}</td>
+									<td>${temp.postdate}</td>
+
+
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
 				</div>
 
 

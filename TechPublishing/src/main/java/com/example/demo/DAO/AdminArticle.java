@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.example.demo.model.Article;
 import com.example.demo.model.AdminArea;
@@ -53,7 +54,27 @@ public class AdminArticle {
        System.out.println("It is working fine rejected");
   	   return 1;
   	}
+
       
+	public List<Article> getArticlesbyAdminName(String adminname)
+	{
+		String hql="from Article as a where a.reviewby=?1 and a.areaid=(select ad.areaid from AdminArea ad where ad.adminname=adminname)";
+		
+	    Query q1 = entityManager.createQuery(hql); 
+		q1.setParameter(1, adminname);
+		
+		return (List<Article>) q1.getResultList();
+    }
+
+	public List<Article> getArticlesbyAdmin(String adminname) {
+		
+	String hql="from Article as a where  a.authname=?1";
+		
+	    Query q1 = entityManager.createQuery(hql); 
+		q1.setParameter(1, adminname);
+		
+		return (List<Article>) q1.getResultList();
+	}
       
       
       

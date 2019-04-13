@@ -250,6 +250,7 @@ $(document).ready(function(){
 
 <footer>
   <p>Footer</p>
+  <a href="/logoutAdmin">Logout</a>
 </footer>
 
 

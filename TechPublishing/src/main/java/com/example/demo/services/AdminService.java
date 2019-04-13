@@ -72,4 +72,18 @@ public class AdminService {
 	{
 		return articleRepository.findByAid(aid);
 	}
+
+	public List<Article> getArticlesbyAdminName(String adminname) {
+	
+		List<Article> ar=adminArticle.getArticlesbyAdminName(adminname);
+		   System.out.println("****This is service *****"+ar);
+		  return ar;
+	}
+
+	public List<Article> getArticlesbyAdmin(String adminname) {
+		
+		List<Article> ar=adminArticle.getArticlesbyAdmin(adminname);
+		   System.out.println("****This is service *****"+ar);
+		  return ar;
+	}
 }

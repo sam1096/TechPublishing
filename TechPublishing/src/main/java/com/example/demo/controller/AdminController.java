@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Admin;
 import com.example.demo.model.Article;
+import com.example.demo.model.User;
+
 import java.util.*;
 import com.example.demo.services.AdminService;
 
@@ -42,6 +44,9 @@ public class AdminController {
 			session.setAttribute("id", admin.getAdminid());
 			session.setAttribute("admin",admin);
 			System.out.println(admin.getAdminname());
+		
+			System.out.println(admin);
+			
 			return "redirect:adminHome";
 		}
 	}
@@ -49,16 +54,49 @@ public class AdminController {
 	
 	@RequestMapping("/logoutAdmin")
 	public String logoutAdmin(HttpSession session) {
+		System.out.println("***************logout**************************");
 		session.invalidate();
 		return "redirect:/";
 	}
 	
+
 	
-	@RequestMapping ("/admin_profile")
-	public ModelAndView adminProfile(@ModelAttribute Admin admin, HttpServletRequest request) {
-		ModelAndView model= new ModelAndView("admin_profile");
-		return model;
+	
+	@RequestMapping("/admin_profile")
+	public String adminProfile(ModelMap map,HttpSession session) {
+	
+		Admin admin=(Admin)session.getAttribute("admin");
+		map.addAttribute("admin", admin);
+	
+		return "admin_profile";
 	}
+	
+	
+	
+	@RequestMapping("/admin_reviewed")
+	public String adminreview(ModelMap map,HttpSession session) {
+	
+		Admin admin=(Admin)session.getAttribute("admin");
+		List<Article> l=adminservice.getArticlesbyAdminName(admin.getAdminname());
+		map.addAttribute("admin", admin);
+		map.addAttribute("articles",l);
+		
+		return "admin_reviewed";
+	}
+	
+	
+	@RequestMapping("/admin_myArticles")
+	public String adminmyarticle(ModelMap map,HttpSession session) {
+	
+		Admin admin=(Admin)session.getAttribute("admin");
+		List<Article> l=adminservice.getArticlesbyAdmin(admin.getAdminname());
+		map.addAttribute("admin", admin);
+		map.addAttribute("articles",l);
+		
+		return "admin_myArticles";
+	}
+	
+	
 	
 	@RequestMapping (value="/read_article",method=RequestMethod.POST)
 	public ModelAndView readArticle(@ModelAttribute Article article,@RequestParam("newfield") int aid,HttpServletRequest request) {
@@ -102,10 +140,7 @@ public class AdminController {
 	    System.out.println("this is it"+temp[0]);
 	    int aid=Integer.parseInt(temp[0]);
 	    String reas=temp[1];
-	
-	
-	    System.out.println("this is it"+aid);
-	    System.out.println("this is it"+reas);
+		
 		int n=adminservice.rejectArticles(aid,reas);
 		
 		System.out.println("this is after it is rejected  "+aid);
@@ -124,12 +159,6 @@ public class AdminController {
 	 }
  }
     
-//@RequestMapping ("/readmore")
-//public String readMore( @RequestParam("aid") String aid,HttpServletRequest request,ModelMap map)
-//{	int article_id=Integer.parseInt(aid);
-//	List<Article> article=adminservice.getfullArticle(article_id);
-//	map.addAttribute("article", article);
-//	return "Article";
-//}
+
     
 }

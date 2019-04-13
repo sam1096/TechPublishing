@@ -127,11 +127,11 @@ button:hover, a:hover {
 					<div class="container-fluid">
 
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="admin_profile">Basic Details</a></li>
+							<li><a href="admin_profile">Basic Details</a></li>
 							<li><a href="/admin_reviewed">Articles Reviewed</a></li>
 							<li><a href="/admin_myArticles">My Articles</a></li>
-							<li><a href="/admin_pass">Change Password</a></li>
-							<li> <a href="/logoutAdmin">Logout</a></li>
+							<li class="active"><a href="/admin_pass">Change Password</a></li>
+							<li><a href="/logoutAdmin">Logout</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -140,29 +140,14 @@ button:hover, a:hover {
 
 					<p class="til">DETAILS</p>
 
+
 					<p>
-						<span class="large_font">Username : </span> <span
-							class="small_font"> ${admin.adminname}</span>
-					</p>
-					<p>
-						<span class="large_font">Name : </span> <span class="small_font">${admin.name}</span>
-					</p>
-					<p>
-						<span class="large_font">Password </span> <span class="small_font"> ${admin.password}</span>
-					</p>
-					<p>
-						<span class="large_font">Role : </span> <span class="small_font">Admin</span>
+						<span class="large_font">Password </span> <span class="small_font">
+							${admin.password}</span>
 					</p>
 
-					<br> <br>
-					<p class="til">CONTACT DETAILS</p>
 					<p>
-						<span class="large_font">Email : </span> <span class="small_font"></span>
-					</p>
-					<p>
-						<span class="large_font">Phone No : </span> <span
-							class="small_font"> </span>
-					</p>
+						<span class="large_font"> New Password </span>
 				</div>
 
 

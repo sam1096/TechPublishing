@@ -40,9 +40,10 @@ public class UserArticle {
 //		/* for(int i=0;i<areaid.size();i++)
 //			 System.out.println(areaid.get(i));*/
 
-		String hql1="from Article as a,AreaInterest as i where a.areaid=i.areaid and a.areaid in(select ar.areaid from UserArea ar where ar.username=?1)";
+		String hql1="from Article as a,AreaInterest as i where a.areaid=i.areaid and a.status=?2 and a.areaid in(select ar.areaid from UserArea ar where ar.username=?1)";
 		Query q1 = entityManager.createQuery(hql1); 
 		q1.setParameter(1, username);
+		q1.setParameter(2, "published");
 		List<Object[]> obj_list1=q1.getResultList();
 
 		 System.out.println("This is the result!!");

@@ -17,6 +17,8 @@ public class ApplicationController {
 	
 	@Autowired
 	private UserService userservice;
+	@Autowired
+	private AdminService adminservice;
 	@RequestMapping("/")
     public String Home() {
 	 return "Home";}
@@ -52,6 +54,32 @@ public class ApplicationController {
 		}
 	}
 	
+	@RequestMapping("loginAdmin")
+	public String loginAdmin(ModelMap map, HttpSession session) {
+		if (session.getAttribute("id") != null) 
+			return "redirect:adminHome";
+		
+		map.addAttribute("error", "");
+		return "Home";
+	}
 	
+	@RequestMapping(value="/adminHome")
+	public String AdminHome(ModelMap map,HttpSession session)
+	{
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginAdmin";
+		} else { 
+			Admin admin=(Admin)session.getAttribute("admin");
+			String adminname=admin.getAdminname();
+			System.out.println(adminname);
+			List<Article> l=adminservice.getArticles(admin.getAdminname());
+			System.out.println("**********************");
+			
+			map.addAttribute("articles",l);
+			//map.addAttribute("user", user);
+			map.addAttribute("message", "");
+			return "admin_review";
+		}
+	}
 	
 }

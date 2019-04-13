@@ -4,14 +4,20 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Admin;
 import com.example.demo.model.Article;
+import com.example.demo.model.User;
+
 import java.util.*;
 import com.example.demo.services.AdminService;
 
@@ -20,23 +26,139 @@ public class AdminController {
 	@Autowired
 	private AdminService adminservice;
 	
-	@RequestMapping ("/login-admin")
-	public ModelAndView loginAdmin(@ModelAttribute Admin admin, HttpServletRequest request) {
-		if(adminservice.findByAdminnameAndPassword(admin.getAdminname(), admin.getPassword())!=null) {
+	@RequestMapping(value = "/validateAdminLogin", method = RequestMethod.POST)
+	public String AdminLogin(@RequestParam("adminname") String adminname, @RequestParam("password")String password, ModelMap map, HttpServletRequest request) {
+		if(request.getSession(false).getAttribute("id")!=null){	
+			System.out.println("********gdfjhkgh****");
+			System.out.println(request.getSession(false).getAttribute("id"));
+			return "redirect:adminHome";
+		}
+			Admin admin = adminservice.validateAdmin( adminname, password);
+		if(admin==null) {
+			System.out.println("***bla****");
+			map.addAttribute("error", "adminname or password invalid");
+			return "Home";
+		}
+		else {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("id", admin.getAdminid());
+			session.setAttribute("admin",admin);
+			System.out.println(admin.getAdminname());
+		
+			System.out.println(admin);
+			
+			return "redirect:adminHome";
+		}
+	}
+	
+	
+	@RequestMapping("/logoutAdmin")
+	public String logoutAdmin(HttpSession session) {
+		System.out.println("***************logout**************************");
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+
+	
+	
+	@RequestMapping("/admin_profile")
+	public String adminProfile(ModelMap map,HttpSession session) {
+	
+		Admin admin=(Admin)session.getAttribute("admin");
+		map.addAttribute("admin", admin);
+	
+		return "admin_profile";
+	}
+	
+	
+	
+	@RequestMapping("/admin_reviewed")
+	public String adminreview(ModelMap map,HttpSession session) {
+	
+		Admin admin=(Admin)session.getAttribute("admin");
+		List<Article> l=adminservice.getArticlesbyAdminName(admin.getAdminname());
+		map.addAttribute("admin", admin);
+		map.addAttribute("articles",l);
+		
+		return "admin_reviewed";
+	}
+	
+	
+	@RequestMapping("/admin_myArticles")
+	public String adminmyarticle(ModelMap map,HttpSession session) {
+	
+		Admin admin=(Admin)session.getAttribute("admin");
+		List<Article> l=adminservice.getArticlesbyAdmin(admin.getAdminname());
+		map.addAttribute("admin", admin);
+		map.addAttribute("articles",l);
+		
+		return "admin_myArticles";
+	}
+	
+	
+	
+	@RequestMapping (value="/read_article",method=RequestMethod.POST)
+	public ModelAndView readArticle(@ModelAttribute Article article,@RequestParam("newfield") int aid,HttpServletRequest request) {
+		    System.out.println("This is it"+aid);
+	        Article l=adminservice.getArticlesbyId(aid);
 			System.out.println("reached");
+			System.out.println("Article = " + l);
+			ModelAndView model= new ModelAndView("read_article");
+			model.addObject("data",l);
+			return model;
+	}
+
+  
+    @RequestMapping (value="/publisharticle/{id}")
+		public ModelAndView publishUserArticle(@ModelAttribute Admin admin,@PathVariable(value="id") int aid,BindingResult result,HttpSession session,HttpServletRequest request,ModelMap map)
+		{   System.out.println("this is it"+aid);
+			int n=adminservice.setArticles(aid);
+			
+			System.out.println("this is after it is published  "+aid);
+			System.out.println("this is it"+admin.getAdminname());
+			if(n!=0) {
 			List<Article> l=adminservice.getArticles(admin.getAdminname());
+			 System.out.println("this is it"+admin.getAdminname());
 			ModelAndView model= new ModelAndView("admin_review");
 			model.addObject("articles",l);
 			return model;
 		}
 		else  {
-			//request.setAttribute("error", "Invalid Username or Password");
-			//request.setAttribute("mode", "MODE_LOGIN");
-			//System.out.println(user.getPassword());
-			//System.out.println(user.getUsername());
 			ModelAndView model= new ModelAndView("welcome_new");
 					return model;
 			
 		}
+	  }
+ 
+  
+  @RequestMapping (value="/rejectarticle/{id}")
+	public ModelAndView rejectUserArticle(@ModelAttribute Admin admin,@PathVariable(value="id") String id,BindingResult result,HttpSession session,HttpServletRequest request)
+	{   System.out.println("this is it"+id);
+	
+	    String[] temp=id.split("_");
+	    System.out.println("this is it"+temp[0]);
+	    int aid=Integer.parseInt(temp[0]);
+	    String reas=temp[1];
+		
+		int n=adminservice.rejectArticles(aid,reas);
+		
+		System.out.println("this is after it is rejected  "+aid);
+		System.out.println("this is it"+admin.getAdminname());
+		if(n!=0) {
+		List<Article> l=adminservice.getArticles(admin.getAdminname());
+		 System.out.println("this is it"+admin.getAdminname());
+		ModelAndView model= new ModelAndView("admin_review");
+		model.addObject("articles",l);
+		return model;
 	}
+	else  {
+		ModelAndView model= new ModelAndView("welcome_new");
+		return model;
+		
+	 }
+ }
+    
+
+    
 }

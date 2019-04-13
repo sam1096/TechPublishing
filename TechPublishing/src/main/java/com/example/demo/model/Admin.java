@@ -1,4 +1,6 @@
 package com.example.demo.model;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
 @Table(name="admin")
-public class Admin {
+public class Admin implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="adminid")

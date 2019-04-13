@@ -54,7 +54,7 @@ public class UserController {
 		User user = userservice.validateUser(username,password);
 		if(user==null) {
 			map.addAttribute("error", "username or password invalid");
-			return "Login";
+			return "Home";
 		}
 		else {
 			HttpSession session = request.getSession(true);
@@ -65,9 +65,9 @@ public class UserController {
 	}
 	
 	@RequestMapping("/logoutUser")
-	public String logoutPublisher(HttpSession session) {
+	public String logoutUser(HttpSession session) {
 		session.invalidate();
-		return "redirect:welcomepage";
+   	return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/userProfile")

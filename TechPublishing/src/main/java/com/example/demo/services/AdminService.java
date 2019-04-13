@@ -7,6 +7,7 @@ import com.example.demo.Respository.ArticleRepository;
 
 import java.util.*;
 import com.example.demo.model.Admin;
+import com.example.demo.model.AreaInterest;
 import com.example.demo.model.Article;
 import com.example.demo.model.User;
 import com.example.demo.DAO.*;
@@ -59,7 +60,10 @@ public class AdminService {
 	  return ar;
 	}
 	
-	
+	public List<AreaInterest> getallCategories()
+	{
+		return adminArticle.getallCategories();
+	}
 	
 	public int  rejectArticles(int id,String reas)
 	{     System.out.println("This is reject service"+id);

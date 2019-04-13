@@ -8,6 +8,8 @@ import javax.persistence.Query;
 
 import com.example.demo.model.Article;
 import com.example.demo.model.AdminArea;
+import com.example.demo.model.AreaInterest;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,7 +78,12 @@ public class AdminArticle {
 		return (List<Article>) q1.getResultList();
 	}
       
-      
+	public List<AreaInterest> getallCategories()
+	{
+		String hql=" from AreaInterest";
+		 List<AreaInterest> obj_list1=entityManager.createQuery(hql).getResultList();
+		 return obj_list1; 
+	} 
       
 	
 	

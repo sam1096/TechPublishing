@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.model.Admin;
+import com.example.demo.model.Article;
 import com.example.demo.model.User;
 import com.example.demo.services.UserService;
-
+import com.example.demo.services.AdminService;
 
 
 @Controller

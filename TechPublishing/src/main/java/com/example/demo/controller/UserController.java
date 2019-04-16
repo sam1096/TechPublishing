@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.User;
 import com.example.demo.model.UserArea;
+import com.example.demo.model.userRatings;
 import com.example.demo.services.UserService;
+import com.example.demo.model.Admin;
 import com.example.demo.model.AreaInterest;
 import com.example.demo.model.Article;
 
@@ -53,7 +56,7 @@ public class UserController {
 		}
 		User user = userservice.validateUser(username,password);
 		if(user==null) {
-			map.addAttribute("error", "username or password invalid");
+			map.addAttribute("error", "Invalid Username or Password");
 			return "Home";
 		}
 		else {
@@ -70,27 +73,80 @@ public class UserController {
    	return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/userProfile")
-	public String userProfile(ModelMap map,HttpSession session)
-	{
-		User user=(User)session.getAttribute("user");
-		System.out.println(user.getUsername());
+
+	@RequestMapping("/userprofile")
+	public String userProfile(ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+
+		User  user=(User)session.getAttribute("user");
 		map.addAttribute("user", user);
-		List<Article> articleinfo=userservice.getArticleByUser(user.getUsername());
+	
+		return "userProfile";
+	}
+	@RequestMapping("/user_pass")
+	public String userPassword(ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+
+		User  user=(User)session.getAttribute("user");
+		map.addAttribute("user", user);
+		
+		return "userPassword";
+	}
+	@RequestMapping("change_pwd")
+	public String userPassword(@RequestParam("password")String pwd,ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+
+		User  user=(User)session.getAttribute("user");
+		User usernew=userservice.changePassword(user.getUsername(),pwd);
+	
+		session.setAttribute("user",usernew);
+		map.addAttribute("user", user);
+		return "redirect:userprofile";
+	}
+	@RequestMapping("/area")
+	public String userArea(ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+		User user=(User)session.getAttribute("user");
 		List<UserArea>area=userservice.getAreaByUser(user.getUsername());
 		List<AreaInterest>userarea=new ArrayList<AreaInterest>();
 		for(int i=0;i<area.size();i++)
 		{
 			userarea.add((userservice.getAreaInterestById(area.get(i).getAreaid())).get(0));
 		}
+		map.addAttribute("user", user);
 		map.addAttribute("userarea", userarea);
+		return "userAreas";
+	}
+	
+	
+	@RequestMapping("/userArticles")
+	public String userArticles(ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+		User user=(User)session.getAttribute("user");
+		System.out.println(user.getUsername());
+		map.addAttribute("user", user);
+		List<Article> articleinfo=userservice.getArticleByUser(user.getUsername());
 		map.addAttribute("articleinfo", articleinfo);
-		return "UserProfile";
+		map.addAttribute("user", user);
+		return "userArticles";
 	}
 	
 	@RequestMapping ("/submitarea")
-	public String AreaOfInterest( HttpServletRequest request,@RequestParam("area") List<String> list, ModelMap map) {
-		User user=(User)request.getSession(false).getAttribute("user");
+	public String AreaOfInterest( HttpSession session,@RequestParam("area") List<String> list, ModelMap map) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+		User user=(User)session.getAttribute("user");
 		System.out.println(user.getUsername());
 		for(int i=0;i<list.size();i++)
 			System.out.println(list.get(i));
@@ -139,7 +195,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("getComments")
-	public String comments( @RequestParam("aid") int aid, HttpSession session ,ModelMap map) {
+	public String comments( @RequestParam("article_id") int aid, HttpSession session ,ModelMap map) {
 		List<Comment> list=userservice.getComment(aid);
 		map.addAttribute("commentList", list);
 		return "comments";
@@ -156,15 +212,42 @@ public class UserController {
 		map.addAttribute("areainterest", list);
 		return "editor";
 	}
-	
-	
-	@RequestMapping ("/readmore")
-	public String readMore( @RequestParam("aid") String aid, HttpServletRequest request,ModelMap map)
-	{	int article_id=Integer.parseInt(aid);
-		List<Article> article=userservice.getfullArticle(article_id);
-		List<Comment> list=userservice.getComment(article_id);
+	@RequestMapping ("/ratings")
+//	public String Ratings(@PathVariable(value="id") String id,HttpSession session)
+	public String Ratings(@RequestParam("stars")int rating,@RequestParam("aid") int aid,HttpSession session,ModelMap map)
+	{	
+	if (session.getAttribute("id") == null) {
+		return "redirect:loginUser";
+	}
+
+	User user = (User)session.getAttribute("user");
+	userservice.save_rating(user.getUsername(),rating,aid);
+	userRatings rateByUser=userservice.getRating(user.getUsername(),aid);
+	System.out.println("*********************************");
+		System.out.println("aid:");
+		System.out.println("*********************************");
+		List<Article> article=userservice.getfullArticle(aid);
+		List<Comment> list=userservice.getComment(aid);
 		map.addAttribute("commentList", list);
 		map.addAttribute("article", article);
+		map.addAttribute("rateByUser", rateByUser);
+		map.addAttribute("article_id",aid);
+		return "Article";
+	}
+	
+	@RequestMapping ("/readmore")
+	public String readMore( @RequestParam("aid") String aid, HttpSession session,ModelMap map)
+	{	if (session.getAttribute("id") == null) {
+		return "redirect:loginUser";
+	}
+		User user = (User)session.getAttribute("user");
+		int article_id=Integer.parseInt(aid);
+		List<Article> article=userservice.getfullArticle(article_id);
+		List<Comment> list=userservice.getComment(article_id);
+		userRatings rateByUser=userservice.getRating(user.getUsername(),article_id);
+		map.addAttribute("commentList", list);
+		map.addAttribute("article", article);
+		map.addAttribute("rateByUser", rateByUser);
 		map.addAttribute("article_id",article_id);
 		return "Article";
 }

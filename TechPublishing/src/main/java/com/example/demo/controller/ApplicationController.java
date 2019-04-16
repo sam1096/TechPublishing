@@ -1,30 +1,19 @@
 package com.example.demo.controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.model.User;
-import com.example.demo.services.UserService;
 import com.example.demo.model.Admin;
 import com.example.demo.model.Article;
-import com.example.demo.model.Comment;
-import com.example.demo.model.AreaInterest;
-
+import com.example.demo.model.User;
+import com.example.demo.services.UserService;
 import com.example.demo.services.AdminService;
+
 
 @Controller
 public class ApplicationController {
@@ -85,8 +74,8 @@ public class ApplicationController {
 		} else { 
 			Admin admin=(Admin)session.getAttribute("admin");
 			String adminname=admin.getAdminname();
-			System.out.println(adminname);
-			List<Article> l=adminservice.getArticles(admin.getAdminname());
+			System.out.println("I am mad"+adminname);
+			List<Article> l=adminservice.getArticles(adminname);
 			System.out.println("**********************");
 			
 			map.addAttribute("articles",l);

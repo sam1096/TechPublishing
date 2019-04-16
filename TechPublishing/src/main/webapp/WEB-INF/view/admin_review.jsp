@@ -1,27 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>TechPublishing</title>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<meta charset="UTF-8">
+<title>Reviewing Articles</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-<link href="static/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<link href="static/js/bootstrap.min.js" rel="stylesheet">
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-<!-- for media images ex facebook google -->
-<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <link href="static/css/style.css" rel="stylesheet">
 
 <script>
@@ -50,6 +43,9 @@
  }
 
 </script>
+
+
+
 
 <script>
  function deletedata(id)
@@ -83,6 +79,13 @@
 
 </script>
 
+
+
+
+
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 	var maxLength = 25;
@@ -100,53 +103,54 @@ $(document).ready(function(){
 
 });
 </script>
+
+
+
 </head>
-
-
 <body>
-	<nav class="navbar navbar-expand-md sticky-top usernav">
-		<div class="container-fluid ">
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid" style="background-color: #34495e;">
 			<a class="navbar-brand" href="welcomepage"><img
 				src="static/images/tech_geek_logo"></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#collapsibleNavbar">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="collapsibleNavbar">
-				<ul class=" nav navbar-nav ml-auto">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Connect</a></li>
-					<li><a href="/admin_profile">Profile</a></li>
-					<li><a href="/logoutUser">Logout</a></li>
-				</ul>
-			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/welcomepage">Home</a></li>
+
+				<li><a href="#">About</a></li>
+				<li><a href="#">Connect</a></li>
+
+				<li><a href="/admin_profile">Profile</a></li>
+				<li><a href="/logoutAdmin">Logout</a></li>
+			</ul>
+
 		</div>
 	</nav>
-
-
-	<div class="container">
+	<div class="container" style="margin-top: 30px">
 		<div class="row">
-
-			<div class="col-sm-2" style="margin-top:3%">
+			<div class="col-sm-2">
 				<h3>EDITOR</h3>
 				<p>Something on mind write here!!!</p>
 				<ul class="nav nav-pills flex-column">
-					<li class="nav-item"><a href="/editor">Create Article</a></li>
+					<li class="nav-item"><a href="/editor_admin">Create
+							Article</a></li>
 				</ul>
-			</div>
 
-			<div class="col-sm-10" style="margin-top:2%">
+				<hr class="d-sm-none">
+			</div>
+			<div class="col-sm-10">
 				<article>
 					<div class="container">
-						<table>
+						<table class="table table-striped">
+							<caption>
+								<h3>Articles</h3>
+							</caption>
 							<thead>
 								<tr class="tr tr-success">
 
-									<th>Description</th>
-									<th>Author name</th>
-									<th>Post Date</th>
-									<th>Review</th>
+									<td>Description</td>
+									<td>Author name</td>
+									<td>Post Date</td>
+									<td>Review</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -194,14 +198,14 @@ $(document).ready(function(){
 		</div>
 	</div>
 
-	<!-- Footer of the page -->
+
+
 
 	<footer class="page-footer font-small blue footer">
 
 		<!-- Copyright -->
-		<div class="footer-copyright text-center py-3 footer_align">
-			© 2019 Copyright: TechPublishing.com
-		</div>
+		<div class="footer-copyright text-center py-3 footer_align">©
+			2019 Copyright: TechPublishing.com</div>
 		<!-- Copyright -->
 
 	</footer>

@@ -3,10 +3,13 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 import com.example.demo.Respository.AdminRepository;
+import com.example.demo.Respository.AreaInterestRepository;
 import com.example.demo.Respository.ArticleRepository;
 
 import java.util.*;
 import com.example.demo.model.Admin;
+import com.example.demo.model.AdminArea;
+import com.example.demo.model.AreaInterest;
 import com.example.demo.model.Article;
 import com.example.demo.model.User;
 import com.example.demo.DAO.*;
@@ -18,8 +21,12 @@ public class AdminService {
 
 	@Autowired
 	private AdminArticle adminArticle;
+	@Autowired
 	private ArticleRepository articleRepository;
+	@Autowired
 	private AdminRepository adminRepository;
+	@Autowired
+	private  AreaInterestRepository areainterestRepository;
 
 	public AdminService(AdminRepository adminRepository)
 	{
@@ -47,9 +54,9 @@ public class AdminService {
 	{ return adminArticle.getArticles(adminname);
 	}
 	
-	public int  setArticles(int id)
+	public int  setArticles(int id,String adminname)
 	{     System.out.println("This is service"+id);
-		return adminArticle.setArticles(id);
+		return adminArticle.setArticles(id,adminname);
 		
 	}
 	
@@ -59,12 +66,15 @@ public class AdminService {
 	  return ar;
 	}
 	
+	public List<AreaInterest> getallCategories()
+	{
+		return adminArticle.getallCategories();
+	}
 	
-	
-	public int  rejectArticles(int id,String reas)
+	public int  rejectArticles(int id,String reas, String adminname)
 	{     System.out.println("This is reject service"+id);
 	System.out.println("This is reject service"+reas);
-		return adminArticle.rejectArticles(id,reas);
+		return adminArticle.rejectArticles(id,reas,adminname);
 		
 	}
 
@@ -86,4 +96,32 @@ public class AdminService {
 		   System.out.println("****This is service *****"+ar);
 		  return ar;
 	}
+	
+	public Article saveArticle(Article art) {
+		return articleRepository.save(art);
+		}
+	
+	public List<AreaInterest> findAreaInterest(String areaname)
+	{
+		return areainterestRepository.findByAreaname(areaname);
+	}
+
+	public Admin setPassword(int adminid, String password) {
+		   System.out.println("This is service"+adminid);
+			return adminArticle.setPassword(adminid, password);
+
+		
+	}
+
+	public List<AdminArea> getInterestByAdminName(String adminname) {
+		
+		return adminArticle.getInterestByAdminName(adminname);
+		
+	}
+
+	public List<AreaInterest> getInterestById(String areaid) {
+		
+		return areainterestRepository.findByAreaid(areaid);
+	}
+	
 }

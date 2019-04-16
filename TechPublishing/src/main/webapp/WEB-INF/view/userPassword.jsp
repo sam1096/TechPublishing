@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -105,20 +105,20 @@ button:hover, a:hover {
 <body>
 
 	<div id="con">
-		<div id="header">hello Admin</div>
+		<div id="header">hello ${user.username}</div>
 		<div id="container">
 			<div id="first">
 				<div class="card">
 					<img src="/images/1.png" alt="John" style="width: 100%">
-					<h1>${admin.name}</h1>
-					<p class="title">ADMIN</p>
-					<p>
-						<button  onclick="location.href='admin_profile';" >Basic Details</button>
+					<h1>${user.firstname} ${user.lastname}</h1>
+					<p class="title">USER</p>
+					<div>
+						<button onclick="location.href='userprofile';">Basic Details</button>
 						<br>
-						<button onclick="location.href='admin_reviewed';">Article Reviewed</button>
+						<button onclick="location.href='area';">Areas</button>
 						<br>
-						<button onclick="location.href='admin_myArticles';">My articles</button>
-					</p>
+						<button onclick="location.href='userArticles';">My articles</button>
+					</div>
 				</div>
 			</div>
 			<div id="second">
@@ -127,66 +127,30 @@ button:hover, a:hover {
 					<div class="container-fluid">
 
 						<ul class="nav navbar-nav">
-							<li><a href="admin_profile">Basic Details</a></li>
-							<li><a href="/admin_area">Area Of Interest</a></li>
-							<li><a href="/admin_reviewed">Articles Reviewed</a></li>
-							<li class="active"><a href="/admin_myArticles">My
-									Articles</a></li>
-							<li><a href="/admin_pass">Change Password</a></li>
-							<li><a href="/logoutAdmin">Logout</a></li>
+							<li class="active"><a href="userprofile">Basic Details</a></li>
+							<li><a href="/area">Areas of Interests</a></li>
+							<li><a href="/userArticles">My Articles</a></li>
+							<li><a href="/user_pass">Change Password</a></li>
+							<li> <a href="/logoutUser">Logout</a></li>
 						</ul>
 					</div>
 				</nav>
 
 				<div class="contain">
 
-					<table class="table table-striped">
-						<caption>
-							<h3>Articles Posted By You !!!</h3>
-						</caption>
-						<thead>
-							<tr class="tr tr-success">
-
-								<td>Description</td>
-
-								<td>Post Date</td>
-								<td>Review Date</td>
-								<td>Post Date</td>
-								<td>Status</td>
-								<td>Reason</td>
-								<td>Rating
-								<td>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${articles}" var="temp">
-								<tr>
-									<td>
-
-										<p class="show-read-more">${temp.description}</p>
-
-										<form class="read" action="/read_article" id='form1'
-											method='POST'>
-											<input type='hidden' id='newfield' name='newfield'
-												value="${temp.aid}" />
-											<button class="bt" type="submit" id='b1'>read more..</button>
-										</form>
-
-
-									</td>
-
-									<td>${temp.authname}</td>
-									<td>${temp.postdate}</td>
-									<td>${temp.reviewdate}</td>
-									<td>${temp.status}</td>
-									<td>${temp.reason}</td>
-									<td>${temp.rating}</td>
-
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-
+					<p class="til">DETAILS</p>
+             <form action="/change_pwd" method="POST" role="form">
+					<p>
+						<span class="large_font">Password : </span> <span
+							class="small_font"> ${user.password}</span>
+					</p>
+					<p>
+						<span class="large_font">New Password : </span>
+					</p>
+				 <input type="password" class="form-control" name="password" placeholder="Enter Password" required/>
+				 <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Submit</button>	
+            </form>
+				
 				</div>
 
 

@@ -22,9 +22,46 @@
    <!--------------For background---------------->
  
    </style>
- 
+
 </head>
 <body background="/images/bg-masthead.jpg">
+<!-- -----------------Displaying error-------------------------------- -->
+<div class="modal fade" id="errorModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Error while Login</h4>
+        </div>
+        <div class="modal-body">
+          <p>${error}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  		<c:set var="error" value="${error}" /> 
+<c:choose>
+    <c:when test="${error!=null}">
+    <script>
+//     alert("Invalid Username or Password!");
+    $(window).on('load',function(){
+        $('#errorModal').modal('show');
+    });
+    </script>
+    </c:when>
+    <c:otherwise>
+   
+    </c:otherwise>      
+</c:choose>
+<!-- -----------------Displaying error-------------------------------- -->
+
 <div>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -42,7 +79,8 @@
   <!-- Trigger the modal with a button -->
   <li>
   <button type="button" class="btn btn-danger navbar-btn" id="myBtn">Login User</button>
-
+  
+  
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -55,7 +93,7 @@
         </div>
         <div class="modal-body" style="padding:40px 50px;">
           <form action="/validateUserLogin" method="POST" role="form">
-          
+          <div>${error} </div>
             <div class="form-group">
              <label for="username"><span class="glyphicon glyphicon-user"></span>Username</label>
              <input type="text" class="form-control" name="username" placeholder="Enter Username" value="${user.username}"/>
@@ -65,11 +103,8 @@
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
              <input type="password" class="form-control" name="password" placeholder="Enter Password" value="${user.password}"/>
             </div>
-            
-            <div class="checkbox">
-              <label><input type="checkbox" value="" checked>Remember me</label>
-            </div>
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+        
+              <button type="submit"  class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -111,10 +146,7 @@
               <input type="password" class="form-control" name="password" placeholder="Enter Password" required/>
              
             </div>
-            
-            <div class="checkbox">
-              <label><input type="checkbox" value="" checked>Remember me</label>
-            </div>
+          
               <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>
@@ -164,7 +196,7 @@
              
               <div class="form-group">
              <label for="username"><span class="glyphicon glyphicon-user"></span>Age</label>
-             <input type="text" class="form-control" name="age" placeholder="Enter Age" value="${user.age}" required/>
+             <input type="number" class="form-control" name="age" placeholder="Enter Age" value="${user.age}" required/>
              </div>
              
             <div class="form-group">
@@ -174,7 +206,7 @@
             
              <div class="form-group">
              <label for="email"><span class="glyphicon glyphicon-user"></span>Email</label>
-             <input type="text" class="form-control" name="email" placeholder="Enter Email" value="${user.email}" required/>
+             <input type="email" class="form-control" name="email" placeholder="Enter Email" value="${user.email}" required/>
              </div>
              
            

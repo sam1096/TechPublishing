@@ -55,7 +55,7 @@ public class UserController {
 		}
 		User user = userservice.validateUser(username,password);
 		if(user==null) {
-			map.addAttribute("error", "username or password invalid");
+			map.addAttribute("error", "Invalid Username or Password");
 			return "Home";
 		}
 		else {

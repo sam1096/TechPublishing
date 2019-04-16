@@ -37,7 +37,7 @@ public class AdminController {
 			Admin admin = adminservice.validateAdmin( adminname, password);
 		if(admin==null) {
 			System.out.println("***bla****");
-			map.addAttribute("error", "adminname or password invalid");
+			map.addAttribute("error", "Invalid Username or Password");
 			return "Home";
 		}
 		else {

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.User;
 import com.example.demo.model.UserArea;
+import com.example.demo.model.userRatings;
 import com.example.demo.services.UserService;
 import com.example.demo.model.AreaInterest;
 import com.example.demo.model.Article;
@@ -139,7 +141,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("getComments")
-	public String comments( @RequestParam("aid") int aid, HttpSession session ,ModelMap map) {
+	public String comments( @RequestParam("article_id") int aid, HttpSession session ,ModelMap map) {
 		List<Comment> list=userservice.getComment(aid);
 		map.addAttribute("commentList", list);
 		return "comments";
@@ -156,15 +158,42 @@ public class UserController {
 		map.addAttribute("areainterest", list);
 		return "editor";
 	}
-	
-	
-	@RequestMapping ("/readmore")
-	public String readMore( @RequestParam("aid") String aid, HttpServletRequest request,ModelMap map)
-	{	int article_id=Integer.parseInt(aid);
-		List<Article> article=userservice.getfullArticle(article_id);
-		List<Comment> list=userservice.getComment(article_id);
+	@RequestMapping ("/ratings")
+//	public String Ratings(@PathVariable(value="id") String id,HttpSession session)
+	public String Ratings(@RequestParam("stars")int rating,@RequestParam("aid") int aid,HttpSession session,ModelMap map)
+	{	
+	if (session.getAttribute("id") == null) {
+		return "redirect:loginUser";
+	}
+
+	User user = (User)session.getAttribute("user");
+	userservice.save_rating(user.getUsername(),rating,aid);
+	userRatings rateByUser=userservice.getRating(user.getUsername(),aid);
+	System.out.println("*********************************");
+		System.out.println("aid:");
+		System.out.println("*********************************");
+		List<Article> article=userservice.getfullArticle(aid);
+		List<Comment> list=userservice.getComment(aid);
 		map.addAttribute("commentList", list);
 		map.addAttribute("article", article);
+		map.addAttribute("rateByUser", rateByUser);
+		map.addAttribute("article_id",aid);
+		return "Article";
+	}
+	
+	@RequestMapping ("/readmore")
+	public String readMore( @RequestParam("aid") String aid, HttpSession session,ModelMap map)
+	{	if (session.getAttribute("id") == null) {
+		return "redirect:loginUser";
+	}
+		User user = (User)session.getAttribute("user");
+		int article_id=Integer.parseInt(aid);
+		List<Article> article=userservice.getfullArticle(article_id);
+		List<Comment> list=userservice.getComment(article_id);
+		userRatings rateByUser=userservice.getRating(user.getUsername(),article_id);
+		map.addAttribute("commentList", list);
+		map.addAttribute("article", article);
+		map.addAttribute("rateByUser", rateByUser);
 		map.addAttribute("article_id",article_id);
 		return "Article";
 }

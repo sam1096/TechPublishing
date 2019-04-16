@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Respository.AreaInterestRepository;
 import com.example.demo.Respository.ArticleRepository;
 import com.example.demo.Respository.CommentRepository;
+import com.example.demo.Respository.RatingRepository;
 import com.example.demo.Respository.UserAreaRepository;
 import com.example.demo.Respository.UserRepository;
 import com.example.demo.model.Article;
@@ -17,6 +18,8 @@ import com.example.demo.model.Comment;
 import com.example.demo.model.AreaInterest;
 import com.example.demo.model.User;
 import com.example.demo.model.UserArea;
+import com.example.demo.model.userRatings;
+
 import javax.persistence.Query;
 import com.example.demo.DAO.UserArticle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +40,16 @@ public class UserService {
 	private final AreaInterestRepository areainterestRepository;
 	@Autowired
 	private final CommentRepository commentRepo;
-
+	@Autowired
+	private final RatingRepository ratingRepository;
 	
-	public UserService(CommentRepository commentRepo,UserRepository userRepository,AreaInterestRepository areainterestRepository,UserAreaRepository userareaRepository,ArticleRepository articleRepository)
+	public UserService( RatingRepository ratingRepository,CommentRepository commentRepo,UserRepository userRepository,AreaInterestRepository areainterestRepository,UserAreaRepository userareaRepository,ArticleRepository articleRepository)
 	{	this.areainterestRepository=areainterestRepository;
 		this.userRepository=userRepository;
 		this.userareaRepository=userareaRepository;
 		this.articleRepository=articleRepository;
 		this.commentRepo=commentRepo;
+		this.ratingRepository=ratingRepository;
 	}
 	
 	public User validateUser(String username, String password) {
@@ -106,8 +111,6 @@ public class UserService {
 		return areainterestRepository.findByAreaid(areaid);
 	}
 
-	
-
 	public Article saveArticle(Article art) {
 	return articleRepository.save(art);
 	}
@@ -125,5 +128,38 @@ public class UserService {
 		//return comment.getArtid();
 		}
 
+	public void save_rating(String authname,int rate,int artid)
+	{
+		userRatings ratings=ratingRepository.findByArtidAndAuthname(artid,authname);
+		System.out.println(ratings);
+		if(ratings==null)
+		{
+			userRatings rating=new userRatings();
+			rating.setArtid(artid);
+			rating.setAuthname(authname);
+			rating.setRating(rate+1);
+			rating.setNotRated(false);
+			ratingRepository.save(rating);
+		}
+		else
+		{
+			userRatings rating=ratings;
+			rating.setRating(rate+1);
+			ratingRepository.save(rating);	
+			
+		}
+		List<userRatings>userratings=ratingRepository.findByArtid(artid);
+		int size=userratings.size();
+		
+		List<Article> articles=articleRepository.findByAid(artid);
+		int value=articles.get(0).getRating();
+		int avg=((size-1)*value+rate+1)/(size);	
+		Article article=articles.get(0);
+		article.setRating(avg);
+	}
+	public userRatings getRating(String authname,int aid)
+	{
+		return ratingRepository.findByArtidAndAuthname(aid,authname);
+	}
 }
 

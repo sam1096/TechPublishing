@@ -1,67 +1,70 @@
 /* Full-width input fields */
 .readmoreButton {
-  border-radius: 2px;
-  background-color: #17a2b8;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 15px;
-  padding: 20px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
+	border-radius: 8px;
+	background-color: #17a2b8;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 15px;
+	padding: 5px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
 }
 
 .readmoreButton span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
 }
 
 .readmoreButton span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
+	content: '\00bb';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	transition: 0.5s;
 }
 
 .readmoreButton:hover span {
-  padding-right: 25px;
+	padding-right: 25px;
 }
 
 .readmoreButton:hover span:after {
-  opacity: 1;
-  right: 0;
+	opacity: 1;
+	right: 0;
 }
 
-.readmoreButton {border-radius: 8px;}
+/* .readmoreButton {
+	border-radius: 8px;
+} */
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .navbar-custom {
-    background-color: #17a2b8;
+	background-color: #17a2b8;
 }
-.nav-item{
+
+.nav-item {
 	background-color: #17a2b8;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
- /* background-color:   #34495e ;*/
+	font-family: Arial, Helvetica, sans-serif;
+	/* background-color:   #34495e ;*/
 }
 
 /* Style the header */
 header {
-  background-color: #666;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
+	background-color: #666;
+	padding: 30px;
+	text-align: center;
+	font-size: 35px;
+	color: white;
 }
 
 /* Create two columns/boxes that floats next to each other */
@@ -69,37 +72,50 @@ header {
   float: left;
   width: 30%;
   height: 300px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
+background
+:
+ 
+#ccc
+;
+
+  
+padding
+:
+ 
+20
+px
+;
+
+
 }
-*/
-/* Style the list inside the menu */
-/*nav ul {
+* /
+	/* Style the list inside the menu */
+	/*nav ul {
   list-style-type: none;
   padding: 0;
 }
-*/
+*/ 
 article {
-  float: left;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
+	float: left;
+	padding: 20px;
+	width: 70%;
+	background-color: #f1f1f1;
+	height: 300px; /* only for demonstration, should be removed */
 }
 
 /* Clear floats after the columns */
 section:after {
-  content: "";
-  display: table;
-  clear: both;
+	content: "";
+	display: table;
+	clear: both;
 }
 
 /* Style the footer */
 footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
+	background-color: #777;
+	padding: 10px;
+	text-align: center;
+	color: white;
 }
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
@@ -110,26 +126,25 @@ footer {
   }
 }*/
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  /*text-align: center;*/
-  background-color: #f1f1f1;
-  white-space: nowrap; 
- /* width: 200px; */
-  overflow: hidden;
-  text-overflow: ellipsis; 
- /* border: 1px solid #000000;*/
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	padding: 16px;
+	/*text-align: center;*/
+	background-color: #f1f1f1;
+	white-space: nowrap;
+	/* width: 200px; */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/* border: 1px solid #000000;*/
 }
 
-
 input[type=text], input[type=password] {
-    width: 90%;
-    padding: 12px 20px;
-    margin: 8px 26px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-	font-size:16px;
+	width: 90%;
+	padding: 12px 20px;
+	margin: 8px 26px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	font-size: 16px;
 }
 
 /* Set a style for all buttons */
@@ -144,224 +159,472 @@ input[type=text], input[type=password] {
 	font-size:20px;
 }
 */
-
 button:hover {
-    opacity: 0.8;
+	opacity: 0.8;
 }
 
 /* Center the image and position the close button */
 .imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
+	text-align: center;
+	margin: 24px 0 12px 0;
+	position: relative;
 }
+
 .avatar {
-    width: 40px;
-	height:40px;
-    border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
 }
 
 /* The Modal (background) */
 .modal {
-	display:block;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 60%;
-    height: 64%;
-    margin-left:20%;
-    margin-top:5%;
-     animation:fadein 2s;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+	display: block;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 60%;
+	height: 64%;
+	margin-left: 20%;
+	margin-top: 5%;
+	animation: fadein 2s;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Modal Content Box */
 .modal-content {
-    background-color: #fefefe;
-    margin: 4% auto 15% auto;
-    border: 1px solid #888;
-    width: 40%; 
+	background-color: #fefefe;
+	margin: 4% auto 15% auto;
+	border: 1px solid #888;
+	width: 40%;
 	padding-bottom: 30px;
 }
 
 /* The Close Button (x) */
 .close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
+	position: absolute;
+	right: 25px;
+	top: 0;
+	color: #000;
+	font-size: 35px;
+	font-weight: bold;
 }
-.close:hover,.close:focus {
-    color: red;
-    cursor: pointer;
+
+.close:hover, .close:focus {
+	color: red;
+	cursor: pointer;
 }
+
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
 }
 
 li {
-  float: left;
+	float: left;
 }
 
 li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
 li a:hover {
-  background-color: #111;
+	background-color: #111;
 }
 
 /* Add Zoom Animation */
 .animate {
-    animation: zoom 0.6s
-}
-@keyframes zoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
+	animation: zoom 0.6s
 }
 
- .modal-header, h4, .close {
-    background-color: #5cb85c;
-    color:white !important;
-    text-align: center;
-    font-size: 30px;
-  }
-  .modal-footer {
-    background-color: #f9f9f9;
-  }
-  
-  
-  /*m style sheet */
-  
-  @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+@
+keyframes zoom {
+	from {transform: scale(0)
+}
 
-html,body{
+to {
+	transform: scale(1)
+}
+
+}
+.modal-header, h4, .close {
+	background-color: #5cb85c;
+	color: white !important;
+	text-align: center;
+	font-size: 30px;
+}
+
+.modal-footer {
+	background-color: #f9f9f9;
+}
+
+.usernav {
+	height: 10%;
+	width: 100%;
+}
+/*m style sheet */
+@import
+	url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+html, body {
 	height: 100%;
 	width: 100%;
-	font-family: "Poppins",sans-serif;
-	color:#222;
-}
-.navbar-nav{
-	background-color:   #34495e ;
+	font-family: "Poppins", sans-serif;
+	color: #222;
 }
 
-
-.navbar{
-	padding: .8rem;
-	background-color:   #34495e ;
-	}
-
-.navbar-nav li
-{
-	padding-right: 20px;
+.navbar-nav {
+	background-color: #34495e;
 }
-.carousel-inner img{
+
+.navbar {
+	/*padding: .8rem;*/
+	background-color: #34495e;
+}
+
+.container-fluid {
+	background-color: #34495e;
+}
+
+.navbar-nav li {
+	padding-right: 5px;
+}
+
+.carousel-inner img {
 	width: 100%;
 	height: 100%;
 }
 
-.padding{
-	padding-bottom: 2rem; 
+.padding {
+	/*padding-bottom: 2rem; */
+	
 }
 
-.welcome{
+.welcome {
 	width: 75%;
 	margin: 0 auto;
 	padding-top: 2rem;
 }
-.welcome hr
-{
+
+.welcome hr {
 	border-top: 2px solid #b4b4b4;
 	width: 95%;
 	margin-top: .3rem;
 	margin-bottom: 1rem;
 }
 
-
-
 /*---Media Queries --*/
-@media (max-width: 992px) {
-
-  }
-@media (max-width: 768px) {
-  
-}
-@media (max-width: 576px) {
-  
+@media ( max-width : 992px) {
 }
 
+@media ( max-width : 768px) {
+}
+
+@media ( max-width : 576px) {
+}
 
 /*---Firefox Bug Fix --*/
 .carousel-item {
-  transition: -webkit-transform 0.5s ease;
-  transition: transform 0.5s ease;
-  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
+	transition: -webkit-transform 0.5s ease;
+	transition: transform 0.5s ease;
+	transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+	-webkit-backface-visibility: visible;
+	backface-visibility: visible;
 }
 /*--- Fixed Background Image --*/
 figure {
-  position: relative;
-  width: 100%;
-  height: 60%;
-  margin: 0!important;
+	position: relative;
+	width: 100%;
+	height: 60%;
+	margin: 0 !important;
 }
+
 .fixed-wrap {
-  clip: rect(0, auto, auto, 0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+	clip: rect(0, auto, auto, 0);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
+
 #fixed {
-  background-image: url('img/mac.png');
-  position: fixed;
-  display: block;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-  will-change: transform;
+	background-image: url('img/mac.png');
+	position: fixed;
+	display: block;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center center;
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	will-change: transform;
 }
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
-    padding: 1rem;
+	padding: 1rem;
 }
 
-
 /* Article display css*/
-
 table {
-  border-collapse: collapse;
-  width: 100%;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
 }
 
-tr:hover {background-color:#f5f5f5;}
+tr:hover {
+	background-color: #f5f5f5;
+}
+
+/*devyanshi stylesheet*/
+
+/* * {
+  box-sizing: border-box;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+Style the header
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+Create two columns/boxes that floats next to each other
+nav {
+  float: right;
+  width: 15%;
+  height: 300px; only for demonstration, should be removed
+  background: #ccc;
+  padding: 20px;
+}
+
+Style the list inside the menu
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 85%;
+  background-color: #f1f1f1;
+  height: 300px; only for demonstration, should be removed
+}
+
+Clear floats after the columns
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+Style the footer
+footer {
+   
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
 
 
+
+ 
+.bt {
+    background:none!important;
+     border:none; 
+     padding:0!important;
+    
+    optional
+    font-family:arial,sans-serif; input has OS specific font-family
+     color:#069;
+     text-decoration:underline;
+     cursor:pointer;
+} */
+.car {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	max-width: 300px;
+	margin: auto;
+	text-align: center;
+	font-family: arial;
+	max-height: 100%;
+}
+
+.contain {
+	margin: auto;
+	padding-left: 100px;
+	font-family: arial;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	max-height: 100%;
+}
+
+.title {
+	color: grey;
+	font-size: 18px;
+}
+
+.til {
+	color: grey;
+	font-size: 28px;
+}
+
+button {
+	border: none;
+	outline: 0;
+	display: inline-block;
+	padding: 8px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;
+}
+
+a {
+	text-decoration: none;
+	font-size: 22px;
+	color: black;
+}
+
+button:hover, a:hover {
+	opacity: 0.7;
+}
+
+#header {
+	width: 100%;
+	background-color: white;
+	height: 80px;
+}
+
+#container {
+	width: 100%;
+	background-color: white;
+	overflow-y: auto;
+}
+
+#first {
+	width: 25%;
+	float: left;
+	background-color: white;
+	max-height: 100%;
+}
+
+#second {
+	width: 73%;
+	float: left;
+	background-color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	margin: auto;
+	max-height: 100%;
+}
+
+.large_font {
+	font-size: 15pt;
+}
+
+.small_font {
+	font-size: 12pt;
+	color: grey;
+	font-family: Georgia;
+}
+
+.inside_nav {
+	width: 100%;
+	background: #ADD8E6;
+}
+
+.inside_nav_spacing {
+	padding-left: 4%;
+}
+
+.inside_nav_admin {
+	background: #ADD8E6;
+}
+
+#con {
+	margin: 2%;
+	height: 100%;
+}
+
+.footer {
+	padding: 5px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+}
+
+.footer_align {
+	width: 100%;
+}
+
+.areaSelection {
+	margin-left: 2%;
+	margin-bottom: 1%;
+	margin-top: 2%;
+}
+
+.area {
+	margin-left: 2%;
+	margin-bottom: 2%;
+}
+
+.textarea {
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-bottom: 2%;
+	height: 100%;
+}
+
+.uploadButton {
+	margin-left: 2%;
+	margin-top: 1%;
+}
+
+#upload{
+	background-color: #17a2b8;
+	border-radius: 8px;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 15px;
+	padding: 5px;
+	width:100px;
+}
 
 
 /*
@@ -380,11 +643,3 @@ Large (lg) devices (desktops, 992px and up)
 Extra (xl) large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { ... }
 */
-
-
-
-
-
-
-
-  

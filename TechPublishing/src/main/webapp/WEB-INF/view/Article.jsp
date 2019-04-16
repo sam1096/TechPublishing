@@ -14,26 +14,38 @@
 <title>Article</title>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$("#comment_page").load("/getComments");
 	});
-	$(document).ready(function(){
-		$("#upload_comment").click(function(){
+	$(document).ready(function() {
+		$("#upload_comment").click(function() {
 			var aid = $("#article_id").val();
 			var comment = $("#comment_desc").val();
 			$.ajax({
-				url:'comment_section',
-				data: {
-					article_id: aid,
+				url : 'comment_section',
+				data : {
+					article_id : aid,
 					comment_desc : comment
 				},
-				success: function(response) {
+				success : function(response) {
 					$("#comment_page").html(response);
 				}
 			});
 			$("#comment_desc").val('');
 		});
 	});
+</script>
+
+<script>
+     $('.ratings').rating(function(vote,event)){
+    	 $.ajax({
+    		method: 'POST',
+    		url: "",
+    		data:{vote:vote}
+    	 }).done(function(info){
+    		 $('.info').html("your vote"+ info)
+    	 })
+     }
 </script>
 </head>
 <body>
@@ -57,26 +69,40 @@
 	</nav>
 	<!---------- end ----------------->
 
-	
+
 
 	<c:forEach items="${article}" var="temp">
 		<div class="card"
 			style="margin-top: 8%; margin-left: 5%, margin-right:5%">
-			<div class="jumbotron-fluid" align="center" style="background-color:skyblue; width:50%;margin-left:25%;"><font size="5" face="verdana">${temp.description}</font></div>
-			 <input type=hidden name="articleId"
-				value="${temp.aid}">
+			<div class="jumbotron-fluid" align="center"
+				style="background-color: skyblue; width: 50%; margin-left: 25%;">
+				<font size="5" face="verdana">${temp.description}</font>
+			</div>
+			<input type=hidden name="articleId" value="${temp.aid}">
 			<div>${temp.aid}</div>
 		</div>
+
+
 		<div style="text-align: left;">
 			<h1>Comments</h1>
-				<div id="comment_page"><jsp:include page="comments.jsp"/></div>
-			
+			<div id="comment_page"><jsp:include page="comments.jsp" /></div>
+
 			<form action="/comment_section" method="post" name="comment_form"
 				id="comment_saving">
 				<div class="container-fluid">
 					<div class="panel-primary">
 						<div class="panel-heading">
 							<!--  <h1 class="panel-title">COMMENT BOX USING AJAX THROUGH JSP</h1>-->
+						</div>
+						<div class="container">
+							<div class="ratings">
+								<input type="radio" name="star" id="rating" value="1"> <input
+									type="radio" name="star" id="rating" value="2"> <input
+									type="radio" name="star" id="rating" value="3"> <input
+									type="radio" name="star" id="rating" value="4"> <input
+									type="radio" name="star" id="rating" value="5">
+							</div>
+							<span class="info"></span>
 						</div>
 						<div class="panel-body">
 							<div class="form-group col-md-4">

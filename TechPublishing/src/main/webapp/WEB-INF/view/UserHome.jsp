@@ -29,7 +29,7 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-md  sticky-top ">
+	<nav class="navbar navbar-expand-md sticky-top usernav">
 		<div class="container-fluid ">
 			<a class="navbar-brand" href="welcomepage"><img
 				src="static/images/tech_geek_logo"></a>
@@ -38,12 +38,12 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
-				<ul class="navbar-nav ml-auto">
+				<ul class=" nav navbar-nav ml-auto">
 					<li><a href="#">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Connect</a></li>
 					<li><a href="/userProfile">Profile</a></li>
-					 <li><a href="/logoutUser">Logout</a></li>
+					<li><a href="/logoutUser">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -58,7 +58,7 @@
 				<ul class="nav nav-pills flex-column">
 					<li class="nav-item"><a href="/editor">Create Article</a></li>
 				</ul>
-				
+
 				<hr class="d-sm-none">
 			</div>
 
@@ -80,10 +80,12 @@
 								<c:forEach items="${dashboard1}" var="temp">
 									<tr>
 										<td>
-										<section class="card">${temp[0].description}</section>
+											<section class="card">${temp[0].description}</section>
 											<form action="/readmore" method="post">
 												<input type="hidden" name="aid" value="${temp[0].aid }" />
-												<button class="readmoreButton" type="submit"><span>Read More</span> </button>
+												<button class="readmoreButton" type="submit">
+													<span>Read More</span>
+												</button>
 											</form>
 										</td>
 										<td>${temp[0].authname}</td>
@@ -99,10 +101,18 @@
 			</div>
 		</div>
 	</div>
+	
+	<footer class="page-footer font-small blue footer">
 
-	<div class="jumbotron text-center" style="margin-bottom: 0">
-		<p>Footer</p>
-	</div>
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3 footer_align">
+			© 2019 Copyright: <a
+				href="https://mdbootstrap.com/education/bootstrap/">
+				TechPublishing.com</a>
+		</div>
+		<!-- Copyright -->
+
+	</footer>
 
 
 </body>

@@ -1,101 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<title>TechPublishing</title>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<meta charset="UTF-8">
-<title>Reviewing Articles</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-table, th, td {
-  border: 1px solid black;
-}
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Style the header */
-header {
-  background-color: #666;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
-}
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: right;
-  width: 15%;
-  height: 300px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-article {
-  float: left;
-  padding: 20px;
-  width: 85%;
-  background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the footer */
-footer {
-   
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
-  }
-}
 
 
 
- 
-.bt {
-    background:none!important;
-     border:none; 
-     padding:0!important;
-    
-    /*optional*/
-    font-family:arial,sans-serif; /*input has OS specific font-family*/
-     color:#069;
-     text-decoration:underline;
-     cursor:pointer;
-}
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<link href="static/js/bootstrap.min.js" rel="stylesheet">
 
-</style>
+
+<!-- for media images ex facebook google -->
+<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<link href="static/css/style.css" rel="stylesheet">
 
 <script>
  function publishdata(id)
@@ -123,9 +50,6 @@ footer {
  }
 
 </script>
-
-
-
 
 <script>
  function deletedata(id)
@@ -157,14 +81,7 @@ footer {
  }
  }
 
-</script> 
-
-
-
-
-
-
-
+</script>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -183,75 +100,103 @@ $(document).ready(function(){
 
 });
 </script>
-
-
-
 </head>
+
+
 <body>
-<header>
-  <h2>DashBoard</h2>
-</header>
+	<nav class="navbar navbar-expand-md  sticky-top ">
+		<div class="container-fluid ">
+			<a class="navbar-brand" href="welcomepage"><img
+				src="static/images/tech_geek_logo"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav ml-auto">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Connect</a></li>
+					<li><a href="/admin_profile">Profile</a></li>
+					<li><a href="/logoutUser">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-<section> 
-<article>
-<div class="container">
-<table class="table table-striped">
-<caption><h3>Articles</h3></caption>
-<thead>
-<tr class="tr tr-success">
 
-<td>Description</td>
-<td>Author name</td>
-<td>Post Date</td>
-<td>Review</td>
-</tr>
-</thead>
-<tbody>
-<c:forEach items="${articles}" var="temp">
-	<tr>
-   	<td>
-   	
-   	    <p class="show-read-more">${temp.description} </p>
-    	
-     	 <form  class="read" action="/read_article" id='form1' method='POST' >
-            <input type='hidden' id='newfield' name='newfield' value="${temp.aid}"/>
-            <button class="bt"type="submit" id='b1' >read more.. </button> 
-         </form>
-      
+	<div class="container">
+		<div class="row">
 
-    </td> 
+			<div class="col-sm-2">
+				<h3>EDITOR</h3>
+				<p>Something on mind write here!!!</p>
+				<ul class="nav nav-pills flex-column">
+					<li class="nav-item"><a href="/editor">Create Article</a></li>
+				</ul>
+			</div>
 
-	<td>${temp.authname}</td>
-	<td>${temp.postdate}</td>
+			<div class="col-sm-10">
+				<article>
+					<div class="container">
+						<table>
+							<thead>
+								<tr class="tr tr-success">
 
- 
-      <td>
-    <button onclick="publishdata(${temp.aid})"  class="btn btn-success btn-md"><span class="glyphicon glyphicon-ok"></span> </button>
-    
-    <button onclick="deletedata(${temp.aid})" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
-  
- 
-      </td>
-	</tr>
-</c:forEach>
-</tbody>
-</table>
-</div>
-</article>
-  
-   <nav>
-    <ul>
-      <li><a href="/admin_profile">Profile</a></li>
-      <li><a href="/editor">Create Articles</a></li>
-      
-    </ul>
-  </nav>
-</section>
+									<td>Description</td>
+									<td>Author name</td>
+									<td>Post Date</td>
+									<td>Review</td>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${articles}" var="temp">
+									<tr>
+										<td>
 
-<footer>
-  <p>Footer</p>
-  <a href="/logoutAdmin">Logout</a>
-</footer>
+											<p class="show-read-more">${temp.description}</p>
+
+											<form class="read" action="/read_article" id='form1'
+												method='POST'>
+												<input type='hidden' id='newfield' name='newfield'
+													value="${temp.aid}" />
+												<button class="bt" type="submit" id='b1'>read
+													more..</button>
+											</form>
+
+
+										</td>
+
+										<td>${temp.authname}</td>
+										<td>${temp.postdate}</td>
+
+
+										<td>
+											<button onclick="publishdata(${temp.aid})"
+												class="btn btn-success btn-md">
+												<span class="glyphicon glyphicon-ok"></span>
+											</button>
+
+											<button onclick="deletedata(${temp.aid})"
+												class="btn btn-danger">
+												<span class="glyphicon glyphicon-remove"></span>
+											</button>
+
+
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+
+	<div class="jumbotron text-center" style="margin-bottom: 0">
+		<p>Footer</p>
+	</div>
 
 
 </body>

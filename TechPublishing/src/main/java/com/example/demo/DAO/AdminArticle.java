@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.example.demo.model.Article;
+import com.example.demo.model.Admin;
 import com.example.demo.model.AdminArea;
 import com.example.demo.model.AreaInterest;
 
@@ -68,7 +69,7 @@ public class AdminArticle {
       
 	public List<Article> getArticlesbyAdminName(String adminname)
 	{
-		String hql="from Article as a where a.reviewby=?1 and a.areaid=(select ad.areaid from AdminArea ad where ad.adminname=adminname)";
+		String hql="from Article as a where a.reviewby=?1 and a.areaid=(select ad.areaid from AdminArea ad where ad.adminname=?1)";
 		
 	    Query q1 = entityManager.createQuery(hql); 
 		q1.setParameter(1, adminname);
@@ -91,6 +92,20 @@ public class AdminArticle {
 		String hql=" from AreaInterest";
 		 List<AreaInterest> obj_list1=entityManager.createQuery(hql).getResultList();
 		 return obj_list1; 
+	}
+
+	public Admin setPassword(int adminid, String password) {
+		 Admin adm= (Admin)entityManager.find(Admin.class ,adminid);
+	       adm.setPassword(password);
+		return adm;
+	}
+
+	public List<AdminArea> getInterestByAdminName(String adminname) {
+		
+		String hql=" from AdminArea ad where ad.adminname=?1 ";
+	    Query q1 = entityManager.createQuery(hql); 
+			q1.setParameter(1, adminname);
+			return (List<AdminArea>) q1.getResultList();
 	} 
       
 	

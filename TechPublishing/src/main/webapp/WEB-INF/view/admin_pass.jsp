@@ -113,11 +113,11 @@ button:hover, a:hover {
 					<h1>${admin.name}</h1>
 					<p class="title">ADMIN</p>
 					<p>
-						<button>Basic Details</button>
+						<button  onclick="location.href='admin_profile';" >Basic Details</button>
 						<br>
-						<button>Article Reviewed</button>
+						<button onclick="location.href='admin_reviewed';">Article Reviewed</button>
 						<br>
-						<button>My articles</button>
+						<button onclick="location.href='admin_myArticles';">My articles</button>
 					</p>
 				</div>
 			</div>
@@ -127,11 +127,12 @@ button:hover, a:hover {
 					<div class="container-fluid">
 
 						<ul class="nav navbar-nav">
-							<li><a href="admin_profile">Basic Details</a></li>
+							<li class="active"><a href="admin_profile">Basic Details</a></li>
+							<li><a href="/admin_area">Area Of Interest</a></li>
 							<li><a href="/admin_reviewed">Articles Reviewed</a></li>
 							<li><a href="/admin_myArticles">My Articles</a></li>
-							<li class="active"><a href="/admin_pass">Change Password</a></li>
-							<li><a href="/logoutAdmin">Logout</a></li>
+							<li><a href="/admin_pass">Change Password</a></li>
+							<li> <a href="/logoutAdmin">Logout</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -139,15 +140,18 @@ button:hover, a:hover {
 				<div class="contain">
 
 					<p class="til">DETAILS</p>
-
-
+             <form action="/change_password" method="POST" role="form">
 					<p>
-						<span class="large_font">Password </span> <span class="small_font">
-							${admin.password}</span>
+						<span class="large_font">Password : </span> <span
+							class="small_font"> ${admin.password}</span>
 					</p>
-
 					<p>
-						<span class="large_font"> New Password </span>
+						<span class="large_font">New Password : </span>
+					</p>
+				 <input type="password" class="form-control" name="password" placeholder="Enter Password" required/>
+				 <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Submit</button>	
+            </form>
+				
 				</div>
 
 

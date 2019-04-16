@@ -113,11 +113,11 @@ button:hover, a:hover {
 					<h1>${admin.name}</h1>
 					<p class="title">ADMIN</p>
 					<p>
-						<button>Basic Details</button>
+						<button  onclick="location.href='admin_profile';" >Basic Details</button>
 						<br>
-						<button>Article Reviewed</button>
+						<button onclick="location.href='admin_reviewed';">Article Reviewed</button>
 						<br>
-						<button>My articles</button>
+						<button onclick="location.href='admin_myArticles';">My articles</button>
 					</p>
 				</div>
 			</div>
@@ -128,6 +128,7 @@ button:hover, a:hover {
 
 						<ul class="nav navbar-nav">
 							<li><a href="admin_profile">Basic Details</a></li>
+							<li><a href="/admin_area">Area Of Interest</a></li>
 							<li class="active"><a href="/admin_reviewed">Articles Reviewed</a></li>
 							<li><a href="/admin_myArticles">My Articles</a></li>
 							<li><a href="/admin_pass">Change Password</a></li>
@@ -148,6 +149,10 @@ button:hover, a:hover {
 								<td>Description</td>
 								<td>Author name</td>
 								<td>Post Date</td>
+								<td>Review Date</td>
+								<td>Post Date</td>
+							    <td>Status</td>
+							    <td>Reason</td>
 							
 							</tr>
 						</thead>
@@ -171,7 +176,9 @@ button:hover, a:hover {
 
 									<td>${temp.authname}</td>
 									<td>${temp.postdate}</td>
-
+                                    <td>${temp.reviewdate}</td>
+                                     <td>${temp.status}</td>
+                                    <td>${temp.reason}</td>
 
 								</tr>
 							</c:forEach>

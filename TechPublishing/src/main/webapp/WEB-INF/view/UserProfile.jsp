@@ -28,7 +28,7 @@
 </head>
 <body>
 	<!-- Navigation bar -->
-	<nav class="navbar navbar-expand-md  sticky-top ">
+	<nav class="navbar navbar-expand-md sticky-top usernav">
 		<div class="container-fluid ">
 			<a class="navbar-brand" href="welcomepage"><img
 				src="static/images/tech_geek_logo"></a>
@@ -37,7 +37,7 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
-				<ul class="navbar-nav ml-auto">
+				<ul class=" nav navbar-nav ml-auto">
 					<li><a href="#">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Connect</a></li>

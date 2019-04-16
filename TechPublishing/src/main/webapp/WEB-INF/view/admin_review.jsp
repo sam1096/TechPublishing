@@ -104,7 +104,7 @@ $(document).ready(function(){
 
 
 <body>
-	<nav class="navbar navbar-expand-md  sticky-top ">
+	<nav class="navbar navbar-expand-md sticky-top usernav">
 		<div class="container-fluid ">
 			<a class="navbar-brand" href="welcomepage"><img
 				src="static/images/tech_geek_logo"></a>
@@ -113,7 +113,7 @@ $(document).ready(function(){
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
-				<ul class="navbar-nav ml-auto">
+				<ul class=" nav navbar-nav ml-auto">
 					<li><a href="#">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Connect</a></li>
@@ -128,7 +128,7 @@ $(document).ready(function(){
 	<div class="container">
 		<div class="row">
 
-			<div class="col-sm-2">
+			<div class="col-sm-2" style="margin-top:3%">
 				<h3>EDITOR</h3>
 				<p>Something on mind write here!!!</p>
 				<ul class="nav nav-pills flex-column">
@@ -136,17 +136,17 @@ $(document).ready(function(){
 				</ul>
 			</div>
 
-			<div class="col-sm-10">
+			<div class="col-sm-10" style="margin-top:2%">
 				<article>
 					<div class="container">
 						<table>
 							<thead>
 								<tr class="tr tr-success">
 
-									<td>Description</td>
-									<td>Author name</td>
-									<td>Post Date</td>
-									<td>Review</td>
+									<th>Description</th>
+									<th>Author name</th>
+									<th>Post Date</th>
+									<th>Review</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -194,9 +194,17 @@ $(document).ready(function(){
 		</div>
 	</div>
 
-	<div class="jumbotron text-center" style="margin-bottom: 0">
-		<p>Footer</p>
-	</div>
+	<!-- Footer of the page -->
+
+	<footer class="page-footer font-small blue footer">
+
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3 footer_align">
+			© 2019 Copyright: TechPublishing.com
+		</div>
+		<!-- Copyright -->
+
+	</footer>
 
 
 </body>

@@ -24,9 +24,9 @@
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <link href="static/css/style.css" rel="stylesheet">
 </head>
-<body  background="static/images/background.jpg">
+<body background="static/images/background.jpg">
 
-	<nav class="navbar navbar-expand-md  sticky-top ">
+	<nav class="navbar navbar-expand-md sticky-top usernav">
 		<div class="container-fluid ">
 			<a class="navbar-brand" href="welcomepage"><img
 				src="static/images/tech_geek_logo"></a>
@@ -35,11 +35,11 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
-				<ul class="navbar-nav ml-auto">
+				<ul class=" nav navbar-nav ml-auto">
 					<li><a href="#">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Connect</a></li>
-					<li><a href="/userProfile">Profile</a></li>
+					<li><a href="/admin_profile">Profile</a></li>
 					<li><a href="/logoutUser">Logout</a></li>
 				</ul>
 			</div>
@@ -64,13 +64,17 @@
 			</div>
 			<div id="second">
 				<nav class="inside_nav">
-						<ul class="inside_nav_admin">
-							<li class="active inside_nav_spacing"><a href="admin_profile">Basic Details</a></li>
-							<li class="inside_nav_spacing"><a href="/admin_reviewed">Articles Reviewed</a></li>
-							<li class="inside_nav_spacing"><a href="/admin_myArticles">My Articles</a></li>
-							<li class="inside_nav_spacing"><a href="/admin_pass">Change Password</a></li>
-							<li class="inside_nav_spacing"></li>
-						</ul>
+					<ul class="inside_nav_admin">
+						<li class="active inside_nav_spacing"><a href="admin_profile">Basic
+								Details</a></li>
+						<li class="inside_nav_spacing"><a href="/admin_reviewed">Articles
+								Reviewed</a></li>
+						<li class="inside_nav_spacing"><a href="/admin_myArticles">My
+								Articles</a></li>
+						<li class="inside_nav_spacing"><a href="/admin_pass">Change
+								Password</a></li>
+						<li class="inside_nav_spacing"></li>
+					</ul>
 				</nav>
 
 				<div class="contain">
@@ -109,8 +113,5 @@
 
 		</div>
 	</div>
-
-
-
 </body>
 </html>

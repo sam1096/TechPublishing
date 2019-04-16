@@ -6,9 +6,6 @@
 <title>TechPublishing</title>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -101,15 +98,12 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<footer class="page-footer font-small blue footer">
 
 		<!-- Copyright -->
-		<div class="footer-copyright text-center py-3 footer_align">
-			© 2019 Copyright: <a
-				href="https://mdbootstrap.com/education/bootstrap/">
-				TechPublishing.com</a>
-		</div>
+		<div class="footer-copyright text-center py-3 footer_align">©
+			2019 Copyright: TechPublishing.com</div>
 		<!-- Copyright -->
 
 	</footer>

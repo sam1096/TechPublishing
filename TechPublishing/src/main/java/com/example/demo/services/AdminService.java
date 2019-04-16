@@ -3,6 +3,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 import com.example.demo.Respository.AdminRepository;
+import com.example.demo.Respository.AreaInterestRepository;
 import com.example.demo.Respository.ArticleRepository;
 
 import java.util.*;
@@ -19,8 +20,12 @@ public class AdminService {
 
 	@Autowired
 	private AdminArticle adminArticle;
+	@Autowired
 	private ArticleRepository articleRepository;
+	@Autowired
 	private AdminRepository adminRepository;
+	@Autowired
+	private  AreaInterestRepository areainterestRepository;
 
 	public AdminService(AdminRepository adminRepository)
 	{
@@ -90,4 +95,14 @@ public class AdminService {
 		   System.out.println("****This is service *****"+ar);
 		  return ar;
 	}
+	
+	public Article saveArticle(Article art) {
+		return articleRepository.save(art);
+		}
+	
+	public List<AreaInterest> findAreaInterest(String areaname)
+	{
+		return areainterestRepository.findByAreaname(areaname);
+	}
+	
 }

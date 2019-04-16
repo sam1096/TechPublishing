@@ -145,6 +145,26 @@ public class AdminController {
 		return "editorAdmin";
 	}
     
+    
+
+	@RequestMapping ("/saveadminArticle")
+	public String saveArticle(@ModelAttribute Article art,ModelMap map,HttpServletRequest request,@RequestParam("areas")String areaname)
+	{
+		Admin admin=(Admin)request.getSession(false).getAttribute("admin");
+		
+		Date date = new Date(); 
+		art.setAuthname(admin.getAdminname());
+		String areaid=adminservice.findAreaInterest(areaname).get(0).getAreaid();
+		art.setAreaid(areaid);
+		art.setStatus("in review");
+		art.setPostdate(date);
+		adminservice.saveArticle(art);
+		map.addAttribute("message", "Successfully saved");
+		return "redirect:userHome";
+	}
+    
+    
+    
 	
     
   @RequestMapping (value="/rejectarticle/{id}")

@@ -47,9 +47,9 @@ public class AdminService {
 	{ return adminArticle.getArticles(adminname);
 	}
 	
-	public int  setArticles(int id)
+	public int  setArticles(int id,String adminname)
 	{     System.out.println("This is service"+id);
-		return adminArticle.setArticles(id);
+		return adminArticle.setArticles(id,adminname);
 		
 	}
 	
@@ -61,10 +61,10 @@ public class AdminService {
 	
 	
 	
-	public int  rejectArticles(int id,String reas)
+	public int  rejectArticles(int id,String reas, String adminname)
 	{     System.out.println("This is reject service"+id);
 	System.out.println("This is reject service"+reas);
-		return adminArticle.rejectArticles(id,reas);
+		return adminArticle.rejectArticles(id,reas,adminname);
 		
 	}
 

@@ -85,8 +85,8 @@ public class ApplicationController {
 		} else { 
 			Admin admin=(Admin)session.getAttribute("admin");
 			String adminname=admin.getAdminname();
-			System.out.println(adminname);
-			List<Article> l=adminservice.getArticles(admin.getAdminname());
+			System.out.println("I am mad"+adminname);
+			List<Article> l=adminservice.getArticles(adminname);
 			System.out.println("**********************");
 			
 			map.addAttribute("articles",l);

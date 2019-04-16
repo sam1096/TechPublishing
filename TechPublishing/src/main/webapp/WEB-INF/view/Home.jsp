@@ -74,8 +74,8 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          <p>Not a member? <a href="#">Register</a></p>
-          <p>Forgot <a href="#">Password?</a></p>
+          <p>Not a member? <button type="button"  id="myBtn3">Register </button></p>
+          
         </div>
       </div>
       
@@ -102,13 +102,13 @@
           
             <div class="form-group">
              <label for="adminname"><span class="glyphicon glyphicon-user"></span>Adminname</label>
-             <input type="text" class="form-control" name="adminname" placeholder="Enter AdminName"/>
+             <input type="text" class="form-control" name="adminname" placeholder="Enter AdminName" required/>
           
              </div>
              
             <div class="form-group">
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-              <input type="password" class="form-control" name="password" placeholder="Enter Password"/>
+              <input type="password" class="form-control" name="password" placeholder="Enter Password" required/>
              
             </div>
             
@@ -120,8 +120,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          <p>Not a member? <a href="#">Register</a></p>
-          <p>Forgot <a href="#">Password?</a></p>
+      
         </div>
       </div>
       
@@ -150,37 +149,35 @@
           
             <div class="form-group">
              <label for="username"><span class="glyphicon glyphicon-user"></span>Username</label>
-             <input type="text" class="form-control" name="username" placeholder="Enter Username" value="${user.username}"/>
+             <input type="text" class="form-control" name="username" placeholder="Enter Username" value="${user.username}"  required/>
              </div>
              
               <div class="form-group">
              <label for="firstname"><span class="glyphicon glyphicon-user"></span>Firstname</label>
-             <input type="text" class="form-control" name="firstname" placeholder="Enter Firstname" value="${user.firstname}"/>
+             <input type="text" class="form-control" name="firstname" placeholder="Enter Firstname" value="${user.firstname}" required/>
              </div>
              
               <div class="form-group">
              <label for="lastname"><span class="glyphicon glyphicon-user"></span>Lastname</label>
-             <input type="text" class="form-control" name="lastname" placeholder="Enter Lastname" value="${user.lastname}"/>
+             <input type="text" class="form-control" name="lastname" placeholder="Enter Lastname" value="${user.lastname}" required/>
              </div>
              
               <div class="form-group">
              <label for="username"><span class="glyphicon glyphicon-user"></span>Age</label>
-             <input type="text" class="form-control" name="age" placeholder="Enter Age" value="${user.age}"/>
+             <input type="text" class="form-control" name="age" placeholder="Enter Age" value="${user.age}" required/>
              </div>
              
             <div class="form-group">
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-             <input type="password" class="form-control" name="password" placeholder="Enter Password" value="${user.password}"/>
+             <input type="password" class="form-control" name="password" placeholder="Enter Password" value="${user.password}" required/>
             </div>
             
              <div class="form-group">
              <label for="email"><span class="glyphicon glyphicon-user"></span>Email</label>
-             <input type="text" class="form-control" name="email" placeholder="Enter Email" value="${user.email}"/>
+             <input type="text" class="form-control" name="email" placeholder="Enter Email" value="${user.email}" required/>
              </div>
              
-            <div class="checkbox">
-              <label><input type="checkbox" value="" checked>Remember me</label>
-            </div>
+           
             
           <!--   <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a></p>--->
             
@@ -189,7 +186,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          <p>Already a member? <a href="#">Login</a></p>
+          <p>Already a member?   <button type="button"  id="myBtn4">Login </button>
         </div>
       </div>   
     </div>
@@ -226,6 +223,21 @@ $(document).ready(function(){
 $(document).ready(function(){
 	  $("#myBtn2").click(function(){
 	    $("#myModal2").modal();
+	  });
+	});
+	
+$(document).ready(function(){
+	  $("#myBtn3").click(function(){
+		  $("#myModal").modal('hide');
+	    $("#myModal2").modal();
+	  });
+	});
+	
+	
+$(document).ready(function(){
+	  $("#myBtn4").click(function(){
+		  $("#myModal2").modal('hide');
+	    $("#myModal").modal();
 	  });
 	});
 </script>

@@ -113,12 +113,13 @@ public class AdminController {
     @RequestMapping (value="/publisharticle/{id}")
 		public ModelAndView publishUserArticle(@ModelAttribute Admin admin,@PathVariable(value="id") int aid,BindingResult result,HttpSession session,HttpServletRequest request,ModelMap map)
 		{   System.out.println("this is it"+aid);
-			int n=adminservice.setArticles(aid);
+		    Admin adm=(Admin)session.getAttribute("admin");
+			int n=adminservice.setArticles(aid,adm.getAdminname());
 			
 			System.out.println("this is after it is published  "+aid);
-			System.out.println("this is it"+admin.getAdminname());
+			System.out.println("***********this is it************"+admin.getAdminname());
 			if(n!=0) {
-			List<Article> l=adminservice.getArticles(admin.getAdminname());
+			List<Article> l=adminservice.getArticles(adm.getAdminname());
 			 System.out.println("this is it"+admin.getAdminname());
 			ModelAndView model= new ModelAndView("admin_review");
 			model.addObject("articles",l);
@@ -140,8 +141,8 @@ public class AdminController {
 	    System.out.println("this is it"+temp[0]);
 	    int aid=Integer.parseInt(temp[0]);
 	    String reas=temp[1];
-		
-		int n=adminservice.rejectArticles(aid,reas);
+	    Admin adm=(Admin)session.getAttribute("admin");
+		int n=adminservice.rejectArticles(aid,reas,adm.getAdminname());
 		
 		System.out.println("this is after it is rejected  "+aid);
 		System.out.println("this is it"+admin.getAdminname());

@@ -8,6 +8,7 @@ import com.example.demo.Respository.ArticleRepository;
 
 import java.util.*;
 import com.example.demo.model.Admin;
+import com.example.demo.model.AdminArea;
 import com.example.demo.model.AreaInterest;
 import com.example.demo.model.Article;
 import com.example.demo.model.User;
@@ -103,6 +104,24 @@ public class AdminService {
 	public List<AreaInterest> findAreaInterest(String areaname)
 	{
 		return areainterestRepository.findByAreaname(areaname);
+	}
+
+	public Admin setPassword(int adminid, String password) {
+		   System.out.println("This is service"+adminid);
+			return adminArticle.setPassword(adminid, password);
+
+		
+	}
+
+	public List<AdminArea> getInterestByAdminName(String adminname) {
+		
+		return adminArticle.getInterestByAdminName(adminname);
+		
+	}
+
+	public List<AreaInterest> getInterestById(String areaid) {
+		
+		return areainterestRepository.findByAreaid(areaid);
 	}
 	
 }

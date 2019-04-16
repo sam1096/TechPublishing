@@ -113,11 +113,14 @@ button:hover, a:hover {
 					<h1>${admin.name}</h1>
 					<p class="title">ADMIN</p>
 					<p>
-						<button  onclick="location.href='admin_profile';" >Basic Details</button>
+						<button onclick="location.href='admin_profile';">Basic
+							Details</button>
 						<br>
-						<button onclick="location.href='admin_reviewed';">Article Reviewed</button>
+						<button onclick="location.href='admin_reviewed';">Article
+							Reviewed</button>
 						<br>
-						<button onclick="location.href='admin_myArticles';">My articles</button>
+						<button onclick="location.href='admin_myArticles';">My
+							articles</button>
 					</p>
 				</div>
 			</div>
@@ -127,11 +130,10 @@ button:hover, a:hover {
 					<div class="container-fluid">
 
 						<ul class="nav navbar-nav">
-							<li><a href="admin_profile">Basic Details</a></li>
+							<li class="active"><a href="admin_profile">Basic Details</a></li>
 							<li><a href="/admin_area">Area Of Interest</a></li>
 							<li><a href="/admin_reviewed">Articles Reviewed</a></li>
-							<li class="active"><a href="/admin_myArticles">My
-									Articles</a></li>
+							<li><a href="/admin_myArticles">My Articles</a></li>
 							<li><a href="/admin_pass">Change Password</a></li>
 							<li><a href="/logoutAdmin">Logout</a></li>
 						</ul>
@@ -140,53 +142,34 @@ button:hover, a:hover {
 
 				<div class="contain">
 
+
+
 					<table class="table table-striped">
 						<caption>
-							<h3>Articles Posted By You !!!</h3>
+							<h3>Area Of Interest</h3>
 						</caption>
 						<thead>
 							<tr class="tr tr-success">
 
-								<td>Description</td>
 
-								<td>Post Date</td>
-								<td>Review Date</td>
-								<td>Post Date</td>
-								<td>Status</td>
-								<td>Reason</td>
-								<td>Rating
-								<td>
+								<td> Area Id</td>
+								<td>Area Name</td>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${articles}" var="temp">
+							<c:forEach items="${interest}" var="temp">
 								<tr>
-									<td>
-
-										<p class="show-read-more">${temp.description}</p>
-
-										<form class="read" action="/read_article" id='form1'
-											method='POST'>
-											<input type='hidden' id='newfield' name='newfield'
-												value="${temp.aid}" />
-											<button class="bt" type="submit" id='b1'>read more..</button>
-										</form>
 
 
-									</td>
 
-									<td>${temp.authname}</td>
-									<td>${temp.postdate}</td>
-									<td>${temp.reviewdate}</td>
-									<td>${temp.status}</td>
-									<td>${temp.reason}</td>
-									<td>${temp.rating}</td>
+									<td>${temp.areaid}</td>
+									<td>${temp.areaname}</td>
+
 
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-
 				</div>
 
 
@@ -203,3 +186,16 @@ button:hover, a:hover {
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

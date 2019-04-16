@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Admin;
+import com.example.demo.model.AdminArea;
 import com.example.demo.model.AreaInterest;
 import com.example.demo.model.Article;
 import com.example.demo.model.User;
@@ -30,8 +31,6 @@ public class AdminController {
 	@RequestMapping(value = "/validateAdminLogin", method = RequestMethod.POST)
 	public String AdminLogin(@RequestParam("adminname") String adminname, @RequestParam("password")String password, ModelMap map, HttpServletRequest request) {
 		if(request.getSession(false).getAttribute("id")!=null){	
-			System.out.println("********gdfjhkgh****");
-			System.out.println(request.getSession(false).getAttribute("id"));
 			return "redirect:adminHome";
 		}
 			Admin admin = adminservice.validateAdmin( adminname, password);
@@ -68,10 +67,24 @@ public class AdminController {
 	
 		Admin admin=(Admin)session.getAttribute("admin");
 		map.addAttribute("admin", admin);
-	
+	    
 		return "admin_profile";
 	}
 	
+	@RequestMapping("/admin_area")
+	public String adminArea(ModelMap map,HttpSession session) {
+	
+		Admin admin=(Admin)session.getAttribute("admin");
+		List<AdminArea> ls=adminservice.getInterestByAdminName(admin.getAdminname());
+		List<AreaInterest> l=new ArrayList<AreaInterest>();
+		for(int i=0;i<ls.size();i++)
+		{ l.add((adminservice.getInterestById(ls.get(i).getAreaid()).get(0)));
+			
+		}
+		
+		map.addAttribute("interest", l);
+		return "Admin_areaOfInt";
+	}
 	
 	
 	@RequestMapping("/admin_reviewed")
@@ -85,6 +98,17 @@ public class AdminController {
 		return "admin_reviewed";
 	}
 	
+
+	@RequestMapping("/admin_pass")
+	public String adminpass(ModelMap map,HttpSession session) {
+	
+		Admin admin=(Admin)session.getAttribute("admin");
+	
+		map.addAttribute("admin", admin);
+		
+		
+		return "admin_pass";
+	}
 	
 	@RequestMapping("/admin_myArticles")
 	public String adminmyarticle(ModelMap map,HttpSession session) {
@@ -169,17 +193,16 @@ public class AdminController {
     
   @RequestMapping (value="/rejectarticle/{id}")
 	public ModelAndView rejectUserArticle(@ModelAttribute Admin admin,@PathVariable(value="id") String id,BindingResult result,HttpSession session,HttpServletRequest request)
-	{   System.out.println("this is it"+id);
+	{ 
 	
 	    String[] temp=id.split("_");
-	    System.out.println("this is it"+temp[0]);
+	    
 	    int aid=Integer.parseInt(temp[0]);
 	    String reas=temp[1];
 	    Admin adm=(Admin)session.getAttribute("admin");
 		int n=adminservice.rejectArticles(aid,reas,adm.getAdminname());
 		
-		System.out.println("this is after it is rejected  "+aid);
-		System.out.println("this is it"+admin.getAdminname());
+	
 		if(n!=0) {
 		List<Article> l=adminservice.getArticles(admin.getAdminname());
 		 System.out.println("this is it"+admin.getAdminname());
@@ -194,6 +217,16 @@ public class AdminController {
 	 }
  }
     
-
-    
+  @RequestMapping(value = "/change_password", method = RequestMethod.POST)
+	public String changePassword(@RequestParam("password")String password, ModelMap map, HttpServletRequest request,HttpSession session) {
+//		if(request.getSession(false).getAttribute("id")!=null){	
+//			return "redirect:adminHome";
+//		}
+	    Admin admin=(Admin)session.getAttribute("admin");
+	    Admin Adm=adminservice.setPassword(admin.getAdminid(),password);
+		session.setAttribute("admin",Adm);
+		map.addAttribute("admin", Adm);
+		return "admin_profile";
+		
+  }
 }

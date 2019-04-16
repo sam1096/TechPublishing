@@ -113,11 +113,11 @@ button:hover, a:hover {
 					<h1>${admin.name}</h1>
 					<p class="title">ADMIN</p>
 					<p>
-						<button>Basic Details</button>
+						<button  onclick="location.href='admin_profile';" >Basic Details</button>
 						<br>
-						<button>Article Reviewed</button>
+						<button onclick="location.href='admin_reviewed';">Article Reviewed</button>
 						<br>
-						<button>My articles</button>
+						<button onclick="location.href='admin_myArticles';">My articles</button>
 					</p>
 				</div>
 			</div>
@@ -128,6 +128,7 @@ button:hover, a:hover {
 
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="admin_profile">Basic Details</a></li>
+							<li><a href="/admin_area">Area Of Interest</a></li>
 							<li><a href="/admin_reviewed">Articles Reviewed</a></li>
 							<li><a href="/admin_myArticles">My Articles</a></li>
 							<li><a href="/admin_pass">Change Password</a></li>
@@ -157,11 +158,11 @@ button:hover, a:hover {
 					<br> <br>
 					<p class="til">CONTACT DETAILS</p>
 					<p>
-						<span class="large_font">Email : </span> <span class="small_font"></span>
+						<span class="large_font">Email : </span> <span class="small_font">${admin.email}</span>
 					</p>
 					<p>
 						<span class="large_font">Phone No : </span> <span
-							class="small_font"> </span>
+							class="small_font">${admin.phoneNo} </span>
 					</p>
 				</div>
 

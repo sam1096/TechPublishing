@@ -57,20 +57,22 @@
 	</nav>
 	<!---------- end ----------------->
 
-	
+
 
 	<c:forEach items="${article}" var="temp">
 		<div class="card"
 			style="margin-top: 8%; margin-left: 5%, margin-right:5%">
-			<div class="jumbotron-fluid" align="center" style="background-color:skyblue; width:50%;margin-left:25%;"><font size="5" face="verdana">${temp.description}</font></div>
-			 <input type=hidden name="articleId"
-				value="${temp.aid}">
+			<div class="jumbotron-fluid" align="center"
+				style="background-color: skyblue; width: 50%; margin-left: 25%;">
+				<font size="5" face="verdana">${temp.description}</font>
+			</div>
+			<input type=hidden name="articleId" value="${temp.aid}">
 			<div>${temp.aid}</div>
 		</div>
 		<div style="text-align: left;">
 			<h1>Comments</h1>
-				<div id="comment_page"><jsp:include page="comments.jsp"/></div>
-			
+			<div id="comment_page"><jsp:include page="comments.jsp" /></div>
+
 			<form action="/comment_section" method="post" name="comment_form"
 				id="comment_saving">
 				<div class="container-fluid">

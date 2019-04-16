@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Admin;
+import com.example.demo.model.AreaInterest;
 import com.example.demo.model.Article;
 import com.example.demo.model.User;
 
@@ -132,7 +133,20 @@ public class AdminController {
 		}
 	  }
  
-  
+    @RequestMapping ("/editor_admin")
+	public String Editor(HttpSession session,ModelMap map) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginAdmin";
+		}
+		Admin admin = (Admin)session.getAttribute("admin");
+		map.addAttribute("admin", admin);
+		List<AreaInterest> list=adminservice.getallCategories();
+		map.addAttribute("areainterest", list);
+		return "editorAdmin";
+	}
+    
+	
+    
   @RequestMapping (value="/rejectarticle/{id}")
 	public ModelAndView rejectUserArticle(@ModelAttribute Admin admin,@PathVariable(value="id") String id,BindingResult result,HttpSession session,HttpServletRequest request)
 	{   System.out.println("this is it"+id);

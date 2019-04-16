@@ -161,5 +161,11 @@ public class UserService {
 	{
 		return ratingRepository.findByArtidAndAuthname(aid,authname);
 	}
+	public User changePassword(String username,String pwd)
+	{
+		User user =userRepository.findByUsername(username).get(0);
+		user.setPassword(pwd);
+		return userRepository.save(user);
+	}
 }
 

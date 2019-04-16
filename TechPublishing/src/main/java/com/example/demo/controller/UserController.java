@@ -21,6 +21,7 @@ import com.example.demo.model.User;
 import com.example.demo.model.UserArea;
 import com.example.demo.model.userRatings;
 import com.example.demo.services.UserService;
+import com.example.demo.model.Admin;
 import com.example.demo.model.AreaInterest;
 import com.example.demo.model.Article;
 
@@ -72,27 +73,80 @@ public class UserController {
    	return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/userProfile")
-	public String userProfile(ModelMap map,HttpSession session)
-	{
-		User user=(User)session.getAttribute("user");
-		System.out.println(user.getUsername());
+
+	@RequestMapping("/userprofile")
+	public String userProfile(ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+
+		User  user=(User)session.getAttribute("user");
 		map.addAttribute("user", user);
-		List<Article> articleinfo=userservice.getArticleByUser(user.getUsername());
+	
+		return "userProfile";
+	}
+	@RequestMapping("/user_pass")
+	public String userPassword(ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+
+		User  user=(User)session.getAttribute("user");
+		map.addAttribute("user", user);
+		
+		return "userPassword";
+	}
+	@RequestMapping("change_password")
+	public String userPassword(@RequestParam("password")String pwd,ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+
+		User  user=(User)session.getAttribute("user");
+		User usernew=userservice.changePassword(user.getUsername(),pwd);
+	
+		session.setAttribute("user",usernew);
+		map.addAttribute("user", user);
+		return "redirect:userprofile";
+	}
+	@RequestMapping("/area")
+	public String userArea(ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+		User user=(User)session.getAttribute("user");
 		List<UserArea>area=userservice.getAreaByUser(user.getUsername());
 		List<AreaInterest>userarea=new ArrayList<AreaInterest>();
 		for(int i=0;i<area.size();i++)
 		{
 			userarea.add((userservice.getAreaInterestById(area.get(i).getAreaid())).get(0));
 		}
+		map.addAttribute("user", user);
 		map.addAttribute("userarea", userarea);
+		return "userAreas";
+	}
+	
+	
+	@RequestMapping("/userArticles")
+	public String userArticles(ModelMap map,HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+		User user=(User)session.getAttribute("user");
+		System.out.println(user.getUsername());
+		map.addAttribute("user", user);
+		List<Article> articleinfo=userservice.getArticleByUser(user.getUsername());
 		map.addAttribute("articleinfo", articleinfo);
-		return "UserProfile";
+		map.addAttribute("user", user);
+		return "userArticles";
 	}
 	
 	@RequestMapping ("/submitarea")
-	public String AreaOfInterest( HttpServletRequest request,@RequestParam("area") List<String> list, ModelMap map) {
-		User user=(User)request.getSession(false).getAttribute("user");
+	public String AreaOfInterest( HttpSession session,@RequestParam("area") List<String> list, ModelMap map) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:loginUser";
+		}
+		User user=(User)session.getAttribute("user");
 		System.out.println(user.getUsername());
 		for(int i=0;i<list.size();i++)
 			System.out.println(list.get(i));

@@ -42,7 +42,7 @@
 					<li><a href="#">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Connect</a></li>
-					<li><a href="/userProfile">Profile</a></li>
+					<li><a href="/userprofile">Profile</a></li>
 					 <li><a href="/logoutUser">Logout</a></li>
 				</ul>
 			</div>

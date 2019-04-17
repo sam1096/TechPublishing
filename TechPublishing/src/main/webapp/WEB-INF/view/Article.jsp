@@ -11,14 +11,21 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.2/css/font-awesome.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
-	
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.2/css/font-awesome.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <title>Article</title>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
 <script>
 	$(document).ready(function() {
 		$("#comment_page").load("/getComments");
@@ -55,11 +62,13 @@
 
 <style>
 .star-rating {
-  line-height:32px;
-  font-size:1.25em;
+	line-height: 32px;
+	font-size: 1.25em;
 }
 
-.star-rating .fa-star{color: yellow;}
+.star-rating .fa-star {
+	color: yellow;
+}
 </style>
 <script>
 
@@ -94,95 +103,82 @@
 </script>
 <style>
 .rating {
-    width: 300px;
-    height: 34px;
-    background-color: #f6f3f3;
+	width: 300px;
+	height: 34px;
+	background-color: #f6f3f3;
 }
- 
+
 .rating label {
-    text-indent: -100px;
-    width: 40px !important;
-    height: 30px;
-    overflow: hidden;
-    cursor: pointer;
+	text-indent: -100px;
+	width: 40px !important;
+	height: 30px;
+	overflow: hidden;
+	cursor: pointer;
 }
- 
+
 .label {
-    float: left;
-    padding-top: 3px;
+	float: left;
+	padding-top: 3px;
 }
-         
+
 input[type="radio"] {
-    padding-right: 4px;
-    position: absolute;
-    left: 340px;
-    margin-top: 10px;
+	padding-right: 4px;
+	position: absolute;
+	left: 340px;
+	margin-top: 10px;
 }
-                 
+
 input[type="radio"], .rating label.stars {
-    float: right;
-    line-height: 30px;
-    height: 30px;
+	float: right;
+	line-height: 30px;
+	height: 30px;
 }
- 
-span + input[type=radio] + label, legend + input[type=radio] + label {
-    clear: right;
-    margin-right: 80px;
-    counter-reset: checkbox;
+
+span+input[type=radio]+label, legend+input[type=radio]+label {
+	clear: right;
+	margin-right: 80px;
+	counter-reset: checkbox;
 }
- 
-.rating input[type="radio"]:required + label:after {
-    content: '';
-    position: absolute;
-    left: 340px; 
-    min-height: 10px;
-    margin-top: -36px;
-    text-align: right;
-    background: #6cbf00;
-    padding: 10px 10px;
-    display: block;
-    width: 50px;
+
+.rating input[type="radio"]:required+label:after {
+	content: '';
+	position: absolute;
+	left: 340px;
+	min-height: 10px;
+	margin-top: -36px;
+	text-align: right;
+	background: #6cbf00;
+	padding: 10px 10px;
+	display: block;
+	width: 50px;
 }
- 
+
 .rating label.stars {
-    background: transparent url('http://www.findsourcecode.com/wp-content/uploads/2014/04/star_off.png') no-repeat center center;
+	background: transparent
+		url('http://www.findsourcecode.com/wp-content/uploads/2014/04/star_off.png')
+		no-repeat center center;
 }
- 
-.rating label.stars:hover ~ label.stars, 
-.rating label.stars:hover, 
-.rating input[type=radio][name=stars]:checked ~ label.stars {
-    background-image: url('http://www.findsourcecode.com/wp-content/uploads/2014/04/star.png');
-    counter-increment: checkbox;
+
+.rating label.stars:hover ~ label.stars, .rating label.stars:hover,
+	.rating input[type=radio][name=stars]:checked ~ label.stars {
+	background-image:
+		url('http://www.findsourcecode.com/wp-content/uploads/2014/04/star.png');
+	counter-increment: checkbox;
 }
- 
-.rating input[type=radio][name=stars]:required + label.stars:after {
-    content: counter(checkbox) " stars!";
+
+.rating input[type=radio][name=stars]:required+label.stars:after {
+	content: counter(checkbox) " stars!";
 }
 </style>
 </head>
 <body>
 
 	<!-- Navigation bar -->
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Cart</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="/welcomepage">Home</a></li>
 
-				<li><a href="#">About</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/logoutUser"><span
-						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-			</ul>
-		</div>
-	</nav>
 	<!---------- end ----------------->
 
 
-<!---------------------Displaying article----------------------->
+	<!---------------------Displaying article----------------------->
 	<c:forEach items="${article}" var="temp">
 		<div class="card"
 			style="margin-top: 8%; margin-left: 5%, margin-right:5%">
@@ -196,49 +192,48 @@ span + input[type=radio] + label, legend + input[type=radio] + label {
 
 		</div>
 
-		
+
 		<!---------------------Displaying article----------------------->
-	
-		
+
+
 		<!---------------------Displaying ratings----------------------->
-		<c:set var="rateByUser" value="${rateByUser}" /> 
-<c:choose>
-    <c:when test="${rateByUser==null}">
-    	<h3>You haven't rated this Article.</h3>
-    </c:when>
-    <c:otherwise>
-   <h3>You have rated this article: ${rateByUser.rating} stars </h3>
-    </c:otherwise>      
-</c:choose>
-		
+		<c:set var="rateByUser" value="${rateByUser}" />
+		<c:choose>
+			<c:when test="${rateByUser==null}">
+				<h3>You haven't rated this Article.</h3>
+			</c:when>
+			<c:otherwise>
+				<h3>You have rated this article: ${rateByUser.rating} stars</h3>
+			</c:otherwise>
+		</c:choose>
+
 		<h3>Give your Ratings!!</h3>
 		<form action="/ratings" method="post">
-		 <fieldset class="rating">     
-        <input type="radio" name="stars" id="4_stars" value="4" >
-        <label class="stars" for="4_stars">4 stars</label>
-        <input type="radio" name="stars" id="3_stars" value="3" >
-        <label class="stars" for="3_stars">3 stars</label>
-        <input type="radio" name="stars" id="2_stars" value="2" >
-        <label class="stars" for="2_stars">2 stars</label>
-        <input type="radio" name="stars" id="1_stars" value="1" >
-        <label class="stars" for="1_stars">1 star</label>
-        <input type="radio" name="stars" id="0_stars" value="0" required>
-        <label class="stars" for="0_stars">0 star</label>
-        <span  class="label"> Rating: </span>
-    </fieldset>
-    <input type="hidden" name="aid" value="${temp.aid}"/>
-    <button type="submit">Submit</button>
-</form>
-         
-<%--         <button onclick="ratedata(${temp.aid})" type="button" id="rate">Submit</button> --%>
-  
-		
-		
-		
-		
-		
-		
-		
+			<fieldset class="rating">
+				<input type="radio" name="stars" id="4_stars" value="4"> <label
+					class="stars" for="4_stars">4 stars</label> <input type="radio"
+					name="stars" id="3_stars" value="3"> <label class="stars"
+					for="3_stars">3 stars</label> <input type="radio" name="stars"
+					id="2_stars" value="2"> <label class="stars" for="2_stars">2
+					stars</label> <input type="radio" name="stars" id="1_stars" value="1">
+				<label class="stars" for="1_stars">1 star</label> <input
+					type="radio" name="stars" id="0_stars" value="0" required>
+				<label class="stars" for="0_stars">0 star</label> <span
+					class="label"> Rating: </span>
+			</fieldset>
+			<input type="hidden" name="aid" value="${temp.aid}" />
+			<button type="submit">Submit</button>
+		</form>
+
+		<%--         <button onclick="ratedata(${temp.aid})" type="button" id="rate">Submit</button> --%>
+
+
+
+
+
+
+
+
 
 		<!---------------------Displaying ratings----------------------->
 		<!---------------------Displaying comments----------------------->

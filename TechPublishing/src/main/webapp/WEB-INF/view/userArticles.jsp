@@ -12,145 +12,80 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+<link href="static/css/style.css" rel="stylesheet">
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.card {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	max-width: 300px;
-	margin: auto;
-	text-align: center;
-	font-family: arial;
-}
-
-.contain {
-	margin: auto;
-	padding-left: 100px;
-	font-family: arial;
-	padding-top: 25px;
-	padding-bottom: 25px;
-}
-
-.title {
-	color: grey;
-	font-size: 18px;
-}
-
-.til {
-	color: grey;
-	font-size: 28px;
-}
-
-button {
-	border: none;
-	outline: 0;
-	display: inline-block;
-	padding: 8px;
-	color: white;
-	background-color: #000;
-	text-align: center;
-	cursor: pointer;
-	width: 100%;
-	font-size: 18px;
-}
-
-a {
-	text-decoration: none;
-	font-size: 22px;
-	color: black;
-}
-
-button:hover, a:hover {
-	opacity: 0.7;
-}
-
-#header {
-	width: 100%;
-	background-color: white;
-	height: 80px;
-}
-
-#container {
-	width: 100%;
-	background-color: black;
-}
-
-#first {
-	width: 25%;
-	float: left;
-	background-color: white;
-}
-
-#second {
-	width: 73%;
-	float: left;
-	background-color: #b3e7ff;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	margin: auto;
-}
-
-.large_font {
-	font-size: 18pt;
-}
-
-.small_font {
-	font-size: 12pt;
-	color: grey;
-	font-style: italic;
-}
-</style>
 </head>
 <body>
 
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid" style="background-color: #34495e;">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><font color="white">Tech
+						Publishing Platform</font></a>
+			</div>
+			<ul class=" nav navbar-nav ml-auto navbar-right">
+				<li><a href="/userHome"><font color="white">Home</font></a></li>
+				<li><a href="#"><font color="white">About</font></a></li>
+				<li><a href="#"><font color="White">Connect</font></a></li>
+				<li><a href="/userprofile"><font color="white">Profile</font></a></li>
+				<li><a href="/logoutUser"><font color="white">Logout</font></a></li>
+			</ul>
+		</div>
+	</nav>
+
+
 	<div id="con">
-		<div id="header">hello ${user.username}</div>
 		<div id="container">
 			<div id="first">
-				<div class="card">
+				<div class="car">
 					<img src="/images/1.png" alt="John" style="width: 100%">
-					<h1>${user.firstname} ${user.lastname}</h1>
+					<h1>${user.firstname}${user.lastname}</h1>
 					<p class="title">USER</p>
-					<div>
-						<button onclick="location.href='userprofile';">Basic Details</button>
+					<p>
+						<button onclick="location.href='userprofile';"
+							style="background: #3CB371;">Basic Details</button>
 						<br>
-						<button onclick="location.href='area';">Areas</button>
+						<button onclick="location.href='area';"
+							style="background: #3CB371;">Areas</button>
 						<br>
-						<button onclick="location.href='userArticles';">My articles</button>
-					</div>
+						<button onclick="location.href='userArticles';"
+							style="background: #3CB371;">My articles</button>
+					</p>
 				</div>
 			</div>
+
 			<div id="second">
 
-				<nav class="navbar navbar-inverse">
-					<div class="container-fluid">
-
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="userprofile">Basic Details</a></li>
-							<li><a href="/area">Areas of Interests</a></li>
-							<li><a href="/userArticles">My Articles</a></li>
-							<li><a href="/user_pass">Change Password</a></li>
-							<li> <a href="/logoutUser">Logout</a></li>
-						</ul>
-					</div>
+				<nav class="inside_nav">
+					<ul class="inside_nav_admin">
+						<li class="inside_nav_spacing_user"><a href="userprofile">Basic
+								Details</a></li>
+						<li class="inside_nav_spacing_user"><a href="/area">Interests</a></li>
+						<li class="active inside_nav_spacing_user"><a href="/userArticles">My
+								Articles</a></li>
+						<li class="inside_nav_spacing_user"><a href="/user_pass">Change
+								Password</a></li>
+					</ul>
 				</nav>
 
+
 				<div class="contain">
-					
-					<table class="table table-striped">
+
+					<table>
 						<caption>
 							<h3>Articles Posted By You!!</h3>
 						</caption>
 						<thead>
 							<tr class="tr tr-success">
 
-								<td>Description</td>
-								<td>Ratings</td>
-								<td>Status</td>
-								<td>Post Date</td>
-								<td>Review Date</td>
-							
+								<th>Description</th>
+								<th>Ratings</th>
+								<th>Status</th>
+								<th>Post Date</th>
+								<th>Review Date</th>
+
 							</tr>
 						</thead>
 						<tbody>
@@ -161,9 +96,12 @@ button:hover, a:hover {
 										<p class="show-read-more">${temp.description}</p>
 										<form action="/readmore" method="post">
 											<input type="hidden" name="aid" value="${temp.aid }" />
-											<button type="submit">Read More>></button>
+											<button class="readmoreButton" type="submit" id='b1'>
+												<span>Read more</span>
+											</button>
+
 										</form>
-										
+
 
 
 									</td>

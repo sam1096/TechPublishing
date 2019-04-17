@@ -41,7 +41,7 @@
 					<li><a href="#">Connect</a></li>
 
 					<li><a href="/userprofile">Profile</a></li>
-					 <li><a href="/logoutUser">Logout</a></li>
+					<li><a href="/logoutUser">Logout</a></li>
 
 				</ul>
 			</div>
@@ -79,11 +79,11 @@
 								<c:forEach items="${dashboard1}" var="temp">
 									<tr>
 										<td>
-											<section class="card">${temp[0].description}</section>
+											<p class="show-read-more">${temp[0].description}</p>
 											<form action="/readmore" method="post">
 												<input type="hidden" name="aid" value="${temp[0].aid }" />
 												<button class="readmoreButton" type="submit">
-													<span>Read More</span>
+													<span>Read more</span>
 												</button>
 											</form>
 										</td>
@@ -100,16 +100,9 @@
 			</div>
 		</div>
 	</div>
-
-	<footer class="page-footer font-small blue footer">
-
-		<!-- Copyright -->
-		<div class="footer-copyright text-center py-3 footer_align">©
-			2019 Copyright: TechPublishing.com</div>
-		<!-- Copyright -->
-
+	<footer id="footer">
+		<p>© 2019 Copyright: TechPublishing.com</p>
 	</footer>
-
 
 </body>
 </html>

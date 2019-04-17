@@ -108,21 +108,19 @@ $(document).ready(function(){
 
 </head>
 <body>
-
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid" style="background-color: #34495e;">
-			<a class="navbar-brand" href="welcomepage"><img
-				src="static/images/tech_geek_logo"></a>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/welcomepage">Home</a></li>
-
-				<li><a href="#">About</a></li>
-				<li><a href="#">Connect</a></li>
-
-				<li><a href="/admin_profile">Profile</a></li>
-				<li><a href="/logoutAdmin">Logout</a></li>
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><font color="white">Tech
+						Publishing Platform</font></a>
+			</div>
+			<ul class=" nav navbar-nav ml-auto navbar-right">
+				<li><a href="/adminHome"><font color="white">Home</font></a></li>
+				<li><a href="#"><font color="white">About</font></a></li>
+				<li><a href="#"><font color="White">Connect</font></a></li>
+				<li><a href="/admin_profile"><font color="white">Profile</font></a></li>
+				<li><a href="/logoutUser"><font color="white">Logout</font></a></li>
 			</ul>
-
 		</div>
 	</nav>
 	<div class="container" style="margin-top: 30px">
@@ -140,7 +138,7 @@ $(document).ready(function(){
 			<div class="col-sm-10">
 				<article>
 					<div class="container">
-						<table class="table table-striped">
+						<table>
 							<caption>
 								<h3>Articles</h3>
 							</caption>
@@ -164,11 +162,10 @@ $(document).ready(function(){
 												method='POST'>
 												<input type='hidden' id='newfield' name='newfield'
 													value="${temp.aid}" />
-												<button class="bt" type="submit" id='b1'>read
-													more..</button>
+												<button class="readmoreButton" type="submit">
+													<span>Read more</span>
+												</button>
 											</form>
-
-
 										</td>
 
 										<td>${temp.authname}</td>
@@ -177,12 +174,12 @@ $(document).ready(function(){
 
 										<td>
 											<button onclick="publishdata(${temp.aid})"
-												class="btn btn-success btn-md">
+												class="btn btn-success" style="width: 15%;">
 												<span class="glyphicon glyphicon-ok"></span>
 											</button>
 
 											<button onclick="deletedata(${temp.aid})"
-												class="btn btn-danger">
+												class="btn btn-danger" style="width: 15%;">
 												<span class="glyphicon glyphicon-remove"></span>
 											</button>
 
@@ -201,13 +198,8 @@ $(document).ready(function(){
 
 
 
-	<footer class="page-footer font-small blue footer">
-
-		<!-- Copyright -->
-		<div class="footer-copyright text-center py-3 footer_align">©
-			2019 Copyright: TechPublishing.com</div>
-		<!-- Copyright -->
-
+	<footer id="footer">
+	<p>© 2019 Copyright: TechPublishing.com</p>
 	</footer>
 
 

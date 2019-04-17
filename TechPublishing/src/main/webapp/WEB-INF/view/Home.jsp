@@ -78,7 +78,6 @@
 	</ul>
 	
 	<ul class="nav navbar-nav navbar-right">   
-<!-- div class="container" id="con1"---->
   <!-- Trigger the modal with a button -->
   <li>
   <button type="button" class="btn btn-danger navbar-btn" id="myBtn">Login User</button>
@@ -122,7 +121,7 @@
 <!-- -/div-->
 </li>
 <!-------------------- Login Admin ----------------------------->
-<li>
+<li class="homebuttons">
 <button type="button" class="btn btn-danger navbar-btn" id="myBtn1">Login Admin</button>
 
   <!-- Modal -->
@@ -162,7 +161,7 @@
     </div>
   </div> 
   </li>
-<li>
+<li class="homebuttons">
 <!-- div class="container" id="con2"---->
   
   <!-- Trigger the modal with a button -->

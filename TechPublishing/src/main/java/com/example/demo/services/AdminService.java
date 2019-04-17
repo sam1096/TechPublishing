@@ -1,4 +1,5 @@
 package com.example.demo.services;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -50,7 +51,7 @@ public class AdminService {
 	
 	
 
-	public List<Article> getArticles(String adminname)
+	public List<Object[]> getArticles(String adminname)
 	{ return adminArticle.getArticles(adminname);
 	}
 	
@@ -123,5 +124,7 @@ public class AdminService {
 		
 		return areainterestRepository.findByAreaid(areaid);
 	}
+	
+	
 	
 }

@@ -17,6 +17,25 @@
 
 <link href="static/css/style.css" rel="stylesheet">
 
+<script type="text/javascript">
+$(document).ready(function(){
+	var maxLength = 12;
+	$(".show-read-more").each(function(){
+		var myStr = $(this).text();
+		if($.trim(myStr).length > maxLength){
+			var newStr = myStr.substring(0, maxLength);
+			
+			$(this).empty().html(newStr);
+			$(this).append(' ...');
+			
+
+		}
+	});
+
+});
+</script>
+
+
 <script>
  function publishdata(id)
  { 
@@ -60,9 +79,7 @@
 	 		url:"rejectarticle/"+id,
             success: function(data)
 	 		{ alert("Article has been rejected!");
-	 	      setTimeout(function(){
-	 	           location.reload();
-	 	      }, 100);
+	 	    
 	 		},
 	 		error: function(data)
 	 		{alert("failed");
@@ -86,26 +103,6 @@
 
 
 
-<script type="text/javascript">
-$(document).ready(function(){
-	var maxLength = 25;
-	$(".show-read-more").each(function(){
-		var myStr = $(this).text();
-		if($.trim(myStr).length > maxLength){
-			var newStr = myStr.substring(0, maxLength);
-			
-			$(this).empty().html(newStr);
-			$(this).append(' ...');
-			$(this).append(' ');
-
-		}
-	});
-
-});
-</script>
-
-
-
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -124,8 +121,8 @@ $(document).ready(function(){
 		</div>
 	</nav>
 	<div class="container" style="margin-top: 30px">
-		<div class="row">
-			<div class="col-sm-2">
+		<div class="row" >
+			<div class="col-sm-2" style="margin-left:-7%;">
 				<h3>EDITOR</h3>
 				<p>Something on mind write here!!!</p>
 				<ul class="nav nav-pills flex-column">
@@ -135,17 +132,18 @@ $(document).ready(function(){
 
 				<hr class="d-sm-none">
 			</div>
-			<div class="col-sm-10">
+			<div class="col-sm-2"  style="margin-left:-3%;">
 				<article>
-					<div class="container">
-						<table>
+		<div class="container" style="margin-left:0%;width:40%;"> 
+						<table style="margin-left:0%;width:40%;">
 							<caption>
 								<h3>Articles</h3>
 							</caption>
 							<thead>
 								<tr class="tr tr-success">
-
+									
 									<td>Description</td>
+									<td>Category</td>	
 									<td>Author name</td>
 									<td>Post Date</td>
 									<td>Review</td>
@@ -155,30 +153,30 @@ $(document).ready(function(){
 								<c:forEach items="${articles}" var="temp">
 									<tr>
 										<td>
-
-											<p class="show-read-more">${temp.description}</p>
-
+											
+											<p class="show-read-more" style="width:30%;"><font size="2">${temp[0].description}</font></p>
+											
 											<form class="read" action="/read_article" id='form1'
 												method='POST'>
 												<input type='hidden' id='newfield' name='newfield'
-													value="${temp.aid}" />
-												<button class="readmoreButton" type="submit">
-													<span>Read more</span>
+													value="${temp[0].aid}" />
+												<button class="readmoreButton" type="submit" style="width:30%;">
+													<span >Read more</span>
 												</button>
 											</form>
 										</td>
-
-										<td>${temp.authname}</td>
-										<td>${temp.postdate}</td>
+										<td>${temp[1].areaname}</td>
+										<td>${temp[0].authname}</td>
+										<td>${temp[0].postdate}</td>
 
 
 										<td>
-											<button onclick="publishdata(${temp.aid})"
+											<button onclick="publishdata(${temp[0].aid})"
 												class="btn btn-success" style="width: 15%;">
 												<span class="glyphicon glyphicon-ok"></span>
 											</button>
 
-											<button onclick="deletedata(${temp.aid})"
+											<button onclick="deletedata(${temp[0].aid})"
 												class="btn btn-danger" style="width: 15%;">
 												<span class="glyphicon glyphicon-remove"></span>
 											</button>
@@ -189,7 +187,7 @@ $(document).ready(function(){
 								</c:forEach>
 							</tbody>
 						</table>
-					</div>
+					</div> 
 				</article>
 			</div>
 		</div>

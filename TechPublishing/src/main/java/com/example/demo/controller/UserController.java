@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -167,6 +168,8 @@ public class UserController {
 		art.setAuthname(user.getUsername());
 		String areaid=userservice.findAreaInterest(areaname).get(0).getAreaid();
 		art.setAreaid(areaid);
+		Date date =new Date();
+		art.setPostdate(date);
 		art.setStatus("in review");
 		userservice.saveArticle(art);
 		map.addAttribute("message", "Successfully saved");

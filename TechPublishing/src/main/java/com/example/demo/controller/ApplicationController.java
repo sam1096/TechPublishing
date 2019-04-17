@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.Admin;
+import com.example.demo.model.AreaInterest;
 import com.example.demo.model.Article;
 import com.example.demo.model.User;
 import com.example.demo.services.UserService;
@@ -75,8 +77,11 @@ public class ApplicationController {
 			Admin admin=(Admin)session.getAttribute("admin");
 			String adminname=admin.getAdminname();
 			System.out.println("I am mad"+adminname);
-			List<Article> l=adminservice.getArticles(adminname);
+			List<Object[]> l=adminservice.getArticles(adminname);
+			
+		
 			System.out.println("**********************");
+			
 			
 			map.addAttribute("articles",l);
 			//map.addAttribute("user", user);

@@ -174,21 +174,36 @@ span+input[type=radio]+label, legend+input[type=radio]+label {
 <body>
 
 	<!-- Navigation bar -->
-
+<nav class="navbar navbar-inverse">
+		<div class="container-fluid" style="background-color: #34495e;">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><font color="white">Tech Publishing Platform</font></a>
+			</div>
+			<ul class=" nav navbar-nav ml-auto navbar-right">
+				<li><a href="/userHome"><font color="white">Home</font></a></li>
+				<li><a href="#"><font color="white">About</font></a></li>
+				<li><a href="#"><font color="White">Connect</font></a></li>
+				<li><a href="/userprofile"><font color="white">Profile</font></a></li>
+				<li><a href="/logoutUser"><font color="white">Logout</font></a></li>
+			</ul>
+		</div>
+	</nav>
 	<!---------- end ----------------->
 
 
 	<!---------------------Displaying article----------------------->
-	<c:forEach items="${article}" var="temp">
-		<div class="card"
-			style="margin-top: 8%; margin-left: 5%, margin-right:5%">
-			<div class="jumbotron-fluid" align="center"
-				style="background-color: skyblue; width: 50%; margin-left: 25%;">
+	<c:forEach items="${article}" var="temp">	
+	
+	<h3><div style="margin-top: 2%; margin-left:8%; font-family: Georgia;">${temp.authname}</div></h3>
+	<div style="margin-left:8%;margin-bottom:2%;">${temp.postdate}</div>
+		<div class="card" style="margin-top: 2%; margin-left: 5%, margin-right:5%">
+			<div class="well" align="center"
+				style="background-color:lavender; width: 70%; margin-left: 25%;">
 				<font size="5" face="verdana">${temp.description}</font>
 			</div>
 			<input type=hidden name="articleId" value="${temp.aid}">
 
-			<div>${temp.aid}</div>
+			<div><h3>Rating :${temp.rating}</h3></div>
 
 		</div>
 

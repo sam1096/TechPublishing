@@ -218,7 +218,7 @@
             
           <!--   <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a></p>--->
             
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"  style="background-color:#6495ED;"></span> Register!!</button>
+              <button type="submit" class="btn btn-success btn-block" style="background-color:#6495ED;"><span class="glyphicon glyphicon-off"  ></span> Register!!</button>
           </form>
         </div>
         <div class="modal-footer">

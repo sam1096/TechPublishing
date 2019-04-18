@@ -11,7 +11,7 @@
   <style>
   <!----For Login ---->
   .modal-header, h4, .close {
-    background-color: #5cb85c;
+   background-color: #6495ED;
     color:white !important;
     text-align: center;
     font-size: 30px;
@@ -50,8 +50,9 @@
   </div>
   
   		<c:set var="error" value="${error}" /> 
+  		<c:set var="err" value="Invalid username or password" /> 
 <c:choose>
-    <c:when test="${error!=null}">
+    <c:when test="${error==err}">
     <script>
 //     alert("Invalid Username or Password!");
     $(window).on('load',function(){
@@ -59,6 +60,8 @@
     });
     </script>
     </c:when>
+     <c:when test="${error==null}">
+     </c:when>
     <c:otherwise>
    
     </c:otherwise>      
@@ -106,7 +109,7 @@
              <input type="password" class="form-control" name="password" placeholder="Enter Password" value="${user.password}"/>
             </div>
         
-              <button type="submit"  class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              <button type="submit"  class="btn btn-success btn-block"  style="background-color:#6495ED;"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -149,7 +152,7 @@
              
             </div>
           
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              <button type="submit" class="btn btn-success btn-block"  style="background-color:#6495ED;"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>
         <div class="modal-footer">
@@ -215,7 +218,7 @@
             
           <!--   <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a></p>--->
             
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Register!!</button>
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"  style="background-color:#6495ED;"></span> Register!!</button>
           </form>
         </div>
         <div class="modal-footer">

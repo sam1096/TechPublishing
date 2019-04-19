@@ -175,7 +175,7 @@ span+input[type=radio]+label, legend+input[type=radio]+label {
 <body>
 
 	<!-- Navigation bar -->
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid" style="background-color: #34495e;">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#"><font color="white">Tech
@@ -183,7 +183,7 @@ span+input[type=radio]+label, legend+input[type=radio]+label {
 			</div>
 			<ul class=" nav navbar-nav ml-auto navbar-right">
 				<li><a href="/userHome"><font color="white">Home</font></a></li>
-				<li><a href="#"><font color="white">About</font></a></li>
+				<li><a href="/about"><font color="white">About</font></a></li>
 				<li><a href="#"><font color="White">Connect</font></a></li>
 				<li><a href="/userprofile"><font color="white">Profile</font></a></li>
 				<li><a href="/logoutUser"><font color="white">Logout</font></a></li>
@@ -196,16 +196,17 @@ span+input[type=radio]+label, legend+input[type=radio]+label {
 	<!---------------------Displaying article----------------------->
 	<c:forEach items="${article}" var="temp">
 
-		<div class="row" style="margin-top: 2%; margin-left: 8%; font-family: Georgia;">
-			<div>
+		<div class="row"
+			style="margin-top: 2%; margin-left: 8%; font-family: Georgia;">
+			<div class="col-sm-6">
 				<h3>${temp.authname}</h3>
 			</div>
-			<div>
+			<div class="col-sm-6">
 				<h3>Rating :${temp.rating}</h3>
 			</div>
 		</div>
-		
-		
+
+
 		<div style="margin-left: 8%; margin-bottom: 2%;">${temp.postdate}</div>
 		<article style="margin-top: 2%; margin-left: 8%; margin-right: 5%">
 			<div>
@@ -226,26 +227,33 @@ span+input[type=radio]+label, legend+input[type=radio]+label {
 				<h3>You haven't rated this Article.</h3>
 			</c:when>
 			<c:otherwise>
-				<h3>You have rated this article: ${rateByUser.rating} stars</h3>
+				<div style="margin-left: 8%;">
+					<h3>Your rating: ${rateByUser.rating} stars</h3>
+				</div>
 			</c:otherwise>
 		</c:choose>
 
-		<h3>Give your Ratings!!</h3>
+		<div style="margin-left: 8%;">
+			<h3>Give your Ratings!!</h3>
+		</div>
 		<form action="/ratings" method="post">
 			<fieldset class="rating">
-				<input type="radio" name="stars" id="4_stars" value="4"> <label
-					class="stars" for="4_stars">4 stars</label> <input type="radio"
-					name="stars" id="3_stars" value="3"> <label class="stars"
-					for="3_stars">3 stars</label> <input type="radio" name="stars"
-					id="2_stars" value="2"> <label class="stars" for="2_stars">2
-					stars</label> <input type="radio" name="stars" id="1_stars" value="1">
-				<label class="stars" for="1_stars">1 star</label> <input
-					type="radio" name="stars" id="0_stars" value="0" required>
-				<label class="stars" for="0_stars">0 star</label> <span
-					class="label"> Rating: </span>
+				<input style="margin-left: 8%;" type="radio" name="stars"
+					id="4_stars" value="4"> <label class="stars" for="4_stars">4
+					stars</label> <input type="radio" name="stars" id="3_stars" value="3">
+				<label class="stars" for="3_stars">3 stars</label> <input
+					type="radio" name="stars" id="2_stars" value="2"> <label
+					class="stars" for="2_stars">2 stars</label> <input type="radio"
+					name="stars" id="1_stars" value="1"> <label class="stars"
+					for="1_stars">1 star</label> <input type="radio" name="stars"
+					id="0_stars" value="0" required> <label class="stars"
+					for="0_stars">0 star</label>
+				<!-- <span class="label"> Rating: </span> -->
 			</fieldset>
 			<input type="hidden" name="aid" value="${temp.aid}" />
-			<button type="submit">Submit</button>
+			<button
+				style="margin-left: 8%; margin-top: 1%; border-radius: 8px; background-color: #17a2b8;"
+				type="submit">Submit</button>
 		</form>
 
 		<%--         <button onclick="ratedata(${temp.aid})" type="button" id="rate">Submit</button> --%>
@@ -261,46 +269,35 @@ span+input[type=radio]+label, legend+input[type=radio]+label {
 		<!---------------------Displaying ratings----------------------->
 		<!---------------------Displaying comments----------------------->
 
-		<div style="text-align: left;">
+		<div style="margin-left: 8%;">
 			<h1>Comments</h1>
 			<div id="comment_page"><jsp:include page="comments.jsp" /></div>
 
 			<form action="/comment_section" method="post" name="comment_form"
 				id="comment_saving">
-				<div class="container-fluid">
-					<div class="panel-primary">
-						<div class="panel-heading">
-							<!--  <h1 class="panel-title">COMMENT BOX USING AJAX THROUGH JSP</h1>-->
-						</div>
-						<div class="container">
-							<div class="ratings">
-								<input type="radio" name="star" id="rating" value="1"> <input
-									type="radio" name="star" id="rating" value="2"> <input
-									type="radio" name="star" id="rating" value="3"> <input
-									type="radio" name="star" id="rating" value="4"> <input
-									type="radio" name="star" id="rating" value="5">
-							</div>
-							<span class="info"></span>
-						</div>
-						<div class="panel-body">
-							<div class="form-group col-md-4">
-								<label>${user.username}</label> <input id="article_id"
-									type=hidden name="articleId" value="${temp.aid}">
-							</div>
-							<div class="form-group col-md-4">
-								<label>YOUR COMMENT</label>
-								<textarea id="comment_desc" class="form-control" rows="5"
-									id="comment" name="comdesc" required="required"></textarea>
-							</div>
-							<div class="clearfix"></div>
-							<div class="form-group col-md-6">
-								<button type="button" name="upload_comment" id="upload_comment"
-									value="Post">Upload</button>
-							</div>
-						</div>
+				<!-- 	<div class="container-fluid"> -->
+				<!-- <div class="panel-primary"> -->
+				<!-- <div class="panel-heading">
+							 <h1 class="panel-title">COMMENT BOX USING AJAX THROUGH JSP</h1>
+						</div> -->
+				<div class="panel-body row">
+					<div class="form-group col-sm-4">
+						<label>${user.username}</label> <input id="article_id" type=hidden
+							name="articleId" value="${temp.aid}">
 					</div>
-
+					<div class="form-group col-sm-8" style="margin-left: -30%;">
+<!-- 						<label>YOUR COMMENT</label> -->
+						<textarea id="comment_desc" class="form-control" rows="1"
+							id="comment" name="comdesc" required="required"></textarea>
+					</div>
 				</div>
+				<div class="clearfix"></div>
+				<div class="form-group">
+					<button type="button" name="upload_comment" id="upload_comment"
+						value="Post"
+						style="border-radius: 8px; background-color: #17a2b8;">Upload</button>
+				</div>
+
 			</form>
 		</div>
 		<!---------------------Displaying comments----------------------->

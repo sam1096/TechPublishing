@@ -16,6 +16,23 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var maxLength = 100;
+		$(".show-read-more").each(function() {
+			var myStr = $(this).text();
+			if ($.trim(myStr).length > maxLength) {
+				var newStr = myStr.substring(0, maxLength);
+
+				$(this).empty().html(newStr);
+				$(this).append(' ...');
+
+			}
+		});
+
+	});
+</script>
 </head>
 <body>
 
@@ -27,7 +44,7 @@
 			</div>
 			<ul class=" nav navbar-nav ml-auto navbar-right">
 				<li><a href="/userHome"><font color="white">Home</font></a></li>
-				<li><a href="#"><font color="white">About</font></a></li>
+				<li><a href="/about"><font color="white">About</font></a></li>
 				<li><a href="#"><font color="White">Connect</font></a></li>
 				<li><a href="/userprofile"><font color="white">Profile</font></a></li>
 				<li><a href="/logoutUser"><font color="white">Logout</font></a></li>
@@ -63,8 +80,8 @@
 						<li class="inside_nav_spacing_user"><a href="userprofile">Basic
 								Details</a></li>
 						<li class="inside_nav_spacing_user"><a href="/area">Interests</a></li>
-						<li class="active inside_nav_spacing_user"><a href="/userArticles">My
-								Articles</a></li>
+						<li class="active inside_nav_spacing_user"><a
+							href="/userArticles">My Articles</a></li>
 						<li class="inside_nav_spacing_user"><a href="/user_pass">Change
 								Password</a></li>
 					</ul>
@@ -80,46 +97,45 @@
 						<thead>
 							<tr class="tr tr-success">
 
-								<th>Description</th>
-								<th>Ratings</th>
-								<th>Status</th>
-								<th>Post Date</th>
-								<th>Review Date</th>
+								<th class="col-sm-4">Description</th>
+								<th class="col-sm-2">Ratings</th>
+								<th class="col-sm-2">Status</th>
+								<th class="col-sm-2">Post Date</th>
+								<th class="col-sm-2">Review Date</th>
 
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${articleinfo}" var="temp">
 								<tr>
-									<td>
+									<td class="col-sm-4">
 
-										<p class="show-read-more">${temp.description}</p>
-										<c:set var="status" value="${temp.status}" />
-										<c:set var="reject" value="rejected" />
-											<c:choose>
-												<c:when test="${status==reject}">
-												
-												
+										<article class="show-read-more">${temp.description}</article> <c:set
+											var="status" value="${temp.status}" /> <c:set var="reject"
+											value="rejected" /> <c:choose>
+											<c:when test="${status==reject}">
+
+
 											</c:when>
-												<c:otherwise>
+											<c:otherwise>
 												<form action="/readmore" method="post">
-											<input type="hidden" name="aid" value="${temp.aid }" />
-											
-											<button class="readmoreButton" type="submit" id='b1'>
-												<span>Read more</span>
-											</button>
+													<input type="hidden" name="aid" value="${temp.aid }" />
 
-										</form>
-												</c:otherwise>
-											</c:choose>
-										
+													<button class="readmoreButton" type="submit" id='b1'>
+														<span>Read more</span>
+													</button>
+
+												</form>
+											</c:otherwise>
+										</c:choose>
+
 
 
 									</td>
-									<td>${temp.rating}</td>
-									<td>${temp.status}</td>
-									<td>${temp.postdate}</td>
-									<td>${temp.reviewdate}</td>
+									<td class="col-sm-2">${temp.rating}</td>
+									<td class="col-sm-2">${temp.status}</td>
+									<td class="col-sm-2">${temp.postdate}</td>
+									<td class="col-sm-2">${temp.reviewdate}</td>
 
 								</tr>
 							</c:forEach>

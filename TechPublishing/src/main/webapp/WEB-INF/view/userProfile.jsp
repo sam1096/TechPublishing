@@ -28,7 +28,7 @@
 			</div>
 			<ul class=" nav navbar-nav ml-auto navbar-right">
 				<li><a href="/userHome"><font color="white">Home</font></a></li>
-				<li><a href="#"><font color="white">About</font></a></li>
+				<li><a href="/about"><font color="white">About</font></a></li>
 				<li><a href="#"><font color="White">Connect</font></a></li>
 				<li><a href="/userprofile"><font color="white">Profile</font></a></li>
 				<li><a href="/logoutUser"><font color="white">Logout</font></a></li>
@@ -42,7 +42,7 @@
 			<div id="first">
 				<div class="car">
 					<img src="/images/1.png" alt="John" style="width: 100%">
-					<h1>${user.firstname}${user.lastname}</h1>
+					<h1>${user.firstname} ${user.lastname}</h1>
 					<p class="title">USER</p>
 					<p>
 						<button onclick="location.href='userprofile';"

@@ -17,6 +17,24 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var maxLength = 100;
+		$(".show-read-more").each(function() {
+			var myStr = $(this).text();
+			if ($.trim(myStr).length > maxLength) {
+				var newStr = myStr.substring(0, maxLength);
+
+				$(this).empty().html(newStr);
+				$(this).append(' ...');
+
+			}
+		});
+
+	});
+</script>
+
 </head>
 <body>
 
@@ -28,7 +46,7 @@
 			</div>
 			<ul class=" nav navbar-nav ml-auto navbar-right">
 				<li><a href="/adminHome"><font color="white">Home</font></a></li>
-				<li><a href="#"><font color="white">About</font></a></li>
+				<li><a href="/about"><font color="white">About</font></a></li>
 				<li><a href="#"><font color="White">Connect</font></a></li>
 				<li><a href="/admin_profile"><font color="white">Profile</font></a></li>
 				<li><a href="/logoutUser"><font color="white">Logout</font></a></li>
@@ -80,22 +98,22 @@
 						<thead>
 							<tr class="tr tr-success">
 
-								<th>Description</th>
-								<th>Author name</th>
-								<th>Post Date</th>
-								<th>Review Date</th>
+								<th class="col-sm-2">Description</th>
+								<th class="col-sm-2">Author name</th>
+								<th class="col-sm-2">Post Date</th>
+								<th class="col-sm-2">Review Date</th>
 							
-								<th>Status</th>
-								<th>Reason</th>
+								<th class="col-sm-2">Status</th>
+								<th class="col-sm-2">Reason</th>
 
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${articles}" var="temp">
 								<tr>
-									<td>
+									<td class="col-sm-4">
 
-										<p class="show-read-more">${temp.description}</p>
+										<article class="show-read-more">${temp.description}</article>
 
 										<form class="read" action="/read_article" id='form1'
 											method='POST'>
@@ -109,11 +127,11 @@
 
 									</td>
 
-									<td>${temp.authname}</td>
-									<td>${temp.postdate}</td>
-									<td>${temp.reviewdate}</td>
-									<td>${temp.status}</td>
-									<td>${temp.reason}</td>
+									<td class="col-sm-2">${temp.authname}</td>
+									<td class="col-sm-2">${temp.postdate}</td>
+									<td class="col-sm-2">${temp.reviewdate}</td>
+									<td class="col-sm-2">${temp.status}</td>
+									<td class="col-sm-2">${temp.reason}</td>
 
 								</tr>
 							</c:forEach>

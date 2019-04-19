@@ -151,7 +151,7 @@ public class AdminController {
 			return model;
 		}
 		else  {
-			ModelAndView model= new ModelAndView("welcome_new");
+			ModelAndView model= new ModelAndView("home");
 					return model;
 			
 		}
@@ -211,7 +211,7 @@ public class AdminController {
 		return model;
 	}
 	else  {
-		ModelAndView model= new ModelAndView("welcome_new");
+		ModelAndView model= new ModelAndView("home");
 		return model;
 		
 	 }

@@ -76,8 +76,8 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/welcomepage">Home</a></li>
-      <li><a href="/about">Help</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="#">Help</a></li>
+      <li><a href="/about">About</a></li>
 	</ul>
 	
 	<ul class="nav navbar-nav navbar-right">   

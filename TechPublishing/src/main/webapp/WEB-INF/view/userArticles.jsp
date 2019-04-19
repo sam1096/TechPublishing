@@ -102,6 +102,7 @@
 								<th class="col-sm-2">Status</th>
 								<th class="col-sm-2">Post Date</th>
 								<th class="col-sm-2">Review Date</th>
+								<th class="col-sm-2">Reason</th>
 
 							</tr>
 						</thead>
@@ -114,7 +115,14 @@
 											var="status" value="${temp.status}" /> <c:set var="reject"
 											value="rejected" /> <c:choose>
 											<c:when test="${status==reject}">
+                                                 	<form action="/reject_user" method="post">
+													<input type="hidden" name="aid" value="${temp.aid }" />
 
+													<button class="readmoreButton" type="submit" id='b2'>
+														<span>Read more</span>
+													</button>
+
+												</form>
 
 											</c:when>
 											<c:otherwise>
@@ -136,6 +144,7 @@
 									<td class="col-sm-2">${temp.status}</td>
 									<td class="col-sm-2">${temp.postdate}</td>
 									<td class="col-sm-2">${temp.reviewdate}</td>
+									<td class="col-sm-2">${temp.reason}</td>
 
 								</tr>
 							</c:forEach>

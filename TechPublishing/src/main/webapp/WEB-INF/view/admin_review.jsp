@@ -72,13 +72,15 @@ $(document).ready(function(){
 	  if (reason == null || reason == "") {
              alert("please specify the reason for rejecting the article.");
 	  } else { id=id+"_"+reason;
-	           alert(id);
+	          // alert(id);
 	  $.ajax({ type :'POST',
 	 		contentType :"application/json",
 	 		url:"rejectarticle/"+id,
             success: function(data)
 	 		{ alert("Article has been rejected!");
-	 	    
+	 		 setTimeout(function(){
+	 	           location.reload();
+	 	      }, 100);
 	 		},
 	 		error: function(data)
 	 		{alert("failed");

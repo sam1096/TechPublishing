@@ -254,4 +254,18 @@ public class UserController {
 		map.addAttribute("article_id",article_id);
 		return "Article";
 }
+	
+	
+	@RequestMapping ("/reject_user")
+	public String readrejectedArticle( @RequestParam("aid") String aid, HttpSession session,ModelMap map)
+	{	if (session.getAttribute("id") == null) {
+		return "redirect:loginUser";
+	}
+		User user = (User)session.getAttribute("user");
+		int article_id=Integer.parseInt(aid);
+		List<Article> article=userservice.getfullArticle(article_id);
+		map.addAttribute("article", article);
+	    map.addAttribute("article_id",article_id);
+		return "reject_user";
+}
 }

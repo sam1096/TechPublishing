@@ -32,6 +32,10 @@ public class ApplicationController {
     public String Welcome(HttpServletRequest request) {
 	 return "Home";}
 	
+	@RequestMapping("/about")
+    public String About(HttpServletRequest request) {
+	 return "about";}
+	
 	@RequestMapping("loginUser")
 	public String loginUser(ModelMap map, HttpSession session) {
 		if (session.getAttribute("id") != null) 

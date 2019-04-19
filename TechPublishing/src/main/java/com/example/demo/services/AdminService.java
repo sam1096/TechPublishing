@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Respository.AdminRepository;
 import com.example.demo.Respository.AreaInterestRepository;
 import com.example.demo.Respository.ArticleRepository;
+import com.example.demo.Respository.UserRepository;
 
 import java.util.*;
 import com.example.demo.model.Admin;
@@ -22,6 +23,8 @@ public class AdminService {
 
 	@Autowired
 	private AdminArticle adminArticle;
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private ArticleRepository articleRepository;
 	@Autowired
@@ -74,6 +77,10 @@ public class AdminService {
 	
 	public int  rejectArticles(int id,String reas, String adminname)
 	{     System.out.println("This is reject service"+id);
+//	String username=articleRepository.findByAid(id).get(0).getAuthname();
+//			User user=userRepository.findByUsername(username).get(0);
+//			String email=user.getEmail();
+//			SendEmail s=new SendEmail(email,reas);
 	System.out.println("This is reject service"+reas);
 		return adminArticle.rejectArticles(id,reas,adminname);
 		

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -166,6 +167,8 @@ public class UserController {
 		System.out.println("*******************************************");
 		art.setAuthname(user.getUsername());
 		String areaid=userservice.findAreaInterest(areaname).get(0).getAreaid();
+		Date date= new Date();
+		art.setPostdate(date);
 		art.setAreaid(areaid);
 		art.setStatus("in review");
 		userservice.saveArticle(art);

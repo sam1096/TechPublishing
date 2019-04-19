@@ -188,7 +188,7 @@ span+input[type=radio]+label, legend+input[type=radio]+label {
 			</div>
 			<input type=hidden name="articleId" value="${temp.aid}">
 
-			<div>${temp.aid}</div>
+			<div><h4>Average Rating : ${temp.rating}</h4></div>
 
 		</div>
 

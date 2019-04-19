@@ -80,7 +80,7 @@
 							<tr class="tr tr-success">
 
 								<th>Description</th>
-								<th>Post Date</th>
+								<th>Author</th>
 								<th>Review Date</th>
 								<th>Post Date</th>
 								<th>Status</th>

@@ -132,28 +132,31 @@ public class UserService {
 	{
 		userRatings ratings=ratingRepository.findByArtidAndAuthname(artid,authname);
 		System.out.println(ratings);
+		List<userRatings>userratings=ratingRepository.findByArtid(artid);
+		int size=userratings.size();
+		List<Article> articles=articleRepository.findByAid(artid);
+		int value=articles.get(0).getRating();
+		int avg;
 		if(ratings==null)
-		{
+		{   
 			userRatings rating=new userRatings();
 			rating.setArtid(artid);
 			rating.setAuthname(authname);
 			rating.setRating(rate+1);
 			rating.setNotRated(false);
 			ratingRepository.save(rating);
+			avg=((size)*value+rate+1)/(size+1);	
 		}
 		else
 		{
 			userRatings rating=ratings;
+			int r=rating.getRating();
+			avg=((size)*value+rate-r+1)/(size);	
 			rating.setRating(rate+1);
 			ratingRepository.save(rating);	
 			
 		}
-		List<userRatings>userratings=ratingRepository.findByArtid(artid);
-		int size=userratings.size();
 		
-		List<Article> articles=articleRepository.findByAid(artid);
-		int value=articles.get(0).getRating();
-		int avg=((size-1)*value+rate+1)/(size);	
 		Article article=articles.get(0);
 		article.setRating(avg);
 	}

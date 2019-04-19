@@ -144,7 +144,7 @@ public class AdminController {
 			System.out.println("this is after it is published  "+aid);
 			System.out.println("***********this is it************"+admin.getAdminname());
 			if(n!=0) {
-			List<Article> l=adminservice.getArticles(adm.getAdminname());
+				List<Object[]> l=adminservice.getArticles(adm.getAdminname());
 			 System.out.println("this is it"+admin.getAdminname());
 			ModelAndView model= new ModelAndView("admin_review");
 			model.addObject("articles",l);
@@ -204,7 +204,7 @@ public class AdminController {
 		
 	
 		if(n!=0) {
-		List<Article> l=adminservice.getArticles(admin.getAdminname());
+			List<Object[]> l=adminservice.getArticles(adm.getAdminname());
 		 System.out.println("this is it"+admin.getAdminname());
 		ModelAndView model= new ModelAndView("admin_review");
 		model.addObject("articles",l);

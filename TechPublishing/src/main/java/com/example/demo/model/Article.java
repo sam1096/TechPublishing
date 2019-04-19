@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 @Entity
 @Table(name="article")
@@ -17,7 +18,8 @@ public class Article {
 	private int aid;
 	@Column(name="rating")
 	private int rating;
-	@Column(name="description")
+
+	@Lob @Column(name="description",nullable=false)
 	private String description;
 	@Column(name="areaid")
 	private String areaid;
@@ -32,7 +34,8 @@ public class Article {
 	
 	@Column(name="reviewby")
 	private String reviewby;
-	@Column(name="reason")
+	
+	@Lob @Column(name="reason")
 	private String reason;
 	
 	

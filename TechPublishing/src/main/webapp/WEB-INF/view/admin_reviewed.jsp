@@ -84,7 +84,7 @@
 								<th>Author name</th>
 								<th>Post Date</th>
 								<th>Review Date</th>
-								<th>Post Date</th>
+							
 								<th>Status</th>
 								<th>Reason</th>
 

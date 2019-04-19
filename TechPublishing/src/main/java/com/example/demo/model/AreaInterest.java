@@ -9,14 +9,12 @@ import javax.persistence.Table;
 @Table(name="areainterest")
 public class AreaInterest {
 	@Id
-	
 	@Column(name="areaid")
 	private String areaid;
 	@Column(name="areaname")
 	private String areaname;
 	public AreaInterest()
 	{
-		
 	}
 	public AreaInterest(String areaid, String areaname) {
 		super();

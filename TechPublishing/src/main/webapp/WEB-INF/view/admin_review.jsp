@@ -17,6 +17,24 @@
 
 <link href="static/css/style.css" rel="stylesheet">
 
+<script type="text/javascript">
+$(document).ready(function(){
+	var maxLength = 100;
+	$(".show-read-more").each(function(){
+		var myStr = $(this).text();
+		if($.trim(myStr).length > maxLength){
+			var newStr = myStr.substring(0, maxLength);
+			$(this).empty().html(newStr);
+			$(this).append(' ...');
+			
+
+		}
+	});
+
+});
+</script>
+
+
 <script>
  function publishdata(id)
  { 
@@ -60,9 +78,7 @@
 	 		url:"rejectarticle/"+id,
             success: function(data)
 	 		{ alert("Article has been rejected!");
-	 	      setTimeout(function(){
-	 	           location.reload();
-	 	      }, 100);
+	 	    
 	 		},
 	 		error: function(data)
 	 		{alert("failed");
@@ -86,29 +102,9 @@
 
 
 
-<script type="text/javascript">
-$(document).ready(function(){
-	var maxLength = 25;
-	$(".show-read-more").each(function(){
-		var myStr = $(this).text();
-		if($.trim(myStr).length > maxLength){
-			var newStr = myStr.substring(0, maxLength);
-			
-			$(this).empty().html(newStr);
-			$(this).append(' ...');
-			$(this).append(' ');
-
-		}
-	});
-
-});
-</script>
-
-
-
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid" style="background-color: #34495e;">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#"><font color="white">Tech
@@ -123,63 +119,65 @@ $(document).ready(function(){
 			</ul>
 		</div>
 	</nav>
-	<div class="container" style="margin-top: 30px">
-		<div class="row">
-			<div class="col-sm-2">
+	
+	<div class="container" style="margin-top:4%; ">
+		<div class="row" >
+			<div class="col-sm-2" style="margin-left:-6%;margin-top:2%;">
 				<h3>EDITOR</h3>
 				<p>Something on mind write here!!!</p>
 				<ul class="nav nav-pills flex-column">
 					<li class="nav-item"><a href="/editor_admin">Create
 							Article</a></li>
 				</ul>
-
-				<hr class="d-sm-none">
 			</div>
-			<div class="col-sm-10">
+			
+			
+			<div class="col-sm-10"  style="margin-left:2%; margin-top:2%;">
 				<article>
-					<div class="container">
+		            <div class="container"> 
 						<table>
 							<caption>
 								<h3>Articles</h3>
 							</caption>
 							<thead>
 								<tr class="tr tr-success">
-
-									<td>Description</td>
-									<td>Author name</td>
-									<td>Post Date</td>
-									<td>Review</td>
+									
+									<th class="col-sm-4">Description</th>
+									<th class="col-sm-2">Category</th>	
+									<th class="col-sm-2">Author name</th>
+									<th class="col-sm-2">Post Date</th>
+									<th class="col-sm-2">Review</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${articles}" var="temp">
 									<tr>
-										<td>
-
-											<p class="show-read-more">${temp.description}</p>
-
+										<td class="col-sm-4">
+											
+											<article class="show-read-more" >${temp[0].description}</article><%-- style="width:30%;"><font size="2">${temp[0].description}</font></p> --%>
+											
 											<form class="read" action="/read_article" id='form1'
 												method='POST'>
 												<input type='hidden' id='newfield' name='newfield'
-													value="${temp.aid}" />
+													value="${temp[0].aid}" />
 												<button class="readmoreButton" type="submit">
-													<span>Read more</span>
+													<span >Read more</span>
 												</button>
 											</form>
 										</td>
+										<td class="col-sm-2">${temp[1].areaname}</td>
+										<td class="col-sm-2">${temp[0].authname}</td>
+										<td class="col-sm-2">${temp[0].postdate}</td>
 
-										<td>${temp.authname}</td>
-										<td>${temp.postdate}</td>
 
-
-										<td>
-											<button onclick="publishdata(${temp.aid})"
-												class="btn btn-success" style="width: 15%;">
+										<td class="col-sm-2">
+											<button onclick="publishdata(${temp[0].aid})"
+												class="btn btn-success" style="width:5%;">
 												<span class="glyphicon glyphicon-ok"></span>
 											</button>
 
-											<button onclick="deletedata(${temp.aid})"
-												class="btn btn-danger" style="width: 15%;">
+											<button onclick="deletedata(${temp[0].aid})"
+												class="btn btn-danger" style="width:5%;">
 												<span class="glyphicon glyphicon-remove"></span>
 											</button>
 
@@ -189,19 +187,10 @@ $(document).ready(function(){
 								</c:forEach>
 							</tbody>
 						</table>
-					</div>
+					</div> 
 				</article>
 			</div>
 		</div>
 	</div>
-
-
-
-
-	<footer id="footer">
-	<p>© 2019 Copyright: TechPublishing.com</p>
-	</footer>
-
-
 </body>
 </html>

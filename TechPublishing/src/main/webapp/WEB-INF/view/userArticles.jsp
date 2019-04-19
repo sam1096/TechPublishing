@@ -41,7 +41,7 @@
 			<div id="first">
 				<div class="car">
 					<img src="/images/1.png" alt="John" style="width: 100%">
-					<h1>${user.firstname}${user.lastname}</h1>
+					<h1>${user.firstname} ${user.lastname}</h1>
 					<p class="title">USER</p>
 					<p>
 						<button onclick="location.href='userprofile';"
@@ -94,14 +94,25 @@
 									<td>
 
 										<p class="show-read-more">${temp.description}</p>
-										<form action="/readmore" method="post">
+										<c:set var="status" value="${temp.status}" />
+										<c:set var="reject" value="rejected" />
+											<c:choose>
+												<c:when test="${status==reject}">
+												
+												
+											</c:when>
+												<c:otherwise>
+												<form action="/readmore" method="post">
 											<input type="hidden" name="aid" value="${temp.aid }" />
+											
 											<button class="readmoreButton" type="submit" id='b1'>
 												<span>Read more</span>
 											</button>
 
 										</form>
-
+												</c:otherwise>
+											</c:choose>
+										
 
 
 									</td>

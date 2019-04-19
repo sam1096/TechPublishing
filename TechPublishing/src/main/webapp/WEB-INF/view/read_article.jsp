@@ -18,7 +18,16 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	
+
+
+
+
+
+	
 </head>
+
 <body>
 
 
@@ -40,7 +49,10 @@
 
 	<h3><div style="margin-top: 2%; margin-left:8%; font-family: Georgia;">${data.authname}</div></h3>
 	<div style="margin-left:8%;margin-bottom:2%;">${data.postdate}</div>
-
-	<div class="container" style="background:#ADD8E6; height:100%;">${data.description}</div>
+<div id="alter_data">
+	<div class="well" align="center"
+				style="background-color:lavender; width: 70%; margin-left: 20%;">${data.description}</div>
+			
+		</div>
 </body>
 </html>

@@ -23,17 +23,36 @@ public class AdminArticle {
 	
 	@PersistenceContext	
 	private EntityManager entityManager;	
-	public List<Article> getArticles(String adminname)
+//	public List<Article> getArticles(String adminname)
+//	{
+//	String hql="from Article as a where a.status= 'in review' and not a.authname=?1 and  a.areaid in(select ad.areaid from AdminArea ad where ad.adminname=?1)";
+//		
+//	    Query q1 = entityManager.createQuery(hql); 
+//		q1.setParameter(1, adminname);
+//		List<Article> li=q1.getResultList();
+//        return li ;
+//		
+//		//return (List<Article>) entityManager.createQuery(hql).getResultList();
+//    }
+	
+	public List<Object[]> getArticles(String adminname)
 	{
-	String hql="from Article as a where a.status= 'in review' and not a.authname=?1 and  a.areaid in(select ad.areaid from AdminArea ad where ad.adminname=?1)";
+
 		
-	    Query q1 = entityManager.createQuery(hql); 
+
+		String hql1="from Article as a,AreaInterest as i where a.status= 'in review' and a.areaid=i.areaid and not a.authname=?1 and a.areaid in(select ar.areaid from AdminArea ar where ar.adminname=?1)";
+		Query q1 = entityManager.createQuery(hql1); 
 		q1.setParameter(1, adminname);
-		List<Article> li=q1.getResultList();
-        return li ;
 		
-		//return (List<Article>) entityManager.createQuery(hql).getResultList();
-    }
+		List<Object[]> obj_list1=q1.getResultList();
+
+		 System.out.println("This is the result!!");
+	
+		 
+		 
+		 return obj_list1; 
+		
+	}
 	
 	public int  setArticles(int id, String adminname)
 	{    
@@ -107,7 +126,7 @@ public class AdminArticle {
 			q1.setParameter(1, adminname);
 			return (List<AdminArea>) q1.getResultList();
 	} 
-      
+  
 	
 	
 }

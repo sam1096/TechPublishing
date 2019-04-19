@@ -51,7 +51,7 @@
 			</div>
 			<ul class=" nav navbar-nav ml-auto navbar-right">
 				<li><a href="/adminHome"><font color="white">Home</font></a></li>
-				<li><a href="#"><font color="white">About</font></a></li>
+				<li><a href="/about"><font color="white">About</font></a></li>
 				<li><a href="#"><font color="White">Connect</font></a></li>
 				<li><a href="/userprofile"><font color="white">Profile</font></a></li>
 				<li><a href="/logoutUser"><font color="white">Logout</font></a></li>

@@ -48,7 +48,7 @@
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class=" nav navbar-nav ml-auto">
 					<li><a href="userHome">Home</a></li>
-					<li><a href="#">About</a></li>
+					<li><a href="/about">About</a></li>
 					<li><a href="#">Connect</a></li>
 					<li><a href="/userProfile">Profile</a></li>
 					<li><a href="/logoutUser">Logout</a></li>

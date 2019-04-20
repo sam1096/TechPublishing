@@ -1,13 +1,6 @@
-FROM ubuntu:latest
+FROM java:8-jdk-alpine
 
-RUN \
-# Update
-apt-get update -y && \
-# Install Java
-apt-get install default-jre -y
 
-ADD ./target/TechPublishing-0.0.1-SNAPSHOT.jar tech.jar
+COPY ./target/TechPublishing-0.0.1-SNAPSHOT.jar /usr/app/
+WORKDIR /usr/app
 
-EXPOSE 10001
-
-CMD java -jar tech.jar

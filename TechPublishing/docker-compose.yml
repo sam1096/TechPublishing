@@ -1,0 +1,26 @@
+version: '2.0'
+
+services:
+  mysql-docker-container:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=Tech
+      - MYSQL_USER=newuser
+      - MYSQL_PASSWORD=password
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/mysql
+  spring-boot-jpass:
+    image: divyanshitech2
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-docker-container
+    ports:
+      - 10001:10001
+    volumes:
+      - /data/spring-boot-jpass
+    command: java -jar /usr/app/TechPublishing-0.0.1-SNAPSHOT.jar

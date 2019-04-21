@@ -1,7 +1,7 @@
 version: '2.0'
 
 services:
-  mysql-docker-container:
+  mysql-docker-contain:
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -13,12 +13,12 @@ services:
     volumes:
       - /data/mysql
   spring-boot-jpass:
-    image: divyanshitech2
+    image: divyanshitech3
     build:
       context: ./
       dockerfile: Dockerfile
     depends_on:
-      - mysql-docker-container
+      - mysql-docker-contain
     ports:
       - 10001:10001
     volumes:
